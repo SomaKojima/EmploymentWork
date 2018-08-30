@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>c2d376cd-01d3-4161-ae70-8caf697a9abf</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>33d27b96-0970-45dd-ba5c-04a726dfdc18</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{d90780cd-483c-4c57-921d-c0c1caf96503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Obj">
+      <UniqueIdentifier>{61c53526-3e43-4d0b-907d-e220a9b47b18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FBX">
+      <UniqueIdentifier>{2761e7c1-05fa-42a1-a78e-be42813f292c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component">
+      <UniqueIdentifier>{d281dfd9-b8af-4c30-8f59-33ae38597297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Command">
+      <UniqueIdentifier>{740a5db0-34df-4401-b9ef-f11dfbcf4147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DebugCollision">
+      <UniqueIdentifier>{b1d132f3-8c3a-4330-9e75-f523ee0f0909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Collision">
+      <UniqueIdentifier>{e3f35b33-654b-4835-a593-2c81efa8c007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameComponent">
+      <UniqueIdentifier>{5704ce68-7540-40fa-9b88-d3dc06fc67dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Obj\Function">
+      <UniqueIdentifier>{9f6db4a6-529a-4d47-ab54-3aefc3d49bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{2b3666eb-1e9c-447f-a470-754b5455f994}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="StepTimer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceResources.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h" />
+    <ClInclude Include="GridFloor.h" />
+    <ClInclude Include="Game\Object\Entity.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\InputComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\Command.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\AdvanceCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\InputHandler.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\ModelComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\ComponentLib.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Component.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\RecessionCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\LeftCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\RightCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\PhysicsComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DebugCollision\DebugBox.h">
+      <Filter>DebugCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DebugCollision\DebugCapsule.h">
+      <Filter>DebugCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DebugCollision\DebugSphere.h">
+      <Filter>DebugCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\SphereCollisionComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\DownCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\UpCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\BoxCollisionComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\CarFactory.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\BulletFactory.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="MyCamera.h" />
+    <ClInclude Include="Game\Command\ShotCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Collision\Collision.h">
+      <Filter>Game\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Collision\CCell.h">
+      <Filter>Game\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\ModelData.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\EntityVector.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\BulletComponent.h">
+      <Filter>Game\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\PlaneCollisionComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\Function\FunctionComponent.h">
+      <Filter>Game\Obj\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\Utility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\BidirectionalList.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utility\RegisterTo.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="DeviceResources.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp" />
+    <ClCompile Include="GridFloor.cpp" />
+    <ClCompile Include="Game\Component\InputComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\AdvanceCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\InputHandler.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\ModelComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\Entity.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\RecessionCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\LeftCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\RightCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\PhysicsComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\DebugCollision\DebugBox.cpp">
+      <Filter>DebugCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\DebugCollision\DebugCapsule.cpp">
+      <Filter>DebugCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\DebugCollision\DebugSphere.cpp">
+      <Filter>DebugCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\SphereCollisionComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\DownCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\UpCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\BoxCollisionComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\CarFactory.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\BulletFactory.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="MyCamera.cpp" />
+    <ClCompile Include="Game\Command\ShotCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Collision\Collision.cpp">
+      <Filter>Game\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Collision\CCell.cpp">
+      <Filter>Game\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\ModelData.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\EntityVector.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\BulletComponent.cpp">
+      <Filter>Game\GameComponent</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="directx.ico">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="settings.manifest">
+      <Filter>Assets</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="FBX\car.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\room.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\burret.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+  </ItemGroup>
+</Project>
