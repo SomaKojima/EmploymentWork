@@ -6,62 +6,14 @@
 class CCell;
 class Entity;
 
-//class OBJECT_FOR_TREE
-//{
-//public:
-//	OBJECT_FOR_TREE(CCell *pCell, Entity* pObject);
-//	~OBJECT_FOR_TREE();
-//
-//	bool Remove();
-//
-//	CCell* GetCell() { return m_pCell; }
-//	Entity* GetEnity() { return m_pObject; }
-//	OBJECT_FOR_TREE* GetPre() { return m_pPre; }
-//	OBJECT_FOR_TREE* GetNext() { return m_pNext; }
-//
-//	void SetCell(CCell* cell) { m_pCell = cell; }
-//	void SetEntity(Entity* entity) { m_pObject = entity; }
-//	void SetPre(OBJECT_FOR_TREE* OFT) { m_pPre = OFT; }
-//	void SetNext(OBJECT_FOR_TREE* OFT) { m_pNext = OFT; }
-//
-//private:
-//	CCell *m_pCell;            // 登録されている小空間
-//	Entity* m_pObject;         // 任意オブジェクトへのポインタ
-//	OBJECT_FOR_TREE *m_pPre;   // 前の構造体へのポインタ
-//	OBJECT_FOR_TREE *m_pNext;  // 次の構造体へのポインタ
-//};
-
-class OBJECT_FOR_TREE : public BidirectionalList<OBJECT_FOR_TREE>
+class OBJECT_FOR_TREE : public BidirectionalList<OBJECT_FOR_TREE, Entity>
 {
 public:
-	OBJECT_FOR_TREE(CCell *pCell, Entity* pObject);
+	OBJECT_FOR_TREE(Entity* pObject);
 	~OBJECT_FOR_TREE();
-
-	Entity* GetEnity() { return m_pObject; }
-
-	void SetEntity(Entity* entity) { m_pObject = entity; }
-
-private:
-	Entity* m_pObject;         // 任意オブジェクトへのポインタ
 };
 
-//class CCell
-//{
-//public:
-//	CCell();
-//	~CCell();
-//
-//	bool Add(OBJECT_FOR_TREE* OFT);
-//
-//	OBJECT_FOR_TREE* GetOFT() { return pOFT; }
-//
-//	void SetOFT(OBJECT_FOR_TREE* OFT) { pOFT = OFT; }
-//
-//private:
-//	OBJECT_FOR_TREE* pOFT;
-//};
-
-class CCell : public BidirectionalList<OBJECT_FOR_TREE>::RegisterTo
+class CCell : public BidirectionalList<OBJECT_FOR_TREE, Entity>::RegisterTo
 {
 public:
 	CCell();

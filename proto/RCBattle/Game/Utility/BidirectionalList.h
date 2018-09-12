@@ -2,10 +2,10 @@
 
 //template<class T> class RegisterTo;
 
-template<class T> class BidirectionalList
+template<class T, class T2> class BidirectionalList
 {
 public:
-	BidirectionalList(T* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
+	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
 	virtual ~BidirectionalList() { m_pPre = nullptr; m_pNext = nullptr; m_pRegisterTo = nullptr; m_pObj = nullptr; }
 
 public:
@@ -15,40 +15,40 @@ public:
 		RegisterTo() : m_pTop(nullptr) {}
 		virtual ~RegisterTo() {}
 
-		bool Add(BidirectionalList<T>* obj);
+		bool Add(T* obj);
 
-		void SetTop(BidirectionalList<T>* top) { m_pTop = top; }
-		BidirectionalList<T>* GetTop() { return m_pTop; }
+		void SetTop(T* top) { m_pTop = top; }
+		T* GetTop() { return m_pTop; }
 
 	protected:
-		BidirectionalList<T>* m_pTop;
+		T* m_pTop;
 	};
 
 public:
 	bool Remove();
 
 	// getter
-	BidirectionalList<T>* GetPre() { return m_pPre; }
-	BidirectionalList<T>* GetNext() { return m_pNext; }
+	T* GetPre() { return m_pPre; }
+	T* GetNext() { return m_pNext; }
 	RegisterTo* GetRegisterTo() { return m_pRegisterTo; }
-	T* GetObj() { return m_pObj; }
+	T2* GetObj() { return m_pObj; }
 
 	// setter
-	void SetPre(BidirectionalList<T>* bl) { m_pPre = bl; }
-	void SetNext(BidirectionalList<T>* bl) { m_pNext = bl; }
+	void SetPre(T* bl) { m_pPre = bl; }
+	void SetNext(T* bl) { m_pNext = bl; }
 	void SetRegisterTo(RegisterTo* registerTo) { m_pRegisterTo = registerTo; }
 
 protected:
-	BidirectionalList<T>* m_pPre;
-	BidirectionalList<T>* m_pNext;
+	T* m_pPre;
+	T* m_pNext;
 
 	RegisterTo* m_pRegisterTo;
 
-	T* m_pObj;
+	T2* m_pObj;
 };
 
-template<class T>
-inline bool BidirectionalList<T>::Remove()
+template<class T, class T2>
+inline bool BidirectionalList<T, T2>::Remove()
 {
 	// ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
 	if (!m_pRegisterTo)
@@ -76,8 +76,8 @@ inline bool BidirectionalList<T>::Remove()
 	return true;
 }
 
-template<class T>
-inline bool BidirectionalList<T>::RegisterTo::Add(BidirectionalList<T>* obj)
+template<class T, class T2>
+inline bool BidirectionalList<T, T2>::RegisterTo::Add(T* obj)
 {
 	// ìÒèdìoò^ñhé~
 	if (obj->GetRegisterTo() == this)

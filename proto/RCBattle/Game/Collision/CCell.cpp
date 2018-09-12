@@ -51,10 +51,9 @@ CLiner8TreeManager* CLiner8TreeManager::m_singleton = nullptr;
 //	}
 //}
 
-OBJECT_FOR_TREE::OBJECT_FOR_TREE(CCell *pCell, Entity* pObject)
+OBJECT_FOR_TREE::OBJECT_FOR_TREE(Entity* pObject)
 	:
-	m_pObject(pObject),
-	BidirectionalList(this)
+	BidirectionalList(pObject)
 {
 }
 
@@ -289,12 +288,7 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 	}
 	int o = 0;
 
-	//OBJECT_FOR_TREE* pOFT = room->GetOFT();
-	OBJECT_FOR_TREE* pOFT = nullptr;
-	if (room->GetTop())
-	{
-		pOFT = room->GetTop()->GetObj();
-	}
+	OBJECT_FOR_TREE* pOFT = room->GetTop();
 	OBJECT_FOR_TREE* pNextOFT = nullptr;
 	int pushCount = 0;
 
@@ -304,10 +298,10 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		for (auto ite = cStack.begin(); ite != cStack.end(); ite++)
 		{
 			o++;
-			if (Collision::HitCheck(pOFT->GetEnity() , (*ite)->GetEnity()))
+			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj()))
 			{
-				pOFT->GetEnity()->OnCollide(*(*ite)->GetEnity());
-				(*ite)->GetEnity()->OnCollide(*pOFT->GetEnity());
+				pOFT->GetObj()->OnCollide(*(*ite)->GetObj());
+				(*ite)->GetObj()->OnCollide(*pOFT->GetObj());
 			}
 		}
 		// 同じ空間内のオブジェクトと当たり判定を取る
@@ -315,22 +309,19 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		cStack.push_back(pOFT);
 		pushCount++;
 
-		//pNextOFT = pOFT->GetNext();
-		pNextOFT = pOFT->GetNext()->GetObj();
+		pNextOFT = pOFT->GetNext();
 
 		while (pNextOFT)
 		{
 			o++;
-			if (Collision::HitCheck(pOFT->GetEnity(), pNextOFT->GetEnity()))
+			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj()))
 			{
-				pOFT->GetEnity()->OnCollide(*pNextOFT->GetEnity());
-				pNextOFT->GetEnity()->OnCollide(*pOFT->GetEnity());
+				pOFT->GetObj()->OnCollide(*pNextOFT->GetObj());
+				pNextOFT->GetObj()->OnCollide(*pOFT->GetObj());
 			}
-			//pNextOFT = pNextOFT->GetNext();
-			pNextOFT = pOFT->GetNext()->GetObj();
+			pNextOFT = pNextOFT->GetNext();
 		}
-		//pOFT = pOFT->GetNext();
-		pOFT = pOFT->GetNext()->GetObj();
+		pOFT = pOFT->GetNext();
 	}
 
 	// 子空間に移動

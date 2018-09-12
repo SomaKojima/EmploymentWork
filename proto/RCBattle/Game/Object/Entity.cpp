@@ -17,7 +17,7 @@ Entity::Entity()
 	m_world(Matrix::Identity),
 	m_local(Matrix::Identity),
 	m_parent(nullptr),
-	m_pOFT(new OBJECT_FOR_TREE(nullptr, this)),
+	m_pOFT(new OBJECT_FOR_TREE(this)),
 	m_pPre(nullptr),
 	m_pNext(nullptr)
 {
