@@ -2,7 +2,6 @@
 
 #include <vector>
 #include "../Utility/BidirectionalList.h"
-#include "../Utility/RegisterTo.h"
 
 class CCell;
 class Entity;
@@ -62,7 +61,7 @@ private:
 //	OBJECT_FOR_TREE* pOFT;
 //};
 
-class CCell : public RegisterTo<OBJECT_FOR_TREE>
+class CCell : public BidirectionalList<OBJECT_FOR_TREE>::RegisterTo
 {
 public:
 	CCell();

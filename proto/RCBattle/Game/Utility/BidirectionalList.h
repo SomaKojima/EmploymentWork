@@ -1,37 +1,54 @@
 #pragma once
 
-template<class T> class RegisterTo;
+//template<class T> class RegisterTo;
 
-template<class T2> class BidirectionalList
+template<class T> class BidirectionalList
 {
 public:
-	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr) , m_pObj(obj){}
+	BidirectionalList(T* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
 	virtual ~BidirectionalList() { m_pPre = nullptr; m_pNext = nullptr; m_pRegisterTo = nullptr; m_pObj = nullptr; }
 
+public:
+	class RegisterTo
+	{
+	public:
+		RegisterTo() : m_pTop(nullptr) {}
+		virtual ~RegisterTo() {}
+
+		bool Add(BidirectionalList<T>* obj);
+
+		void SetTop(BidirectionalList<T>* top) { m_pTop = top; }
+		BidirectionalList<T>* GetTop() { return m_pTop; }
+
+	protected:
+		BidirectionalList<T>* m_pTop;
+	};
+
+public:
 	bool Remove();
 
 	// getter
-	BidirectionalList<T2>* GetPre() { return m_pPre; }
-	BidirectionalList<T2>* GetNext() { return m_pNext; }
-	RegisterTo<T2>* GetRegisterTo() { return m_pRegisterTo; }
-	T2* GetObj() { return m_pObj; }
+	BidirectionalList<T>* GetPre() { return m_pPre; }
+	BidirectionalList<T>* GetNext() { return m_pNext; }
+	RegisterTo* GetRegisterTo() { return m_pRegisterTo; }
+	T* GetObj() { return m_pObj; }
 
 	// setter
-	void SetPre(BidirectionalList<T2>* bl) { m_pPre = bl; }
-	void SetNext(BidirectionalList<T2>* bl) { m_pNext = bl; }
-	void SetRegisterTo(RegisterTo<T2>* registerTo) { m_pRegisterTo = registerTo; }
+	void SetPre(BidirectionalList<T>* bl) { m_pPre = bl; }
+	void SetNext(BidirectionalList<T>* bl) { m_pNext = bl; }
+	void SetRegisterTo(RegisterTo* registerTo) { m_pRegisterTo = registerTo; }
 
 protected:
-	BidirectionalList<T2>* m_pPre;
-	BidirectionalList<T2>* m_pNext;
+	BidirectionalList<T>* m_pPre;
+	BidirectionalList<T>* m_pNext;
 
-	RegisterTo<T2>* m_pRegisterTo;
+	RegisterTo* m_pRegisterTo;
 
-	T2* m_pObj;
+	T* m_pObj;
 };
 
-template<class T2>
-inline bool BidirectionalList<T2>::Remove()
+template<class T>
+inline bool BidirectionalList<T>::Remove()
 {
 	// ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
 	if (!m_pRegisterTo)
@@ -56,5 +73,34 @@ inline bool BidirectionalList<T2>::Remove()
 	m_pNext = nullptr;
 
 	m_pRegisterTo = nullptr;
+	return true;
 }
 
+template<class T>
+inline bool BidirectionalList<T>::RegisterTo::Add(BidirectionalList<T>* obj)
+{
+	// ìÒèdìoò^ñhé~
+	if (obj->GetRegisterTo() == this)
+	{
+		return false;
+	}
+
+	if (!m_pTop)
+	{
+		obj->SetRegisterTo(this);
+		obj->SetPre(nullptr);
+		obj->SetNext(nullptr);
+		m_pTop = obj;
+		return true;
+	}
+
+	obj->SetRegisterTo(this);
+	obj->SetPre(nullptr);
+	obj->SetNext(m_pTop);
+
+	// åªç›êÊì™ÇÃOFTÇïœÇ¶ÇÈ
+	m_pTop->SetPre(obj);
+	m_pTop = obj;
+
+	return true;
+}

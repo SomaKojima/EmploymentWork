@@ -227,6 +227,8 @@ bool CLiner8TreeManager::CreateNewCell(DWORD Elem)
 		// 指定の要素番号に空間を新規作成
 		ppCellAry[Elem] = new CCell();
 
+		ppCellAry[Elem];
+
 		// 親空間にジャンプ
 		Elem = (Elem - 1) >> 3;
 		if (Elem >= m_dwCellNum) break;
@@ -288,7 +290,11 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 	int o = 0;
 
 	//OBJECT_FOR_TREE* pOFT = room->GetOFT();
-	OBJECT_FOR_TREE* pOFT = room->GetTop()->GetObj();
+	OBJECT_FOR_TREE* pOFT = nullptr;
+	if (room->GetTop())
+	{
+		pOFT = room->GetTop()->GetObj();
+	}
 	OBJECT_FOR_TREE* pNextOFT = nullptr;
 	int pushCount = 0;
 
