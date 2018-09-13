@@ -343,8 +343,8 @@ void Game::CreateDeviceDependentResources()
 
 	// 車モデルの作成
 	// モデルを読み込む
-	ModelData::Create(device);
 	ModelData* modelData = ModelData::GetInstance();
+	modelData->Create(device);
 
 	// オブジェクトのコンテナクラス
 	EntityVector* entityVector = EntityVector::GetInstance();
@@ -428,9 +428,6 @@ void Game::OnDeviceLost()
 	CLiner8TreeManager::Lost();
 
 	// 車モデルの開放
-	ModelData* modelData = ModelData::GetInstance();
-	modelData->Lost();
-	modelData = nullptr;
 
 	EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Finalize();

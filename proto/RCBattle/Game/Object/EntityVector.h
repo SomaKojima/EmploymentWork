@@ -3,6 +3,7 @@
 #include <vector>
 #include "../../StepTimer.h"
 #include "../../Game.h"
+#include "../Utility/Utility.h"
 #include "../Utility/BidirectionalList.h"
 
 class Entity;
