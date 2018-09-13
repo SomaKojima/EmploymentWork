@@ -2,8 +2,6 @@
 #include "EntityVector.h"
 #include "Entity.h"
 
-EntityVector* EntityVector::m_sEntityVector = nullptr;
-
 EntityVector::EntityVector()
 	:
 	m_vector(new EntityCell()),
@@ -127,18 +125,4 @@ void EntityVector::AddDestory(Entity * entity)
 	}
 	entity->GetEOF()->Remove();
 	m_destroy->Add(entity->GetEOF());
-}
-
-EntityVector* EntityVector::GetInstance()
-{
-	if (!m_sEntityVector)
-	{
-		m_sEntityVector = new EntityVector();
-	}
-	return m_sEntityVector;
-}
-
-void EntityVector::Lost()
-{
-	delete m_sEntityVector;
 }

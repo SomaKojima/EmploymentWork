@@ -24,7 +24,7 @@ public:
 };
 
 
-class EntityVector
+class EntityVector : public SingletonBase<EntityVector>
 {
 public:
 	EntityVector();
@@ -38,11 +38,8 @@ public:
 	void Add(Entity* entity);
 	void AddDestory(Entity* entity);
 
-	static EntityVector* GetInstance();
-	static void Lost();
 
 private:
-	static EntityVector* m_sEntityVector;
 	
 	// ŽÀ‘Ì‚ÌƒRƒ“ƒeƒi
 	EntityCell* m_vector;

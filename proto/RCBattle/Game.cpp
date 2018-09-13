@@ -431,7 +431,6 @@ void Game::OnDeviceLost()
 
 	EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Finalize();
-	entityVector->Lost();
 }
 
 void Game::OnDeviceRestored()
