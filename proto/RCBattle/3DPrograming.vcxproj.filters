@@ -232,6 +232,9 @@
     <ClCompile Include="Game\GameComponent\BulletComponent.cpp">
       <Filter>Game\GameComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Object\Function\FunctionComponent.cpp">
+      <Filter>Game\Obj\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

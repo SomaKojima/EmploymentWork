@@ -16,11 +16,13 @@
 #include <vector>
 #include <map>
 #include <typeinfo>
+#include "../../StepTimer.h"
 
 /// <summary>
 /// 前方宣言
 /// </summary>
 class Component;
+class Entity;
 
 /// <summary>
 /// コンポーネント機能のクラス
@@ -28,6 +30,11 @@ class Component;
 class FunctionComponent
 {
 public:
+	// コンポーネントの更新
+	bool UpdateComponent(Entity& entity, DX::StepTimer const& timer);
+	// コンポーネントの遅延更新
+	bool LateComponentUpdate(Entity& entity, DX::StepTimer const& timer);
+
 	// コンポーネントの追加
 	template<class T>
 	inline void AddComponent(T* component);

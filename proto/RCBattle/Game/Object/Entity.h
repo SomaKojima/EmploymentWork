@@ -40,10 +40,6 @@ public:
 
 	// 初期化
 	void Initialize();
-	// コンポーネントの更新
-	bool UpdateComponent(DX::StepTimer const& timer);
-	// コンポーネントの遅延更新
-	bool LateComponentUpdate(DX::StepTimer const& timer);
 	// コンポーネントの当たり判定
 	void OnCollide(Entity& entity);
 	// 更新

@@ -46,28 +46,6 @@ void Entity::Initialize()
 	cLiner8TreeManager->Register(this);
 }
 
-bool Entity::UpdateComponent(DX::StepTimer const & timer)
-{
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->Update(*this, timer);
-	}
-	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
-	cLiner8TreeManager->Register(this);
-	return false;
-}
-
-bool Entity::LateComponentUpdate(DX::StepTimer const & timer)
-{
-	int i = 0;
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->LateUpdate(*this, timer);
-		i++;
-	}
-	return false;
-}
-
 void Entity::OnCollide(Entity & entity)
 {
 	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
@@ -83,6 +61,9 @@ bool Entity::Update(DX::StepTimer const & timer)
 	m_local = Matrix::CreateFromQuaternion(m_dir) * Matrix::CreateTranslation(m_trans);
 
 	UpdateMatrix();
+
+	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
+	cLiner8TreeManager->Register(this);
 	return false;
 }
 

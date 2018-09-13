@@ -50,7 +50,7 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->GetObj()->UpdateComponent(timer);
+		entity->GetObj()->UpdateComponent(*entity->GetObj(), timer);
 		entity = entity->GetNext();
 	}
 
@@ -61,7 +61,7 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->GetObj()->LateComponentUpdate(timer);
+		entity->GetObj()->LateComponentUpdate(*entity->GetObj(), timer);
 		entity = entity->GetNext();
 	}
 	entity = m_vector->GetTop();

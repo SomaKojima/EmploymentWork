@@ -228,6 +228,7 @@
     <ClCompile Include="Game\Object\CarFactory.cpp" />
     <ClCompile Include="Game\Object\Entity.cpp" />
     <ClCompile Include="Game\Object\EntityVector.cpp" />
+    <ClCompile Include="Game\Object\Function\FunctionComponent.cpp" />
     <ClCompile Include="Game\Object\ModelData.cpp" />
     <ClCompile Include="GridFloor.cpp" />
     <ClCompile Include="Main.cpp" />
