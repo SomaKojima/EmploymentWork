@@ -27,6 +27,7 @@
 /// </summary>
 class Game;
 class Component;
+class EntityOfTree;
 
 /// <summary>
 ///オブジェクトクラス 
@@ -78,8 +79,6 @@ public:
 	void SetRadius(float radius) { m_radius = radius; }
 	void SetWorld(DirectX::SimpleMath::Matrix& world) { m_world = world; }
 	void SetParent(Entity* parent) { m_parent = parent; }
-	void SetPre(Entity* pre) { m_pPre = pre; }
-	void SetNext(Entity* next) { m_pNext = next; }
 
 	// ゲッター
 	DirectX::SimpleMath::Quaternion GetDir() { return m_dir; }
@@ -91,9 +90,7 @@ public:
 	DirectX::SimpleMath::Matrix GetLocal() { return m_local; }
 	Entity* GetParent() { return m_parent; }
 	OBJECT_FOR_TREE* GetOFT() { return m_pOFT; }
-	//BidirectionalList<OBJECT_FOR_TREE>* GetOFT() { return m_pOFT; }
-	Entity* GetPre() { return m_pPre; }
-	Entity* GetNext() { return m_pNext; }
+	EntityOfTree* GetEOF() { return m_pEOF; }
 
 private:
 	DirectX::SimpleMath::Quaternion m_dir;		// 方向
@@ -106,11 +103,9 @@ private:
 	DirectX::SimpleMath::Matrix m_local;		// ローカル座標
 
 	Entity* m_parent;							// 親のポインタ
-	OBJECT_FOR_TREE* m_pOFT;					// 空間用の分木ポインタ
-	//BidirectionalList<OBJECT_FOR_TREE>* m_pOFT;
 
 	std::vector<Entity*> m_childVector;			// 子のコンテナ
 
-	Entity* m_pPre;
-	Entity* m_pNext;
+	OBJECT_FOR_TREE* m_pOFT;					// 当たり判定用
+	EntityOfTree* m_pEOF;						// 実体をリストで回す用
 };

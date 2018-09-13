@@ -6,21 +6,22 @@ EntityVector* EntityVector::m_sEntityVector = nullptr;
 
 EntityVector::EntityVector()
 	:
-	m_vector(nullptr),
-	m_destroy(nullptr)
+	m_vector(new EntityCell())//,m_destroy(nullptr)
 {
 }
 
 EntityVector::~EntityVector()
 {
+	delete m_vector;
 }
 
 void EntityVector::Initialize()
 {
-	Entity* entity = m_vector;
+	int a = 0;
+	EntityOfTree* entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->Initialize();
+		entity->GetObj()->Initialize();
 		entity = entity->GetNext();
 	}
 }
@@ -28,11 +29,11 @@ void EntityVector::Initialize()
 void EntityVector::Update(DX::StepTimer const& timer)
 {
 
-	Entity* entity = nullptr;
-	Entity* entityBuf = nullptr;
+	EntityOfTree* entity = nullptr;
+	EntityOfTree* entityBuf = nullptr;
 
 	// 追加リストのオブジェクトを加える
-	entity = m_destroy;
+	/*entity = m_destroy->GetTop()->GetObj();
 	while (entity)
 	{
 		entityBuf = entity;
@@ -44,12 +45,12 @@ void EntityVector::Update(DX::StepTimer const& timer)
 		entityBuf->Finalize();
 		delete entityBuf;
 	}
-	m_destroy = nullptr;
+	m_destroy = nullptr;*/
 
-	entity = m_vector;
+	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->UpdateComponent(timer);
+		entity->GetObj()->UpdateComponent(timer);
 		entity = entity->GetNext();
 	}
 
@@ -57,40 +58,41 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->HitCheck();
 
-	entity = m_vector;
+	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->LateComponentUpdate(timer);
+		entity->GetObj()->LateComponentUpdate(timer);
 		entity = entity->GetNext();
 	}
-	entity = m_vector;
+	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->Update(timer);
+		entity->GetObj()->Update(timer);
 		entity = entity->GetNext();
 	}
 }
  
 void EntityVector::Render(Game* game)
 {
-	Entity* entity = m_vector;
+	EntityOfTree* entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->Draw(game);
+		entity->GetObj()->Draw(game);
 		entity = entity->GetNext();
 	}
 }
 
 void EntityVector::Finalize()
 {
-	Entity* entity = m_vector;
-	Entity* entityBuf;
+	EntityOfTree* entity = m_vector->GetTop();
+	EntityOfTree* entityBuf;
 	while (entity)
 	{
 		entityBuf = entity;
 		entity = entityBuf->GetNext();
-		entityBuf->Finalize();
-		delete entityBuf;
+		entityBuf->Remove();
+		entityBuf->GetObj()->Finalize();
+		delete entityBuf->GetObj();
 	}
 }
 
@@ -100,30 +102,26 @@ void EntityVector::Add(Entity * entity)
 	{
 		return;
 	}
-
-	if (m_vector)
-	{
-		entity->SetNext(m_vector);
-		m_vector->SetPre(entity);
-	}
-	m_vector = entity;
+	m_vector->Add(entity->GetEOF());
 	entity->Initialize();
 }
 
-void EntityVector::AddDestory(Entity * entity)
-{
-	if (!entity)
-	{
-		return;
-	}
-
-	if (m_destroy)
-	{
-		entity->SetNext(m_destroy);
-		m_destroy->SetPre(entity);
-	}
-	m_destroy = entity;
-}
+//void EntityVector::AddDestory(Entity * entity)
+//{
+//	if (!entity)
+//	{
+//		return;
+//	}
+//
+//	m_destroy->SetTop(entity);
+//
+//	if (m_destroy)
+//	{
+//		entity->SetNext(m_destroy);
+//		m_destroy->SetPre(entity);
+//	}
+//	m_destroy = entity;
+//}
 
 EntityVector* EntityVector::GetInstance()
 {

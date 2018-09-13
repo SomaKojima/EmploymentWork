@@ -18,8 +18,7 @@ Entity::Entity()
 	m_local(Matrix::Identity),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),
-	m_pPre(nullptr),
-	m_pNext(nullptr)
+	m_pEOF(new EntityOfTree(this))
 {
 	m_componentMap.clear();
 }
@@ -110,7 +109,7 @@ void Entity::Finalize()
 void Entity::Destroy()
 {
 	EntityVector* entityVector = EntityVector::GetInstance();
-	if (m_pPre)
+	/*if (m_pPre)
 	{
 		m_pPre->SetNext(m_pNext);
 	}
@@ -125,7 +124,8 @@ void Entity::Destroy()
 	}
 	m_pPre = nullptr;
 	m_pNext = nullptr;
-	entityVector->AddDestory(this);
+	entityVector->AddDestory(this);*/
+
 	m_pOFT->Remove();
 }
 

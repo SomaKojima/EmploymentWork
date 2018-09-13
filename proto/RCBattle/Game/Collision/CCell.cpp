@@ -10,46 +10,6 @@ using namespace DirectX::SimpleMath;
 
 CLiner8TreeManager* CLiner8TreeManager::m_singleton = nullptr;
 
-//{
-//	OBJECT_FOR_TREE::OBJECT_FOR_TREE(CCell *pCell, Entity* pObject)
-//		:
-//		m_pCell(pCell),
-//		m_pObject(pObject)
-//	{
-//	}
-//
-//	OBJECT_FOR_TREE::~OBJECT_FOR_TREE()
-//	{
-//	}
-//
-//	bool OBJECT_FOR_TREE::Remove()
-//	{
-//		// “o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡
-//		if (!m_pCell)
-//		{
-//			return false;
-//		}
-//		if (!m_pPre)
-//		{
-//			m_pCell->SetOFT(m_pNext);
-//		}
-//		else
-//		{
-//			m_pPre->SetNext(m_pNext);
-//		}
-//		if (m_pNext)
-//		{
-//			m_pNext->SetPre(m_pPre);
-//		}
-//
-//		m_pPre = nullptr;
-//		m_pNext = nullptr;
-//
-//		m_pCell = nullptr;
-//
-//		return true;
-//	}
-//}
 
 OBJECT_FOR_TREE::OBJECT_FOR_TREE(Entity* pObject)
 	:
@@ -60,45 +20,6 @@ OBJECT_FOR_TREE::OBJECT_FOR_TREE(Entity* pObject)
 OBJECT_FOR_TREE::~OBJECT_FOR_TREE()
 {
 }
-
-//CCell::CCell()
-//	:
-//	pOFT(nullptr)
-//{
-//
-//}
-//
-//CCell::~CCell()
-//{
-//}
-//
-//bool CCell::Add(OBJECT_FOR_TREE* OFT)
-//{
-//	// “ñd“o˜^–hŽ~
-//	if (OFT->GetCell() == this)
-//	{
-//		return false;
-//	}
-//
-//	if (!pOFT)
-//	{
-//		OFT->SetCell(this);
-//		OFT->SetPre(nullptr);
-//		OFT->SetNext(nullptr);
-//		pOFT = OFT;
-//		return true;
-//	}
-//
-//	OFT->SetCell(this);
-//	OFT->SetPre(nullptr);
-//	OFT->SetNext(pOFT);
-//
-//	// Œ»Ýæ“ª‚ÌOFT‚ð•Ï‚¦‚é
-//	pOFT->SetPre(OFT);
-//	pOFT = OFT;
-//
-//	return true;
-//}
 
 CCell::CCell()
 {

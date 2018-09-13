@@ -2,7 +2,7 @@
 
 //template<class T> class RegisterTo;
 
-template<class T, class T2> class BidirectionalList
+template<class T,class T2> class BidirectionalList
 {
 public:
 	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
@@ -47,7 +47,7 @@ protected:
 	T2* m_pObj;
 };
 
-template<class T, class T2>
+template<class T,class T2>
 inline bool BidirectionalList<T, T2>::Remove()
 {
 	// ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
@@ -76,7 +76,7 @@ inline bool BidirectionalList<T, T2>::Remove()
 	return true;
 }
 
-template<class T, class T2>
+template<class T,class T2>
 inline bool BidirectionalList<T, T2>::RegisterTo::Add(T* obj)
 {
 	// ìÒèdìoò^ñhé~
