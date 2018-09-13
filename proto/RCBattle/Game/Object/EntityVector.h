@@ -35,10 +35,7 @@ public:
 	void Finalize();
 
 	void Add(Entity* entity);
-	/*void AddDestory(Entity* entity);
-
-	Entity* GetVector() { return m_vector; }
-	void SetVector(Entity* _vector) { m_vector = _vector; }*/
+	void AddDestory(Entity* entity);
 
 	static EntityVector* GetInstance();
 	static void Lost();
@@ -47,9 +44,7 @@ private:
 	static EntityVector* m_sEntityVector;
 	
 	// 実体のコンテナ
-	//Entity* m_vector;
 	EntityCell* m_vector;
 	// 実体のコンテナ
-	//Entity* m_destroy;
-	//EntityCell* m_destroy;
+	EntityCell* m_destroy;
 };

@@ -6,13 +6,15 @@ EntityVector* EntityVector::m_sEntityVector = nullptr;
 
 EntityVector::EntityVector()
 	:
-	m_vector(new EntityCell())//,m_destroy(nullptr)
+	m_vector(new EntityCell()),
+	m_destroy(new EntityCell())
 {
 }
 
 EntityVector::~EntityVector()
 {
 	delete m_vector;
+	delete m_destroy;
 }
 
 void EntityVector::Initialize()
@@ -33,19 +35,17 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	EntityOfTree* entityBuf = nullptr;
 
 	// 追加リストのオブジェクトを加える
-	/*entity = m_destroy->GetTop()->GetObj();
+	entity = m_destroy->GetTop();
+	Entity* obj = nullptr;
 	while (entity)
 	{
-		entityBuf = entity;
-		entity = entity->GetNext();
+		entityBuf = entity->GetNext();
+		obj = entity->GetObj();
+		entity = entityBuf;
 
-		entityBuf->SetPre(nullptr);
-		entityBuf->SetNext(nullptr);
-
-		entityBuf->Finalize();
-		delete entityBuf;
+		obj->Finalize();
+		delete obj;
 	}
-	m_destroy = nullptr;*/
 
 	entity = m_vector->GetTop();
 	while (entity)
@@ -86,13 +86,27 @@ void EntityVector::Finalize()
 {
 	EntityOfTree* entity = m_vector->GetTop();
 	EntityOfTree* entityBuf;
+	Entity* obj = nullptr;
 	while (entity)
 	{
-		entityBuf = entity;
+		entityBuf = entity->GetNext();
+		obj = entity->GetObj();
+		entity = entityBuf;
+
+		obj->Finalize();
+		delete obj;
+	}
+
+	// 追加リストのオブジェクトを加える
+	entity = m_destroy->GetTop();
+	while (entity)
+	{
+		entityBuf = entity->GetNext();
+		obj = entity->GetObj();
 		entity = entityBuf->GetNext();
-		entityBuf->Remove();
-		entityBuf->GetObj()->Finalize();
-		delete entityBuf->GetObj();
+
+		obj->Finalize();
+		delete obj;
 	}
 }
 
@@ -103,25 +117,17 @@ void EntityVector::Add(Entity * entity)
 		return;
 	}
 	m_vector->Add(entity->GetEOF());
-	entity->Initialize();
 }
 
-//void EntityVector::AddDestory(Entity * entity)
-//{
-//	if (!entity)
-//	{
-//		return;
-//	}
-//
-//	m_destroy->SetTop(entity);
-//
-//	if (m_destroy)
-//	{
-//		entity->SetNext(m_destroy);
-//		m_destroy->SetPre(entity);
-//	}
-//	m_destroy = entity;
-//}
+void EntityVector::AddDestory(Entity * entity)
+{
+	if (!entity)
+	{
+		return;
+	}
+	entity->GetEOF()->Remove();
+	m_destroy->Add(entity->GetEOF());
+}
 
 EntityVector* EntityVector::GetInstance()
 {

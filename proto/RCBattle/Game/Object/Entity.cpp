@@ -25,8 +25,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	m_pOFT->Remove();
-	delete m_pOFT;
 }
 
 void Entity::Initialize()
@@ -85,29 +83,19 @@ void Entity::Finalize()
 	}
 
 	m_componentMap.clear();
+
+	m_pOFT->Remove();
+	m_pEOF->Remove();
+
+	delete m_pOFT;
+	delete m_pEOF;
 }
 
 void Entity::Destroy()
 {
 	EntityVector* entityVector = EntityVector::GetInstance();
-	/*if (m_pPre)
-	{
-		m_pPre->SetNext(m_pNext);
-	}
-	else
-	{
-		entityVector->SetVector(m_pNext);
-	}
-
-	if (m_pNext)
-	{
-		m_pNext->SetPre(m_pPre);
-	}
-	m_pPre = nullptr;
-	m_pNext = nullptr;
-	entityVector->AddDestory(this);*/
-
-	m_pOFT->Remove();
+	
+	entityVector->AddDestory(this);
 }
 
 void Entity::DeleteComponent()
