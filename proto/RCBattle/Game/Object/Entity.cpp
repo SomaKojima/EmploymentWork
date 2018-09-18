@@ -13,9 +13,9 @@ Entity::Entity()
 	m_transform(Transform()),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),
-	m_pEOF(new EntityOfTree(this))
+	m_pEOF(new EntityOfTree(this)),
+	FunctionComponent(this)
 {
-	m_componentMap.clear();
 }
 
 Entity::~Entity()
@@ -24,11 +24,6 @@ Entity::~Entity()
 
 void Entity::Initialize()
 {
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->Initialize(*this);
-	}
-
 	// ‰ŠúˆÚ“®
 	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_trans);
 
@@ -37,14 +32,6 @@ void Entity::Initialize()
 	// ‰Šú‹óŠÔ“o˜^
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->Register(this);
-}
-
-void Entity::OnCollide(Entity & entity)
-{
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->OnCollide(*this, entity);
-	}
 }
 
 bool Entity::Update(DX::StepTimer const & timer)
@@ -60,25 +47,8 @@ bool Entity::Update(DX::StepTimer const & timer)
 	return false;
 }
 
-void Entity::Draw(Game * game)
-{
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->Draw(*this, game);
-	}
-}
-
 void Entity::Finalize()
 {
-
-	for (auto ite = m_componentMap.begin(); ite != m_componentMap.end(); ite++)
-	{
-		ite->second->Finalize(*this);
-		delete ite->second;
-	}
-
-	m_componentMap.clear();
-
 	m_pOFT->Remove();
 	m_pEOF->Remove();
 
@@ -91,11 +61,6 @@ void Entity::Destroy()
 	EntityVector* entityVector = EntityVector::GetInstance();
 	
 	entityVector->AddDestory(this);
-}
-
-void Entity::DeleteComponent()
-{
-
 }
 
 Entity* Entity::AddChild(Entity * entity)

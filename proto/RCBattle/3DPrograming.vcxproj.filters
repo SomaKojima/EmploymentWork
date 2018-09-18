@@ -20,9 +20,6 @@
     <Filter Include="Game\Component">
       <UniqueIdentifier>{d281dfd9-b8af-4c30-8f59-33ae38597297}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Command">
-      <UniqueIdentifier>{740a5db0-34df-4401-b9ef-f11dfbcf4147}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DebugCollision">
       <UniqueIdentifier>{b1d132f3-8c3a-4330-9e75-f523ee0f0909}</UniqueIdentifier>
     </Filter>
@@ -49,6 +46,9 @@
     </Filter>
     <Filter Include="Game\Component\Physics">
       <UniqueIdentifier>{e0e332df-6d0c-4f11-8377-d9e27cf840b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Command">
+      <UniqueIdentifier>{740a5db0-34df-4401-b9ef-f11dfbcf4147}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

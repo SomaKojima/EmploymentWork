@@ -357,7 +357,7 @@ void Game::CreateDeviceDependentResources()
 	// 車の作成
 	entity = carFactory->CreateCar();
 	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 0.0f));
-	// 入力コンポーネントを追加
+	//// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
 	// コンテナに追加
 	entityVector->Add(entity);

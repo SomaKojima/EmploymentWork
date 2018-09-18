@@ -13,8 +13,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include <vector>
-#include <map>
+#include <list>
 #include <typeinfo>
 #include "../../StepTimer.h"
 
@@ -23,6 +22,7 @@
 /// </summary>
 class Component;
 class Entity;
+class Game;
 
 /// <summary>
 /// コンポーネント機能のクラス
@@ -30,48 +30,45 @@ class Entity;
 class FunctionComponent
 {
 public:
+	FunctionComponent(Entity* me) : m_me(me){}
+	virtual ~FunctionComponent() { m_me = nullptr; }
+public:
+	void InitializeComponent();
 	// コンポーネントの更新
-	bool UpdateComponent(Entity& entity, DX::StepTimer const& timer);
+	bool UpdateComponent(DX::StepTimer const& timer);
 	// コンポーネントの遅延更新
-	bool LateComponentUpdate(Entity& entity, DX::StepTimer const& timer);
+	bool LateComponentUpdate(DX::StepTimer const& timer);
+	// 当たり判定の処理
+	void OnCollideComponent(Entity& entity);
+	// コンポーネントの描画
+	void DrawCompoennt(Game* game);
+	// コンポーネントの終了
+	void FinalizeComponent();
 
 	// コンポーネントの追加
-	template<class T>
-	inline void AddComponent(T* component);
+	void AddComponent(Component* component);
 
 	template<class T>
 	inline T* GetComponent();
 
 protected:
-	std::map<const char*, Component*> m_componentMap;	// コンポーネントのコンテナ
-};
+	std::list<Component*> m_componentlist;	// コンポーネントのコンテナ
 
-template<class T>
-inline void FunctionComponent::AddComponent(T* component)
-{
-	const type_info& id = typeid(component);
-	const char* name = id.name();
-	m_componentMap[name] = component;
-}
+private:
+	Entity* m_me;
+};
 
 template<class T>
 inline T * FunctionComponent::GetComponent()
 {
 	T* sub = nullptr;
-	Component* component = nullptr;
-	const char* name = typeid(T*).name();
-	if (m_componentMap[name] != nullptr)
+	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		component = m_componentMap.find(name)->second;
-		sub = dynamic_cast<T*>(component);
+		sub = dynamic_cast<T*>((*ite));
 		if (sub)
 		{
 			return sub;
 		}
-	}
-	else
-	{
-		m_componentMap.erase(name);
 	}
 	return nullptr;
 }

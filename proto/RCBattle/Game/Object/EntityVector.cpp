@@ -20,6 +20,7 @@ void EntityVector::Initialize()
 	EntityOfTree* entity = m_vector->GetTop();
 	while (entity)
 	{
+		entity->GetObj()->InitializeComponent();
 		entity->GetObj()->Initialize();
 		entity = entity->GetNext();
 	}
@@ -31,7 +32,7 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	EntityOfTree* entity = nullptr;
 	EntityOfTree* entityBuf = nullptr;
 
-	// 追加リストのオブジェクトを加える
+	// デストロイリストのオブジェクトの処理
 	entity = m_destroy->GetTop();
 	Entity* obj = nullptr;
 	while (entity)
@@ -40,14 +41,16 @@ void EntityVector::Update(DX::StepTimer const& timer)
 		obj = entity->GetObj();
 		entity = entityBuf;
 
+		obj->FinalizeComponent();
 		obj->Finalize();
 		delete obj;
 	}
 
+	// コンポーネントの更新処理
 	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->GetObj()->UpdateComponent(*entity->GetObj(), timer);
+		entity->GetObj()->UpdateComponent(timer);
 		entity = entity->GetNext();
 	}
 
@@ -55,12 +58,15 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->HitCheck();
 
+	// コンポーネントの遅延処理
 	entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->GetObj()->LateComponentUpdate(*entity->GetObj(), timer);
+		entity->GetObj()->LateComponentUpdate(timer);
 		entity = entity->GetNext();
 	}
+
+	// オブジェクトの更新処理
 	entity = m_vector->GetTop();
 	while (entity)
 	{
@@ -71,10 +77,11 @@ void EntityVector::Update(DX::StepTimer const& timer)
  
 void EntityVector::Render(Game* game)
 {
+	// コンポーネントの描画処理
 	EntityOfTree* entity = m_vector->GetTop();
 	while (entity)
 	{
-		entity->GetObj()->Draw(game);
+		entity->GetObj()->DrawCompoennt(game);
 		entity = entity->GetNext();
 	}
 }
@@ -90,11 +97,12 @@ void EntityVector::Finalize()
 		obj = entity->GetObj();
 		entity = entityBuf;
 
+		obj->FinalizeComponent();
 		obj->Finalize();
 		delete obj;
 	}
 
-	// 追加リストのオブジェクトを加える
+	// デストロイリストに残っているオブジェクトの終了処理
 	entity = m_destroy->GetTop();
 	while (entity)
 	{
@@ -102,6 +110,7 @@ void EntityVector::Finalize()
 		obj = entity->GetObj();
 		entity = entityBuf->GetNext();
 
+		obj->FinalizeComponent();
 		obj->Finalize();
 		delete obj;
 	}

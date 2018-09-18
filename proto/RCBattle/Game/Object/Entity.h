@@ -90,23 +90,18 @@ public:
 
 	// 初期化
 	void Initialize();
-	// コンポーネントの当たり判定
-	void OnCollide(Entity& entity);
 	// 更新
 	bool Update(DX::StepTimer const& timer);
-	// 描画
-	void Draw(Game* game);
 	// 終了
 	void Finalize();
 	// 消す
 	void Destroy();
 
-	// コンポーネントの削除
-	void DeleteComponent();
 	// 子の追加
 	Entity* AddChild(Entity* entity);
 	// 子の削除
 	void DeleteChild();
+
 	// マトリクスの更新
 	void UpdateMatrix();
 

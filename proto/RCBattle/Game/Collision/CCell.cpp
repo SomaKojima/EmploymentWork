@@ -221,8 +221,8 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 			o++;
 			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj()))
 			{
-				pOFT->GetObj()->OnCollide(*(*ite)->GetObj());
-				(*ite)->GetObj()->OnCollide(*pOFT->GetObj());
+				pOFT->GetObj()->OnCollideComponent(*(*ite)->GetObj());
+				(*ite)->GetObj()->OnCollideComponent(*pOFT->GetObj());
 			}
 		}
 		// 同じ空間内のオブジェクトと当たり判定を取る
@@ -237,8 +237,8 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 			o++;
 			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj()))
 			{
-				pOFT->GetObj()->OnCollide(*pNextOFT->GetObj());
-				pNextOFT->GetObj()->OnCollide(*pOFT->GetObj());
+				pOFT->GetObj()->OnCollideComponent(*pNextOFT->GetObj());
+				pNextOFT->GetObj()->OnCollideComponent(*pOFT->GetObj());
 			}
 			pNextOFT = pNextOFT->GetNext();
 		}

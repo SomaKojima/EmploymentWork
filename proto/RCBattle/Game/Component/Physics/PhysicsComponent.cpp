@@ -80,7 +80,6 @@ void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 		vel.y -= (m_gravity / (60 * 60));
 	}
 
-
 	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld()) + vel;
 	if (pos.y <= 1.5f)
 	{
