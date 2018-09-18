@@ -166,6 +166,9 @@
     <ClInclude Include="Game\Object\SpriteData.h">
       <Filter>Game\Obj</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameComponent\HPComponnet.h">
+      <Filter>Game\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -261,6 +264,9 @@
     </ClCompile>
     <ClCompile Include="Game\Object\SpriteData.cpp">
       <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\HPComponnet.cpp">
+      <Filter>Game\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

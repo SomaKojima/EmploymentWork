@@ -10,6 +10,8 @@
 #include "Game/Object/SpriteData.h"
 #include "Game/Object/EntityVector.h"
 
+#include "Game/GameComponent/HPComponnet.h"
+
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -366,33 +368,37 @@ void Game::CreateDeviceDependentResources()
 	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 0.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
+	entity->SetName("Player");
 	// コンテナに追加
 	entityVector->Add(entity);
 
 	// カメラの設定
 	m_camera.SetPlayer(entity);
 
-	// 敵
-	// 車の作成
-	entity = carFactory->CreateCar();
-	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 10.0f));
-	// コンテナに追加
-	entityVector->Add(entity);
+	//// 敵
+	//// 車の作成
+	//entity = carFactory->CreateCar();
+	//entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 10.0f));
+	//// コンテナに追加
+	//entityVector->Add(entity);
 
-	// 部屋の作成
-	entity = new Entity();
-	// モデルコンポーネントの追加
-	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
-	// 球の当たり判定コンポーネントの追加
-	entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
-	// コンテナに追加
-	entityVector->Add(entity);
+	//// 部屋の作成
+	//entity = new Entity();
+	//// モデルコンポーネントの追加
+	//entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
+	//// 球の当たり判定コンポーネントの追加
+	//entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
+	//// コンテナに追加
+	//entityVector->Add(entity);
 
-	// UIスプライト
-	entity = new Entity();
-	entity->AddComponent(new UIRenderer(spriteData->GetSprite()));
-	entity->GetTrans().SetTrans(Vector3(100, 100, 0));
-	entityVector->Add(entity);
+	//// UIスプライト
+	//entity = new Entity();
+	//entity->AddComponent(new UIRenderer(spriteData->GetSprite()));
+
+	//entity->AddComponent(new HPComponent());
+
+	//entity->GetTrans().SetTrans(Vector3(100, 100, 0));
+	//entityVector->Add(entity);
 
 	entityVector->Initialize();
 }

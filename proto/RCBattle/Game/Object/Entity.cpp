@@ -10,6 +10,7 @@ using namespace DirectX::SimpleMath;
 
 Entity::Entity()
 	:
+	m_name(""),
 	m_transform(Transform()),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),
@@ -66,7 +67,7 @@ void Entity::Destroy()
 Entity* Entity::AddChild(Entity * entity)
 {
 	entity->SetParent(this);
-	m_childVector.push_back(entity);
+	m_childlist.push_back(entity);
 	return entity;
 }
 
@@ -84,7 +85,7 @@ void Entity::UpdateMatrix()
 	{
 		m_transform.m_world = m_transform.m_local;
 	}
-	for (auto ite = m_childVector.begin(); ite != m_childVector.end(); ite++)
+	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
 	{
 		(*ite)->UpdateMatrix();
 	}

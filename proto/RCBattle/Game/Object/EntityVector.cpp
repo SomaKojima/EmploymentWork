@@ -134,3 +134,47 @@ void EntityVector::AddDestory(Entity * entity)
 	entity->GetEOF()->Remove();
 	m_destroy->Add(entity->GetEOF());
 }
+
+Entity* EntityVector::GetEntity(char * name)
+{
+	EntityOfTree* entity = m_vector->GetTop();
+	entity = m_vector->GetTop();
+	Entity* entity2;
+	while (entity)
+	{
+		if (entity->GetObj()->GetName() == name)
+		{
+			return entity->GetObj();
+		}
+		entity2 = CheckChildList(entity->GetObj()->GetChildList(), name);
+		if (entity2)
+		{
+			return entity2;
+		}
+		entity = entity->GetNext();
+	}
+
+	return nullptr;
+}
+
+Entity * EntityVector::CheckChildList(std::list<Entity*>* childList, char * name)
+{
+	for (auto ite = childList->begin(); ite != childList->end(); ite++)
+	{
+		if ((*ite)->GetName() == name)
+		{
+			return (*ite);
+		}
+	}
+
+	Entity* entity = nullptr;
+	for (auto ite = childList->begin(); ite != childList->end(); ite++)
+	{
+		entity = CheckChildList((*ite)->GetChildList(), name);
+		if (entity)
+		{
+			return entity;
+		}
+	}
+	return nullptr;
+}

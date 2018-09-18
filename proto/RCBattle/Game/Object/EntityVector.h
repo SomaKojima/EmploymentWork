@@ -38,6 +38,9 @@ public:
 	void Add(Entity* entity);
 	void AddDestory(Entity* entity);
 
+	Entity* GetEntity(char* name);
+	Entity* CheckChildList(std::list<Entity*>* childList, char* name);
+
 private:
 	
 	// ŽÀ‘Ì‚ÌƒRƒ“ƒeƒi

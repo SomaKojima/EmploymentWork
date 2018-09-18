@@ -13,9 +13,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include <vector>
-#include <map>
-#include <typeinfo>
+#include <list>
 #include "../../StepTimer.h"
 #include "../Collision/CCell.h"
 
@@ -107,20 +105,24 @@ public:
 
 	//　プロパティ
 	// セッター
+	void SetName(char* name) { m_name = name; }
 	void SetParent(Entity* parent) { m_parent = parent; }
 
 	// ゲッター
+	char* GetName() { return m_name; }
 	Transform& GetTrans() { return m_transform; }
 	Entity& GetParent() { return *m_parent; }
+	std::list<Entity*>* GetChildList() { return &m_childlist; }
 	OBJECT_FOR_TREE* GetOFT() { return m_pOFT; }
 	EntityOfTree* GetEOF() { return m_pEOF; }
 
 private:
+	char* m_name;								// 名前
 	Transform m_transform;						// 変形の情報
 
 	Entity* m_parent;							// 親のポインタ
 
-	std::vector<Entity*> m_childVector;			// 子のコンテナ
+	std::list<Entity*> m_childlist;				// 子のコンテナ
 
 	OBJECT_FOR_TREE* m_pOFT;					// 当たり判定用
 	EntityOfTree* m_pEOF;						// 実体をリストで回す用
