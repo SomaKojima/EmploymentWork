@@ -9,6 +9,7 @@
 
 #include "DeviceResources.h"
 #include "StepTimer.h"
+#include "SpriteBatch.h"
 
 #include "DebugCamera.h"
 #include "GridFloor.h"
@@ -45,6 +46,8 @@ public:
 
     // Properties
     void GetDefaultSize( int& width, int& height ) const;
+
+	DirectX::SpriteBatch* GetSpriteBatch() { return m_sprites.get(); }
 
 	ID3D11Device* GetDevice()
 	{

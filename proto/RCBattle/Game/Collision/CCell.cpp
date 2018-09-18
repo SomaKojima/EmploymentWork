@@ -168,6 +168,7 @@ bool CLiner8TreeManager::Register(Entity* entity)
 	b += Vector3(radius, radius * 2, radius);
 	c += Vector3(-radius, 0.0f, -radius);
 	DWORD elem = Get2PointMortonOrder(b, c);
+
 /*
 	Game::SetNumText(elem);
 	Game::SetPosText(Vector3::Transform(Vector3::Zero, entity->GetWorld()));*/

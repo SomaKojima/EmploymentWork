@@ -15,6 +15,7 @@
 /// </summary>
 #include "Input/InputComponent.h"
 #include "Draw/ModelComponent.h"
+#include "Draw/UIRenderer.h"
 #include "Physics/PhysicsComponent.h"
 #include "Collision/SphereCollisionComponent.h"
 #include "Collision/BoxCollisionComponent.h"

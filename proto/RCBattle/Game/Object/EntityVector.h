@@ -38,7 +38,6 @@ public:
 	void Add(Entity* entity);
 	void AddDestory(Entity* entity);
 
-
 private:
 	
 	// ŽÀ‘Ì‚ÌƒRƒ“ƒeƒi

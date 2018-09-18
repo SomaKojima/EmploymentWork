@@ -32,6 +32,6 @@ public:
 	Entity* CreateCar();
 
 private:
-
 	DirectX::Model* m_carModel;	// ŽÔ‚Ìƒ‚ƒfƒ‹
+
 };

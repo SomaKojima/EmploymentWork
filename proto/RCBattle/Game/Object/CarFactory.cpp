@@ -26,6 +26,7 @@ CarFactory::CarFactory()
 {
 	ModelData* modelData = ModelData::GetInstance();
 	m_carModel = modelData->GetCar();
+
 }
 
 CarFactory::~CarFactory()

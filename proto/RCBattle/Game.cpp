@@ -7,6 +7,7 @@
 #include "Game/Component/ComponentLib.h"
 #include "Game/Collision/Collision.h"
 #include "Game/Object/ModelData.h"
+#include "Game/Object/SpriteData.h"
 #include "Game/Object/EntityVector.h"
 
 #if _DEBUG
@@ -180,12 +181,14 @@ void Game::Render()
 	m_gridFloor->Render(context, m_view, m_projection);
 
 	// ここから描画処理を記述する
+	// スプライトの描画 
+
+	m_sprites->Begin();
 
 	EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Render(this);
 
 	Vector2 pos = Vector2::Zero;
-	m_sprites->Begin();
 	// デバッグテキストの描画
 	for (int i = 0; i < 18; i++)
 	{
@@ -337,13 +340,17 @@ void Game::CreateDeviceDependentResources()
 	// グリッドの床の作成
 	m_gridFloor = std::make_unique<GridFloor>(device, context, m_states.get(), 10.0f, 10);
 
+	// 当たり判定の空間を作成
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->Init(4, -100.0f, 100.0f,100.0f, 0.0f, 100.0f, -100.0f);
 
-	// 車モデルの作成
 	// モデルを読み込む
 	ModelData* modelData = ModelData::GetInstance();
 	modelData->Create(device);
+
+	// スプライトデータの読み込み
+	SpriteData* spriteData = SpriteData::GetInstance();
+	spriteData->Create(device);
 
 	// オブジェクトのコンテナクラス
 	EntityVector* entityVector = EntityVector::GetInstance();
@@ -357,7 +364,7 @@ void Game::CreateDeviceDependentResources()
 	// 車の作成
 	entity = carFactory->CreateCar();
 	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 0.0f));
-	//// 入力コンポーネントを追加
+	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
 	// コンテナに追加
 	entityVector->Add(entity);
@@ -379,6 +386,12 @@ void Game::CreateDeviceDependentResources()
 	// 球の当たり判定コンポーネントの追加
 	entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
 	// コンテナに追加
+	entityVector->Add(entity);
+
+	// UIスプライト
+	entity = new Entity();
+	entity->AddComponent(new UIRenderer(spriteData->GetSprite()));
+	entity->GetTrans().SetTrans(Vector3(100, 100, 0));
 	entityVector->Add(entity);
 
 	entityVector->Initialize();

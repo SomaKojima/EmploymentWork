@@ -160,6 +160,12 @@
     <ClInclude Include="Game\Component\Physics\PhysicsComponent.h">
       <Filter>Game\Component\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Component\Draw\UIRenderer.h">
+      <Filter>Game\Component\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\SpriteData.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -249,6 +255,12 @@
     </ClCompile>
     <ClCompile Include="Game\Component\Physics\PhysicsComponent.cpp">
       <Filter>Game\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Draw\UIRenderer.cpp">
+      <Filter>Game\Component\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\SpriteData.cpp">
+      <Filter>Game\Obj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

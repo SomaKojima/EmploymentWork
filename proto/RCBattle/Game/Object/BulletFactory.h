@@ -28,15 +28,6 @@ public:
 	// デストラクタ
 	~BulletFactory();
 
-	//static BulletFactory* GetInstance()
-	//{
-	//	if (!sBulletFactory)
-	//	{
-	//		sBulletFactory = new BulletFactory();
-	//	}
-	//	return sBulletFactory;
-	//}
-
 	// 弾の生成
 	Entity* CreateBullet();
 

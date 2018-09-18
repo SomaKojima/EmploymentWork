@@ -180,6 +180,7 @@
     <ClInclude Include="Game\Component\Component.h" />
     <ClInclude Include="Game\Component\ComponentLib.h" />
     <ClInclude Include="Game\Component\Draw\ModelComponent.h" />
+    <ClInclude Include="Game\Component\Draw\UIRenderer.h" />
     <ClInclude Include="Game\Component\Input\InputComponent.h" />
     <ClInclude Include="Game\Component\Physics\PhysicsComponent.h" />
     <ClInclude Include="Game\DebugCollision\DebugBox.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Game\Object\EntityVector.h" />
     <ClInclude Include="Game\Object\Function\FunctionComponent.h" />
     <ClInclude Include="Game\Object\ModelData.h" />
+    <ClInclude Include="Game\Object\SpriteData.h" />
     <ClInclude Include="Game\Utility\BidirectionalList.h" />
     <ClInclude Include="Game\Utility\RegisterTo.h" />
     <ClInclude Include="Game\Utility\Utility.h" />
@@ -219,6 +221,7 @@
     <ClCompile Include="Game\Component\Collision\PlaneCollisionComponent.cpp" />
     <ClCompile Include="Game\Component\Collision\SphereCollisionComponent.cpp" />
     <ClCompile Include="Game\Component\Draw\ModelComponent.cpp" />
+    <ClCompile Include="Game\Component\Draw\UIRenderer.cpp" />
     <ClCompile Include="Game\Component\Input\InputComponent.cpp" />
     <ClCompile Include="Game\Component\Physics\PhysicsComponent.cpp" />
     <ClCompile Include="Game\DebugCollision\DebugBox.cpp" />
@@ -231,6 +234,7 @@
     <ClCompile Include="Game\Object\EntityVector.cpp" />
     <ClCompile Include="Game\Object\Function\FunctionComponent.cpp" />
     <ClCompile Include="Game\Object\ModelData.cpp" />
+    <ClCompile Include="Game\Object\SpriteData.cpp" />
     <ClCompile Include="GridFloor.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyCamera.cpp" />
