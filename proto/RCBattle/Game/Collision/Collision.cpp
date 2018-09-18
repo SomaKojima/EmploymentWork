@@ -28,8 +28,8 @@ Collision::~Collision()
 
 bool Collision::HitCheck_Sphere(Entity* entity, SphereCollisionComponent& sphere, Entity* entity2, SphereCollisionComponent& sphere2, DirectX::SimpleMath::Vector3* repulsionVel)
 {
-	Vector3 pos = Vector3::Transform(sphere.GetCenter(), entity->GetWorld());
-	Vector3 pos2 = Vector3::Transform(sphere2.GetCenter(), entity2->GetWorld());
+	Vector3 pos = Vector3::Transform(sphere.GetCenter(), entity->GetTrans().GetWorld());
+	Vector3 pos2 = Vector3::Transform(sphere2.GetCenter(), entity2->GetTrans().GetWorld());
 
 	// ’†SŠÔ‚Ì‹——£‚Ì•½•û‚ğŒvZ
 	DirectX::SimpleMath::Vector3 d = pos - pos2;

@@ -74,7 +74,7 @@ void SphereCollisionComponent::LateUpdate(Entity & entity, DX::StepTimer const &
 /// <param name="game">ゲーム</param>
 void SphereCollisionComponent::Draw(Entity & entity, Game * game)
 {
-	Matrix world = entity.GetWorld() * Matrix::CreateTranslation(m_center);
+	Matrix world = entity.GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成

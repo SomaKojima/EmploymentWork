@@ -10,12 +10,7 @@ using namespace DirectX::SimpleMath;
 
 Entity::Entity()
 	:
-	m_angle(Vector3::Zero),
-	m_dir(Quaternion::Identity),
-	m_vel(Vector3::Zero),
-	m_radius(0.0f),
-	m_world(Matrix::Identity),
-	m_local(Matrix::Identity),
+	m_transform(Transform()),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),
 	m_pEOF(new EntityOfTree(this))
@@ -35,7 +30,7 @@ void Entity::Initialize()
 	}
 
 	// 初期移動
-	m_local = Matrix::CreateFromQuaternion(m_dir) * Matrix::CreateTranslation(m_trans);
+	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_trans);
 
 	UpdateMatrix();
 
@@ -55,8 +50,8 @@ void Entity::OnCollide(Entity & entity)
 bool Entity::Update(DX::StepTimer const & timer)
 {
 	// マトリクス/座標の更新
-	m_trans += Vector3::Transform(m_vel, m_dir);
-	m_local = Matrix::CreateFromQuaternion(m_dir) * Matrix::CreateTranslation(m_trans);
+	m_transform.m_trans += Vector3::Transform(m_transform.m_vel, m_transform.m_dir);
+	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_trans);
 
 	UpdateMatrix();
 
@@ -118,11 +113,11 @@ void Entity::UpdateMatrix()
 {
 	if (m_parent)
 	{
-		m_world = m_local * m_parent->GetWorld();
+		m_transform.m_world = m_transform.m_local * m_parent->GetTrans().GetWorld();
 	}
 	else
 	{
-		m_world = m_local;
+		m_transform.m_world = m_transform.m_local;
 	}
 	for (auto ite = m_childVector.begin(); ite != m_childVector.end(); ite++)
 	{

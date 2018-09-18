@@ -51,7 +51,7 @@ Entity * BulletFactory::CreateBullet()
 	entity->AddComponent(new ModelComponent(m_bulletModel, ModelComponent::Type::Nomal));
 	// 球の当たり判定コンポーネントの追加
 	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 0.4f));
-	entity->SetRadius(0.4f);
+	entity->GetTrans().SetRadius(0.4f);
 	// 物理コンポーネントの追加
 	/*PhysicsComponent* physics = new PhysicsComponent();
 	physics->SetIsFriction(false);

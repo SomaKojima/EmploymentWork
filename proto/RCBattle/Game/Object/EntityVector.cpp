@@ -17,7 +17,6 @@ EntityVector::~EntityVector()
 
 void EntityVector::Initialize()
 {
-	int a = 0;
 	EntityOfTree* entity = m_vector->GetTop();
 	while (entity)
 	{

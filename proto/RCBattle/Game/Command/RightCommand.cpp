@@ -37,8 +37,8 @@ RightCommand::~RightCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void RightCommand::Excute(Entity & entity)
 {
-	Vector3 angle = entity.GetAngle();
-	Vector3 vel = entity.GetVel();
+	Vector3 angle = entity.GetTrans().GetAngle();
+	Vector3 vel = entity.GetTrans().GetVel();
 	angle.y -= XMConvertToRadians(1.0f);
 	//if (vel.z >= -0.001f)
 	//{
@@ -48,7 +48,7 @@ void RightCommand::Excute(Entity & entity)
 	//	angle.y += XMConvertToRadians(1.0f);
 	//}
 
-	entity.SetAngle(angle);
+	entity.GetTrans().SetAngle(angle);
 
 	//Vector3 vel = Vector3(-0.1f, entity.GetVel().y, entity.GetVel().z);
 	//entity.SetVel(vel);

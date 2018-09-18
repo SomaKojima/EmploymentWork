@@ -162,9 +162,9 @@ bool CLiner8TreeManager::Register(Entity* entity)
 	{
 		return false;
 	}
-	Vector3 b = Vector3::Transform(Vector3::Zero, entity->GetWorld());
+	Vector3 b = Vector3::Transform(Vector3::Zero, entity->GetTrans().GetWorld());
 	Vector3 c = b;
-	float radius = entity->GetRadius();
+	float radius = entity->GetTrans().GetRadius();
 	b += Vector3(radius, radius * 2, radius);
 	c += Vector3(-radius, 0.0f, -radius);
 	DWORD elem = Get2PointMortonOrder(b, c);

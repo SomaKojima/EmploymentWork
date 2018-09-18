@@ -357,7 +357,7 @@ void Game::CreateDeviceDependentResources()
 	// プレイヤーの作成
 	// 車の作成
 	entity = carFactory->CreateCar();
-	entity->SetTrans(Vector3(0.0f, 2.0f, 0.0f));
+	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 0.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
 	// コンテナに追加
@@ -369,7 +369,7 @@ void Game::CreateDeviceDependentResources()
 	// 敵
 	// 車の作成
 	entity = carFactory->CreateCar();
-	entity->SetTrans(Vector3(0.0f, 2.0f, 10.0f));
+	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 10.0f));
 	// コンテナに追加
 	entityVector->Add(entity);
 

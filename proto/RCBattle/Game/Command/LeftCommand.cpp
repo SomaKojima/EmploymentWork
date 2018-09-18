@@ -37,10 +37,10 @@ LeftCommand::~LeftCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void LeftCommand::Excute(Entity & entity)
 {
-	Vector3 angle = entity.GetAngle();
+	Vector3 angle = entity.GetTrans().GetAngle();
 	angle.y += XMConvertToRadians(1.0f);
 
-	entity.SetAngle(angle);
+	entity.GetTrans().SetAngle(angle);
 
 	//Vector3 vel = Vector3(0.1f, entity.GetVel().y, entity.GetVel().z);
 	//entity.SetVel(vel);

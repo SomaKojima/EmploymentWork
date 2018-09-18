@@ -87,7 +87,7 @@ void ModelComponent::Draw(Entity & entity, Game * game)
 			});
 		}
 
-		m_model->Draw(game->GetContext(), *game->GetStates(), entity.GetWorld(), game->GetView(), game->GetProjection());
+		m_model->Draw(game->GetContext(), *game->GetStates(), entity.GetTrans().GetWorld(), game->GetView(), game->GetProjection());
 	}
 }
 

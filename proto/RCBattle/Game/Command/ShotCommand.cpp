@@ -44,12 +44,12 @@ void ShotCommand::Excute(Entity & entity)
 	BulletFactory* bulletFactory = BulletFactory::GetInstance();
 	Entity* _entity = bulletFactory->CreateBullet();
 
-	_entity->SetAngle(entity.GetAngle());
-	_entity->SetVel(Vector3(0.0f, 0.0f, 0.2f));
+	_entity->GetTrans().SetAngle(entity.GetTrans().GetAngle());
+	_entity->GetTrans().SetVel(Vector3(0.0f, 0.0f, 0.2f));
 
-	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetWorld());
-	pos += Vector3::Transform(Vector3(0.0f, -1.0f, 3.0f), entity.GetDir());
-	_entity->SetTrans(pos);
+	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld());
+	pos += Vector3::Transform(Vector3(0.0f, -1.0f, 3.0f), entity.GetTrans().GetDir());
+	_entity->GetTrans().SetTrans(pos);
 	
 	entityVector->Add(_entity);
 }

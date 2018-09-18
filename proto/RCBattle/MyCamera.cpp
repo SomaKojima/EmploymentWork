@@ -40,9 +40,9 @@ void MyCamera::GameCamera()
 {
 	Vector3 eye = Vector3(0.0f, 2.0f, -5.0f);
 
-	Matrix rotY = Matrix::CreateRotationY(m_target->GetAngle().y);
+	Matrix rotY = Matrix::CreateRotationY(m_target->GetTrans().GetAngle().y);
 	eye = Vector3::Transform(eye, rotY);
-	eye += Vector3::Transform(Vector3::Zero, m_target->GetWorld());
+	eye += Vector3::Transform(Vector3::Zero, m_target->GetTrans().GetWorld());
 
-	SetPositionTarget(eye, Vector3::Transform(Vector3::Zero, m_target->GetWorld()));
+	SetPositionTarget(eye, Vector3::Transform(Vector3::Zero, m_target->GetTrans().GetWorld()));
 }

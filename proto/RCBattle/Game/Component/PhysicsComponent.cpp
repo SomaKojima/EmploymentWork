@@ -69,7 +69,7 @@ void PhysicsComponent::Initialize(Entity & entity)
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 {
-	Vector3 vel = entity.GetVel();
+	Vector3 vel = entity.GetTrans().GetVel();
 
 	if(m_isFriction)
 	{
@@ -82,14 +82,14 @@ void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 	}
 
 
-	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetWorld()) + vel;
+	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld()) + vel;
 	if (pos.y <= 1.5f)
 	{
-		entity.SetWorld(entity.GetWorld() * Matrix::CreateTranslation(Vector3(0.0f, -pos.y + 1.5f, 0.0f)));
+		entity.GetTrans().SetWorld(entity.GetTrans().GetWorld() * Matrix::CreateTranslation(Vector3(0.0f, -pos.y + 1.5f, 0.0f)));
 		vel.y = 0.0f;
 	}
 
-	entity.SetVel(vel);
+	entity.GetTrans().SetVel(vel);
 }
 
 /// <summary>
@@ -99,10 +99,10 @@ void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::LateUpdate(Entity & entity, DX::StepTimer const & timer)
 {
-	Vector3 trans = entity.GetTrans();
+	Vector3 trans = entity.GetTrans().GetTrans();
 
 	trans += m_repulsionVel;
-	entity.SetTrans(trans);
+	entity.GetTrans().SetTrans(trans);
 	m_repulsionVel = Vector3::Zero;
 }
 

@@ -37,6 +37,6 @@ RecessionCommand::~RecessionCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void RecessionCommand::Excute(Entity & entity)
 {
-	Vector3 vel = Vector3(entity.GetVel().x, entity.GetVel().y, -0.1f);
-	entity.SetVel(vel);
+	Vector3 vel = Vector3(entity.GetTrans().GetVel().x, entity.GetTrans().GetVel().y, -0.1f);
+	entity.GetTrans().SetVel(vel);
 }
