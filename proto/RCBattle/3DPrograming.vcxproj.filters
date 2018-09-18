@@ -38,6 +38,18 @@
     <Filter Include="Utility">
       <UniqueIdentifier>{2b3666eb-1e9c-447f-a470-754b5455f994}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Component\Draw">
+      <UniqueIdentifier>{d986f92e-b066-4476-8918-3b4f8b5edabb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\Collision">
+      <UniqueIdentifier>{e7b55852-6e7f-46fe-a46c-2ee3898a3558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\Input">
+      <UniqueIdentifier>{7bb79d06-11ea-44cb-a53b-2646ac51ba07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Component\Physics">
+      <UniqueIdentifier>{e0e332df-6d0c-4f11-8377-d9e27cf840b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -53,9 +65,6 @@
     <ClInclude Include="Game\Object\Entity.h">
       <Filter>Game\Obj</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Component\InputComponent.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Command\Command.h">
       <Filter>Game\Command</Filter>
     </ClInclude>
@@ -64,15 +73,6 @@
     </ClInclude>
     <ClInclude Include="Game\Command\InputHandler.h">
       <Filter>Game\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\ModelComponent.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\ComponentLib.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\Component.h">
-      <Filter>Game\Component</Filter>
     </ClInclude>
     <ClInclude Include="Game\Command\RecessionCommand.h">
       <Filter>Game\Command</Filter>
@@ -83,9 +83,6 @@
     <ClInclude Include="Game\Command\RightCommand.h">
       <Filter>Game\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Component\PhysicsComponent.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Game\DebugCollision\DebugBox.h">
       <Filter>DebugCollision</Filter>
     </ClInclude>
@@ -95,17 +92,11 @@
     <ClInclude Include="Game\DebugCollision\DebugSphere.h">
       <Filter>DebugCollision</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Component\SphereCollisionComponent.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Command\DownCommand.h">
       <Filter>Game\Command</Filter>
     </ClInclude>
     <ClInclude Include="Game\Command\UpCommand.h">
       <Filter>Game\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Component\BoxCollisionComponent.h">
-      <Filter>Game\Component</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\CarFactory.h">
       <Filter>Game\Obj</Filter>
@@ -133,9 +124,6 @@
     <ClInclude Include="Game\GameComponent\BulletComponent.h">
       <Filter>Game\GameComponent</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Component\PlaneCollisionComponent.h">
-      <Filter>Game\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Object\Function\FunctionComponent.h">
       <Filter>Game\Obj\Function</Filter>
     </ClInclude>
@@ -148,6 +136,30 @@
     <ClInclude Include="Game\Utility\RegisterTo.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Component\Component.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\ComponentLib.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Draw\ModelComponent.h">
+      <Filter>Game\Component\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Collision\BoxCollisionComponent.h">
+      <Filter>Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Collision\PlaneCollisionComponent.h">
+      <Filter>Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Collision\SphereCollisionComponent.h">
+      <Filter>Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Input\InputComponent.h">
+      <Filter>Game\Component\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\Physics\PhysicsComponent.h">
+      <Filter>Game\Component\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -158,17 +170,11 @@
     </ClCompile>
     <ClCompile Include="DebugCamera.cpp" />
     <ClCompile Include="GridFloor.cpp" />
-    <ClCompile Include="Game\Component\InputComponent.cpp">
-      <Filter>Game\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Command\AdvanceCommand.cpp">
       <Filter>Game\Command</Filter>
     </ClCompile>
     <ClCompile Include="Game\Command\InputHandler.cpp">
       <Filter>Game\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Component\ModelComponent.cpp">
-      <Filter>Game\Component</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\Entity.cpp">
       <Filter>Game\Obj</Filter>
@@ -182,9 +188,6 @@
     <ClCompile Include="Game\Command\RightCommand.cpp">
       <Filter>Game\Command</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Component\PhysicsComponent.cpp">
-      <Filter>Game\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Game\DebugCollision\DebugBox.cpp">
       <Filter>DebugCollision</Filter>
     </ClCompile>
@@ -194,17 +197,11 @@
     <ClCompile Include="Game\DebugCollision\DebugSphere.cpp">
       <Filter>DebugCollision</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Component\SphereCollisionComponent.cpp">
-      <Filter>Game\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Command\DownCommand.cpp">
       <Filter>Game\Command</Filter>
     </ClCompile>
     <ClCompile Include="Game\Command\UpCommand.cpp">
       <Filter>Game\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Component\BoxCollisionComponent.cpp">
-      <Filter>Game\Component</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\CarFactory.cpp">
       <Filter>Game\Obj</Filter>
@@ -234,6 +231,24 @@
     </ClCompile>
     <ClCompile Include="Game\Object\Function\FunctionComponent.cpp">
       <Filter>Game\Obj\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Draw\ModelComponent.cpp">
+      <Filter>Game\Component\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Collision\BoxCollisionComponent.cpp">
+      <Filter>Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Collision\PlaneCollisionComponent.cpp">
+      <Filter>Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Collision\SphereCollisionComponent.cpp">
+      <Filter>Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Input\InputComponent.cpp">
+      <Filter>Game\Component\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Physics\PhysicsComponent.cpp">
+      <Filter>Game\Component\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,8 +13,8 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "Component.h"
-#include "../DebugCollision/DebugBox.h"
+#include "../Component.h"
+#include "../../DebugCollision/DebugBox.h"
 
 /// <summary>
 /// 前方宣言
@@ -30,16 +30,8 @@ public:
 	BoxCollisionComponent(DirectX::SimpleMath::Vector3 center, DirectX::SimpleMath::Vector3 radius);
 	~BoxCollisionComponent();
 
-	// 初期化
-	void Initialize(Entity & entity) override;
-	// 更新
-	void Update(Entity& entity, DX::StepTimer const& timer) override;
-	// 遅延更新
-	void LateUpdate(Entity& m_entity, DX::StepTimer const& timer) override;
 	// 描画
 	void Draw(Entity & entity, Game* game) override;
-	// 終了
-	void Finalize(Entity & entity) override;
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	DirectX::SimpleMath::Vector3 GetRadius() { return m_radius; }

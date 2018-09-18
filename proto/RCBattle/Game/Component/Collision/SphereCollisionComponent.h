@@ -13,8 +13,8 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "Component.h"
-#include "../DebugCollision/DebugSphere.h"
+#include "../Component.h"
+#include "../../DebugCollision/DebugSphere.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
@@ -25,12 +25,6 @@ public:
 	SphereCollisionComponent(DirectX::SimpleMath::Vector3 center, float radius);
 	~SphereCollisionComponent();
 
-	// 初期化
-	void Initialize(Entity & entity) override;
-	// 更新
-	void Update(Entity& entity, DX::StepTimer const& timer) override;
-	// 遅延更新
-	void LateUpdate(Entity& entity, DX::StepTimer const& timer) override;
 	// 描画
 	void Draw(Entity & entity, Game* game) override;
 	// 終了

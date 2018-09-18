@@ -10,8 +10,8 @@
 /// </summary>
 #include "../../pch.h"
 #include "Collision.h"
-#include "../Component/SphereCollisionComponent.h"
-#include "../Component/BoxCollisionComponent.h"
+
+#include "../Component/ComponentLib.h"
 
 /// <summary>
 /// –¼‘O‹óŠÔ

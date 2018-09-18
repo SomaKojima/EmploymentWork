@@ -13,7 +13,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "Component.h"
+#include "../Component.h"
 
 /// <summary>
 /// 前方宣言
@@ -36,11 +36,6 @@ public:
 	void Update(Entity& entity, DX::StepTimer const& timer) override;
 	// 遅延更新
 	void LateUpdate(Entity& entity, DX::StepTimer const& timer) override;
-	// 描画
-	void Draw(Entity & entity, Game* game) override;
-	// 終了
-	void Finalize(Entity & entity) override;
-
 	// 当たり判定の処理
 	void OnCollide(Entity& entity, Entity& collide) override;
 

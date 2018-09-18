@@ -68,7 +68,7 @@ public:
 	DirectX::SimpleMath::Matrix GetWorld() { return m_world; }
 	DirectX::SimpleMath::Matrix GetLocal() { return m_local; }
 
-public:
+private:
 	DirectX::SimpleMath::Quaternion m_dir;		// 方向
 	DirectX::SimpleMath::Vector3 m_angle;		// 角度				
 	DirectX::SimpleMath::Vector3 m_vel;			// 速度
@@ -121,7 +121,7 @@ public:
 	EntityOfTree* GetEOF() { return m_pEOF; }
 
 private:
-	Transform m_transform;
+	Transform m_transform;						// 変形の情報
 
 	Entity* m_parent;							// 親のポインタ
 

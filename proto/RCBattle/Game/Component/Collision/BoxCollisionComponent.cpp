@@ -28,7 +28,6 @@ BoxCollisionComponent::BoxCollisionComponent(DirectX::SimpleMath::Vector3 center
 	m_radius(radius),
 	m_obj(nullptr)
 {
-	m_name = "BoxCollision";
 }
 
 /// <summary>
@@ -38,31 +37,6 @@ BoxCollisionComponent::~BoxCollisionComponent()
 {
 }
 
-/// <summary>
-/// 初期化
-/// </summary>
-/// <param name="entity">実体</param>
-void BoxCollisionComponent::Initialize(Entity & entity)
-{
-}
-
-/// <summary>
-/// 更新
-/// </summary>
-/// <param name="entity">実体</param>
-/// <param name="timer">時間</param>
-void BoxCollisionComponent::Update(Entity & entity, DX::StepTimer const & timer)
-{
-}
-
-/// <summary>
-/// 遅延更新
-/// </summary>
-/// <param name="m_entity">実体</param>
-/// <param name="timer">時間</param>
-void BoxCollisionComponent::LateUpdate(Entity & m_entity, DX::StepTimer const & timer)
-{
-}
 
 /// <summary>
 /// 描画
@@ -81,12 +55,4 @@ void BoxCollisionComponent::Draw(Entity & entity, Game * game)
 	{
 		m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
 	}
-}
-
-/// <summary>
-/// 終了
-/// </summary>
-/// <param name="entity">実体</param>
-void BoxCollisionComponent::Finalize(Entity & entity)
-{
 }

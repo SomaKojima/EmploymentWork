@@ -13,7 +13,9 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "InputComponent.h"
-#include "ModelComponent.h"
-#include "PhysicsComponent.h"
-#include "SphereCollisionComponent.h"
+#include "Input/InputComponent.h"
+#include "Draw/ModelComponent.h"
+#include "Physics/PhysicsComponent.h"
+#include "Collision/SphereCollisionComponent.h"
+#include "Collision/BoxCollisionComponent.h"
+//#include "Collision/PlaneCollisionComponent.h"

@@ -18,7 +18,6 @@ InputComponent::InputComponent()
 	:
 	m_inputHandle()
 {
-	m_name = "Input";
 }
 
 /// <summary>
@@ -28,13 +27,6 @@ InputComponent::~InputComponent()
 {
 }
 
-/// <summary>
-/// 初期化
-/// </summary>
-/// <param name="entity"></param>
-void InputComponent::Initialize(Entity & entity)
-{
-}
 
 /// <summary>
 /// 更新
@@ -48,30 +40,4 @@ void InputComponent::Update(Entity& entity, DX::StepTimer const& timer)
 	{
 		(*ite)->Excute(entity);
 	}
-}
-
-/// <summary>
-/// 遅延更新
-/// </summary>
-/// <param name="m_entity">実体</param>
-/// <param name="timer">時間</param>
-void InputComponent::LateUpdate(Entity & m_entity, DX::StepTimer const & timer)
-{
-}
-
-/// <summary>
-/// 描画
-/// </summary>
-/// <param name="entity">実体</param>
-/// <param name="game">ゲーム</param>
-void InputComponent::Draw(Entity & entity, Game * game)
-{
-}
-
-/// <summary>
-/// 終了処理
-/// </summary>
-/// <param name="entity">実体</param>
-void InputComponent::Finalize(Entity & entity)
-{
 }

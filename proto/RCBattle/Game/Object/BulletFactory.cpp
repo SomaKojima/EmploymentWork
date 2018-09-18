@@ -13,9 +13,7 @@
 #include "Entity.h"
 #include "ModelData.h"
 
-#include "../Component/ModelComponent.h"
-#include "../Component/PhysicsComponent.h"
-#include "../Component/SphereCollisionComponent.h"
+#include "../Component/ComponentLib.h"
 #include "../GameComponent/BulletComponent.h"
 
 /// <summary>

@@ -5,7 +5,6 @@
 #include "pch.h"
 #include "Game.h"
 #include "Game/Component/ComponentLib.h"
-#include "Game/Component/BoxCollisionComponent.h"
 #include "Game/Collision/Collision.h"
 #include "Game/Object/ModelData.h"
 #include "Game/Object/EntityVector.h"

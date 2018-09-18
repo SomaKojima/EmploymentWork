@@ -29,7 +29,6 @@ SphereCollisionComponent::SphereCollisionComponent(DirectX::SimpleMath::Vector3 
 	m_radius(radius),
 	m_obj(nullptr)
 {
-	m_name = "SphereCollision";
 }
 
 /// <summary>
@@ -38,33 +37,6 @@ SphereCollisionComponent::SphereCollisionComponent(DirectX::SimpleMath::Vector3 
 SphereCollisionComponent::~SphereCollisionComponent()
 {
 
-}
-
-/// <summary>
-/// 初期化
-/// </summary>
-/// <param name="entity">実体</param>
-void SphereCollisionComponent::Initialize(Entity & entity)
-{
-
-}
-
-/// <summary>
-/// 更新
-/// </summary>
-/// <param name="entity">実体</param>
-/// <param name="timer">時間</param>
-void SphereCollisionComponent::Update(Entity & entity, DX::StepTimer const & timer)
-{
-}
-
-/// <summary>
-/// 遅延更新
-/// </summary>
-/// <param name="m_entity">実体</param>
-/// <param name="timer">時間</param>
-void SphereCollisionComponent::LateUpdate(Entity & entity, DX::StepTimer const & timer)
-{
 }
 
 /// <summary>

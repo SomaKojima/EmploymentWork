@@ -1,5 +1,5 @@
 /// <summary>
-/// InputComponent.h
+/// SphereCollisionComponent.h
 /// 
 /// 制作日:2018/7/4
 /// 制作者:小嶋 颯天
@@ -13,20 +13,17 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "Component.h"
-#include "../Command/InputHandler.h"
-#include "../Command/Command.h"
-
-class BulletFactory;
+#include "../Component.h"
+#include "../../DebugCollision/DebugSphere.h"
 
 /// <summary>
-/// 入力のコンポーネントクラス
+/// 球の当たり判定のコンポーネントクラス
 /// </summary>
-class InputComponent : public Component
+class PlaneCollisionComponent : public Component
 {
 public:
-	InputComponent();
-	~InputComponent();
+	PlaneCollisionComponent();
+	~PlaneCollisionComponent();
 
 	// 初期化
 	void Initialize(Entity & entity) override;
@@ -40,6 +37,4 @@ public:
 	void Finalize(Entity & entity) override;
 
 private:
-	InputHandler m_inputHandle;
 };
-

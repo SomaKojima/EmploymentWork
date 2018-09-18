@@ -10,10 +10,10 @@
 /// </summary>
 #include "../../pch.h"
 #include "PhysicsComponent.h"
-#include "../Collision/Collision.h"
-#include "../Collision/CCell.h"
-#include "../Component/SphereCollisionComponent.h"
-#include "../Component/BoxCollisionComponent.h"
+#include "../../Collision/Collision.h"
+#include "../../Collision/CCell.h"
+
+#include "../ComponentLib.h"
 
 /// <summary>
 /// ñºëOãÛä‘
@@ -34,7 +34,6 @@ PhysicsComponent::PhysicsComponent()
 	sphere(nullptr),
 	box(nullptr)
 {
-	m_name = "Physics";
 }
 
 /// <summary>
@@ -104,23 +103,6 @@ void PhysicsComponent::LateUpdate(Entity & entity, DX::StepTimer const & timer)
 	trans += m_repulsionVel;
 	entity.GetTrans().SetTrans(trans);
 	m_repulsionVel = Vector3::Zero;
-}
-
-/// <summary>
-/// ï`âÊ
-/// </summary>
-/// <param name="entity">é¿ëÃ</param>
-/// <param name="game">ÉQÅ[ÉÄ</param>
-void PhysicsComponent::Draw(Entity & entity, Game * game)
-{
-}
-
-/// <summary>
-/// èIóπ
-/// </summary>
-/// <param name="entity">é¿ëÃ</param>
-void PhysicsComponent::Finalize(Entity & entity)
-{
 }
 
 void PhysicsComponent::OnCollide(Entity& entity, Entity& collide)
