@@ -186,6 +186,7 @@
     <ClInclude Include="Game\Component\TestComponent.h" />
     <ClInclude Include="Game\DebugCollision\DebugBox.h" />
     <ClInclude Include="Game\DebugCollision\DebugCapsule.h" />
+    <ClInclude Include="Game\DebugCollision\DebugPlane.h" />
     <ClInclude Include="Game\DebugCollision\DebugSphere.h" />
     <ClInclude Include="Game\GameComponent\BulletComponent.h" />
     <ClInclude Include="Game\GameComponent\Button\ButtonComponent.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="Game\Component\TestComponent.cpp" />
     <ClCompile Include="Game\DebugCollision\DebugBox.cpp" />
     <ClCompile Include="Game\DebugCollision\DebugCapsule.cpp" />
+    <ClCompile Include="Game\DebugCollision\DebugPlane.cpp" />
     <ClCompile Include="Game\DebugCollision\DebugSphere.cpp" />
     <ClCompile Include="Game\GameComponent\BulletComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Button\ButtonComponent.cpp" />
@@ -279,6 +281,9 @@
     <MeshContentTask Include="FBX\room.FBX">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Game\DebugCollision\DebugPlane.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

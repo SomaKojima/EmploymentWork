@@ -50,7 +50,9 @@ void ScenePlay::Initialize(Game * game)
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
 	// 球の当たり判定コンポーネントの追加
-	entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
+	//entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), 2, 1));
+	entity->GetTrans().SetTrans(Vector3(0.0f, 0.0f, 3.0f));
 	// コンテナに追加
 	entityVector->Add(entity);
 }

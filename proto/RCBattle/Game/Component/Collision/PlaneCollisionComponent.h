@@ -14,7 +14,7 @@
 /// ヘッダのインクルード
 /// </summary>
 #include "../Component.h"
-#include "../../DebugCollision/DebugSphere.h"
+#include "../../DebugCollision/DebugPlane.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
@@ -22,7 +22,7 @@
 class PlaneCollisionComponent : public Component
 {
 public:
-	PlaneCollisionComponent();
+	PlaneCollisionComponent(DirectX::SimpleMath::Vector3 center, DirectX::SimpleMath::Vector3 angle, float width, float height);
 	~PlaneCollisionComponent();
 
 	// 初期化
@@ -37,4 +37,11 @@ public:
 	void Finalize() override;
 
 private:
+	DirectX::SimpleMath::Vector3 m_center;	// 中心
+	DirectX::SimpleMath::Vector3 m_angle;	// 角度
+	float m_width;							// 横幅
+	float m_height;							// 縦幅
+
+	// 当たり判定の表示用オブジェクト
+	std::unique_ptr<DebugPlane> m_obj;
 };

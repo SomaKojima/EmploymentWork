@@ -196,6 +196,9 @@
     <ClInclude Include="Game\GameComponent\Button\StartButtonComponent.h">
       <Filter>Game\GameComponent\Button</Filter>
     </ClInclude>
+    <ClInclude Include="Game\DebugCollision\DebugPlane.h">
+      <Filter>DebugCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -313,6 +316,9 @@
     <ClCompile Include="Game\GameComponent\Button\StartButtonComponent.cpp">
       <Filter>Game\GameComponent\Button</Filter>
     </ClCompile>
+    <ClCompile Include="Game\DebugCollision\DebugPlane.cpp">
+      <Filter>DebugCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -337,5 +343,8 @@
     <MeshContentTask Include="FBX\burret.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Game\DebugCollision\DebugPlane.inc" />
   </ItemGroup>
 </Project>
