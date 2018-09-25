@@ -8,7 +8,7 @@
 #include "UpCommand.h"
 #include "ShotCommand.h"
 
-#include "../Object/BulletFactory.h"
+#include "../Object/Factory/BulletFactory.h"
 
 using namespace std;
 using namespace DirectX;

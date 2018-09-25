@@ -26,15 +26,15 @@ public:
 	~PlaneCollisionComponent();
 
 	// 初期化
-	void Initialize(Entity & entity) override;
+	void Initialize() override;
 	// 更新
-	void Update(Entity& entity, DX::StepTimer const& timer) override;
+	void Update(DX::StepTimer const& timer) override;
 	// 遅延更新
-	void LateUpdate(Entity& entity, DX::StepTimer const& timer) override;
+	void LateUpdate(DX::StepTimer const& timer) override;
 	// 描画
-	void Draw(Entity & entity, Game* game) override;
+	void Draw(Game* game) override;
 	// 終了
-	void Finalize(Entity & entity) override;
+	void Finalize() override;
 
 private:
 };

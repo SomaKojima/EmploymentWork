@@ -33,9 +33,9 @@ public:
 	~ModelComponent();
 
 	// ï`âÊ
-	void Draw(Entity & entity, Game* game) override;
+	void Draw(Game* game) override;
 	// èIóπ
-	void Finalize(Entity & entity) override;
+	void Finalize() override;
 private:
 	Type m_type;
 	DirectX::Model* m_model;

@@ -8,7 +8,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "PhysicsComponent.h"
 #include "../../Collision/Collision.h"
 
@@ -46,10 +46,10 @@ PhysicsComponent::~PhysicsComponent()
 /// 初期化
 /// </summary>
 /// <param name="entity">実体</param>
-void PhysicsComponent::Initialize(Entity & entity)
+void PhysicsComponent::Initialize()
 {
-	SphereCollisionComponent* buffSphere = entity.GetComponent<SphereCollisionComponent>();
-	BoxCollisionComponent* buffBox = entity.GetComponent<BoxCollisionComponent>();
+	SphereCollisionComponent* buffSphere = m_me->GetComponent<SphereCollisionComponent>();
+	BoxCollisionComponent* buffBox = m_me->GetComponent<BoxCollisionComponent>();
 	if (buffSphere)
 	{
 		sphere = buffSphere;
@@ -65,9 +65,9 @@ void PhysicsComponent::Initialize(Entity & entity)
 /// </summary>
 /// <param name="entity">実体</param>
 /// <param name="timer">時間</param>
-void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
+void PhysicsComponent::Update(DX::StepTimer const& timer)
 {
-	Vector3 vel = entity.GetTrans().GetVel();
+	Vector3 vel = m_me->GetTrans().GetVel();
 
 	if(m_isFriction)
 	{
@@ -79,14 +79,14 @@ void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 		vel.y -= (m_gravity / (60 * 60));
 	}
 
-	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld()) + vel;
+	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().GetWorld()) + vel;
 	if (pos.y <= 1.5f)
 	{
-		entity.GetTrans().SetWorld(entity.GetTrans().GetWorld() * Matrix::CreateTranslation(Vector3(0.0f, -pos.y + 1.5f, 0.0f)));
+		m_me->GetTrans().SetWorld(m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(Vector3(0.0f, -pos.y + 1.5f, 0.0f)));
 		vel.y = 0.0f;
 	}
 
-	entity.GetTrans().SetVel(vel);
+	m_me->GetTrans().SetVel(vel);
 }
 
 /// <summary>
@@ -94,16 +94,16 @@ void PhysicsComponent::Update(Entity & entity, DX::StepTimer const& timer)
 /// </summary>
 /// <param name="m_entity">実体</param>
 /// <param name="timer">時間</param>
-void PhysicsComponent::LateUpdate(Entity & entity, DX::StepTimer const & timer)
+void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 {
-	Vector3 trans = entity.GetTrans().GetTrans();
+	Vector3 trans = m_me->GetTrans().GetTrans();
 
 	trans += m_repulsionVel;
-	entity.GetTrans().SetTrans(trans);
+	m_me->GetTrans().SetTrans(trans);
 	m_repulsionVel = Vector3::Zero;
 }
 
-void PhysicsComponent::OnCollide(Entity& entity, Entity& collide)
+void PhysicsComponent::OnCollide(Entity& collide)
 {
-	Collision::HitCheck(&entity, &collide, &m_repulsionVel);
+	Collision::HitCheck(m_me, &collide, &m_repulsionVel);
 }

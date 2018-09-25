@@ -50,6 +50,15 @@
     <Filter Include="Game\Command">
       <UniqueIdentifier>{740a5db0-34df-4401-b9ef-f11dfbcf4147}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Obj\Factory">
+      <UniqueIdentifier>{b9c2467b-ffda-4e0b-861c-54aa2d675c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{6bc33e7b-6f93-4d98-a609-c260f227efcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameComponent\Button">
+      <UniqueIdentifier>{eb434c89-6064-4901-8fcb-15bad58fc3aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -97,12 +106,6 @@
     </ClInclude>
     <ClInclude Include="Game\Command\UpCommand.h">
       <Filter>Game\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\CarFactory.h">
-      <Filter>Game\Obj</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\BulletFactory.h">
-      <Filter>Game\Obj</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="MyCamera.h" />
@@ -166,8 +169,32 @@
     <ClInclude Include="Game\Object\SpriteData.h">
       <Filter>Game\Obj</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameComponent\HPComponnet.h">
+    <ClInclude Include="Game\Object\Factory\BulletFactory.h">
+      <Filter>Game\Obj\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\Factory\CarFactory.h">
+      <Filter>Game\Obj\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\EnemyComponent.h">
       <Filter>Game\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\SceneManager.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\ScenePlay.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\SceneTitle.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component\TestComponent.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Button\ButtonComponent.h">
+      <Filter>Game\GameComponent\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Button\StartButtonComponent.h">
+      <Filter>Game\GameComponent\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,12 +238,6 @@
     </ClCompile>
     <ClCompile Include="Game\Command\UpCommand.cpp">
       <Filter>Game\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\CarFactory.cpp">
-      <Filter>Game\Obj</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\BulletFactory.cpp">
-      <Filter>Game\Obj</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="MyCamera.cpp" />
@@ -265,8 +286,32 @@
     <ClCompile Include="Game\Object\SpriteData.cpp">
       <Filter>Game\Obj</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameComponent\HPComponnet.cpp">
+    <ClCompile Include="Game\Object\Factory\BulletFactory.cpp">
+      <Filter>Game\Obj\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\Factory\CarFactory.cpp">
+      <Filter>Game\Obj\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\EnemyComponent.cpp">
       <Filter>Game\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\SceneManager.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\ScenePlay.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\SceneTitle.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\TestComponent.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Button\ButtonComponent.cpp">
+      <Filter>Game\GameComponent\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Button\StartButtonComponent.cpp">
+      <Filter>Game\GameComponent\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

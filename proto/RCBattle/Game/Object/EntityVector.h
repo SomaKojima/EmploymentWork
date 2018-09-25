@@ -16,11 +16,11 @@ public:
 
 };
 
-class EntityCell : public BidirectionalList<EntityOfTree, Entity>::RegisterTo
+class EntityList : public BidirectionalList<EntityOfTree, Entity>::RegisterTo
 {
 public:
-	EntityCell() {}
-	~EntityCell() {}
+	EntityList() {}
+	~EntityList() {}
 };
 
 
@@ -44,7 +44,7 @@ public:
 private:
 	
 	// 実体のコンテナ
-	EntityCell* m_vector;
+	EntityList* m_vector;
 	// 実体のコンテナ
-	EntityCell* m_destroy;
+	EntityList* m_destroy;
 };

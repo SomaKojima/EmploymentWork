@@ -13,18 +13,13 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 // “K“–‚È’l‚Å‚·
-const float Camera::CAMERA_K = 1.0f / 10.0f;	//	‚Î‚ËŒW”
+const float Camera::CAMERA_K = 1.0f / 1.0f;	//	‚Î‚ËŒW”
 const float Camera::CAMERA_M = 1.0f / 2.0f;		//	–€CŒW”
 const float Camera::CAMERA_DISTANCE = 10.0f;	//	Šî€‚Ì‹——£
 
 Camera::Camera()
 	: m_resetFlag(true), m_k(CAMERA_K), m_m(CAMERA_M), m_distance(CAMERA_DISTANCE)
 {
-}
-
-void Camera::ResetCamera()
-{
-	m_resetFlag = true;
 }
 
 void Camera::SetPositionTarget(Vector3& eye, Vector3& target)

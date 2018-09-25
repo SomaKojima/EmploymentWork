@@ -15,6 +15,7 @@
 /// </summary>
 #include "../Component.h"
 #include "../../DebugCollision/DebugSphere.h"
+#include "../../Collision/Collision.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
@@ -26,15 +27,16 @@ public:
 	~SphereCollisionComponent();
 
 	// 描画
-	void Draw(Entity & entity, Game* game) override;
+	void Draw(Game* game) override;
 	// 終了
-	void Finalize(Entity & entity) override;
+	void Finalize() override;
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	float GetRadius() { return m_radius; }
 private:
 	DirectX::SimpleMath::Vector3 m_center; // 球の中心
 	float m_radius;   // 球の半径
+	Collision::Sphere m_sphere;
 
 	// 当たり判定の表示用オブジェクト
 	std::unique_ptr<DebugSphere> m_obj;

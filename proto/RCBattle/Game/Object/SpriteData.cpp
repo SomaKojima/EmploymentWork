@@ -17,5 +17,5 @@ SpriteData::~SpriteData()
 void SpriteData::Create(ID3D11Device * device)
 {
 	// テクスチャのロード 
-	CreateWICTextureFromFile(device, L"Resources\\Textures\\takagi.jpg", nullptr, m_texture.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\box.png", nullptr, m_texture.GetAddressOf());
 }

@@ -31,13 +31,13 @@ public:
 	~PhysicsComponent();
 
 	// 初期化
-	void Initialize(Entity & entity) override;
+	void Initialize() override;
 	// 更新
-	void Update(Entity& entity, DX::StepTimer const& timer) override;
+	void Update(DX::StepTimer const& timer) override;
 	// 遅延更新
-	void LateUpdate(Entity& entity, DX::StepTimer const& timer) override;
+	void LateUpdate(DX::StepTimer const& timer) override;
 	// 当たり判定の処理
-	void OnCollide(Entity& entity, Entity& collide) override;
+	void OnCollide(Entity& collide) override;
 
 	SphereCollisionComponent* GetSphereCollision() { return sphere; }
 	BoxCollisionComponent* GetBoxCollision() { return box; }

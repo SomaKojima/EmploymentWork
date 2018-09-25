@@ -10,7 +10,7 @@
 /// </summary>
 #include "../../pch.h"
 #include "ShotCommand.h"
-#include "../Object//BulletFactory.h"
+#include "../Object/Factory/BulletFactory.h"
 #include "../Object/EntityVector.h"
 
 using namespace std;

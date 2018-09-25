@@ -8,13 +8,13 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "BulletFactory.h"
-#include "Entity.h"
-#include "ModelData.h"
+#include "../Entity.h"
+#include "../ModelData.h"
 
-#include "../Component/ComponentLib.h"
-#include "../GameComponent/BulletComponent.h"
+#include "../../Component/ComponentLib.h"
+#include "../../GameComponent/BulletComponent.h"
 
 /// <summary>
 /// 名前空間
@@ -48,14 +48,8 @@ Entity * BulletFactory::CreateBullet()
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(m_bulletModel, ModelComponent::Type::Nomal));
 	// 球の当たり判定コンポーネントの追加
-	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 0.4f));
+	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 0.1f));
 	entity->GetTrans().SetRadius(0.4f);
-	// 物理コンポーネントの追加
-	/*PhysicsComponent* physics = new PhysicsComponent();
-	physics->SetIsFriction(false);
-	physics->SetIsGravity(false);
-	entity->AddComponent(physics);*/
-
 	entity->AddComponent(new BulletComponent());
 
 	return entity;

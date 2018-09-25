@@ -31,16 +31,20 @@ public:
 	virtual ~Component() {};
 
 	// 初期化
-	virtual void Initialize(Entity & entity) {};
+	virtual void Initialize() {};
 	// 更新
-	virtual void Update(Entity& m_entity, DX::StepTimer const& timer) {};
+	virtual void Update(DX::StepTimer const& timer) {};
 	// 遅延更新
-	virtual void LateUpdate(Entity& m_entity, DX::StepTimer const& timer) {}
+	virtual void LateUpdate(DX::StepTimer const& timer) {}
 	// 描画
-	virtual void Draw(Entity & entity, Game* game) {};
+	virtual void Draw(Game* game) {};
 	// 終了
-	virtual void Finalize(Entity & entity) {};
+	virtual void Finalize() {};
 
 	// 当たり判定の処理
-	virtual void OnCollide(Entity& entity, Entity& collide) {}
+	virtual void OnCollide(Entity& collide) {}
+
+	void SetEntity(Entity* me) { m_me = me; }
+protected:
+	Entity* m_me;
 };

@@ -8,7 +8,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "BoxCollisionComponent.h"
 #include "SphereCollisionComponent.h"
 
@@ -43,13 +43,13 @@ BoxCollisionComponent::~BoxCollisionComponent()
 /// </summary>
 /// <param name="entity">実体</param>
 /// <param name="game">ゲーム</param>
-void BoxCollisionComponent::Draw(Entity & entity, Game * game)
+void BoxCollisionComponent::Draw(Game * game)
 {
-	Matrix world = entity.GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成
-		m_obj = std::make_unique<DebugBox>(game->GetDevice(), m_center, m_radius);
+		//m_obj = std::make_unique<DebugBox>(game->GetDevice(), m_center, m_radius);
 	}
 	else
 	{

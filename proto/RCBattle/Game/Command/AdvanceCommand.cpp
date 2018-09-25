@@ -25,6 +25,18 @@ AdvanceCommand::~AdvanceCommand()
 /// <param name="entity">À‘Ì</param>
 void AdvanceCommand::Excute(Entity & entity)
 {
-	Vector3 vel = Vector3(entity.GetTrans().GetVel().x, entity.GetTrans().GetVel().y, 0.1f);
+	Vector3 vel = entity.GetTrans().GetVel();
+	
+	// Œã‘Ş‚µ‚Ä‚¢‚½ê‡
+	if (vel.z <= 0.1f)
+	{
+		vel.z = 0.1f;
+	}
+	else
+	{
+		int a = 0;
+	}
+	vel.z += (vel.z / 60.0f);
+
 	entity.GetTrans().SetVel(vel);
 }

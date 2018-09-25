@@ -8,7 +8,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "InputComponent.h"
 
 /// <summary>
@@ -33,11 +33,11 @@ InputComponent::~InputComponent()
 /// </summary>
 /// <param name="entity">実体</param>
 /// <param name="timer">時間</param>
-void InputComponent::Update(Entity& entity, DX::StepTimer const& timer)
+void InputComponent::Update(DX::StepTimer const& timer)
 {
 	std::vector<Command*>& command = m_inputHandle.GetInputHnadle();
 	for (auto ite = command.begin(); ite != command.end(); ite++)
 	{
-		(*ite)->Excute(entity);
+		(*ite)->Excute(*m_me);
 	}
 }

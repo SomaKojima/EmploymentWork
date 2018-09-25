@@ -29,7 +29,7 @@ public:
 	~InputComponent();
 
 	// XV
-	void Update(Entity& entity, DX::StepTimer const& timer) override;
+	void Update(DX::StepTimer const& timer) override;
 
 private:
 	InputHandler m_inputHandle;

@@ -14,8 +14,8 @@
 #include "DebugCamera.h"
 #include "GridFloor.h"
 #include "Game/Object/Entity.h"
-#include "Game/Object//CarFactory.h"
-#include "Game/Object//BulletFactory.h"
+#include "Game/Object/Factory/CarFactory.h"
+#include "Game/Object/Factory/BulletFactory.h"
 #include "MyCamera.h"
 #include "Game/Collision/CCell.h"
 
@@ -57,6 +57,7 @@ public:
 	DirectX::CommonStates* GetStates() { return m_states.get(); }
 	const DirectX::SimpleMath::Matrix& GetView() { return m_view; }
 	const DirectX::SimpleMath::Matrix& GetProjection() { return m_projection; }
+	MyCamera* GetCamera() { return &m_camera; }
 
 	// デバッグテキスト
 	static void AddText(wchar_t text[]);
@@ -121,5 +122,4 @@ private:
 
 	// カメラ
 	MyCamera m_camera;
-
 };

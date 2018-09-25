@@ -31,7 +31,7 @@ public:
 	~BoxCollisionComponent();
 
 	// •`‰æ
-	void Draw(Entity & entity, Game* game) override;
+	void Draw(Game* game) override;
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	DirectX::SimpleMath::Vector3 GetRadius() { return m_radius; }

@@ -9,8 +9,7 @@
 #include "Game/Object/ModelData.h"
 #include "Game/Object/SpriteData.h"
 #include "Game/Object/EntityVector.h"
-
-#include "Game/GameComponent/HPComponnet.h"
+#include "Game/Scene/SceneManager.h"
 
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
@@ -143,9 +142,11 @@ void Game::Update(DX::StepTimer const& timer)
 	// デバッグカメラの更新
 	m_debugCamera->Update();
 
-	//// コンポーネントの更新
-	EntityVector* entityVector = EntityVector::GetInstance();
-	entityVector->Update(timer);
+	//// シーンの更新
+	SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->Update(timer);
+	/*EntityVector* entityVector = EntityVector::GetInstance();
+	entityVector->Update(timer);*/
 
 	// 1秒ごとにデバッグテキストを1行消す
 	static int second = 0;
@@ -185,36 +186,39 @@ void Game::Render()
 	// ここから描画処理を記述する
 	// スプライトの描画 
 
-	m_sprites->Begin();
+	m_sprites->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
 
-	EntityVector* entityVector = EntityVector::GetInstance();
-	entityVector->Render(this);
+	// シーンの描画
+	SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->Render();
+	/*EntityVector* entityVector = EntityVector::GetInstance();
+	entityVector->Render(this);*/
 
 	Vector2 pos = Vector2::Zero;
 	// デバッグテキストの描画
-	for (int i = 0; i < 18; i++)
-	{
-		if (m_debugText[i] == nullptr)
-		{
-			break;
-		}
-		m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
-		pos.y += 32;
-	}
-	//	FPSの描画
-	wchar_t name[30] = L"fps : ";
-	wchar_t fpsBuf[30] = L"";
-	int a = m_timer.GetFramesPerSecond();
-	_itow( a , fpsBuf, 10);
-	wcscat(name, fpsBuf);
-	m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
+	//for (int i = 0; i < 18; i++)
+	//{
+	//	if (m_debugText[i] == nullptr)
+	//	{
+	//		break;
+	//	}
+	//	m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
+	//	pos.y += 32;
+	//}
+	////	FPSの描画
+	//wchar_t name[30] = L"fps : ";
+	//wchar_t fpsBuf[30] = L"";
+	//int a = m_timer.GetFramesPerSecond();
+	//_itow( a , fpsBuf, 10);
+	//wcscat(name, fpsBuf);
+	//m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
 
 
-	wchar_t name2[30] = L"num : ";
-	wchar_t num[30] = L"";
-	_itow(m_numText, num, 10);
-	wcscat(name2, num);
-	m_font->DrawString(m_sprites.get(), name2, Vector2(300.0f, 42.0f), Colors::Red);
+	//wchar_t name2[30] = L"num : ";
+	//wchar_t num[30] = L"";
+	//_itow(m_numText, num, 10);
+	//wcscat(name2, num);
+	//m_font->DrawString(m_sprites.get(), name2, Vector2(300.0f, 42.0f), Colors::Red);
 	//wchar_t name3[30] = L"pos : ";
 	//wchar_t num2[30] = L"";
 	//_itow((int)m_posText.x, num, 10);
@@ -227,11 +231,11 @@ void Game::Render()
 	//wcscat(name3, num);
 	//m_font->DrawString(m_sprites.get(), name3, Vector2(300, 74.0f), Colors::Red);
 
-	wchar_t name4[30] = L"num2 : ";
+	/*wchar_t name4[30] = L"num2 : ";
 	wchar_t num3[30] = L"";
 	_itow(m_numText2, num3, 10);
 	wcscat(name4, num3);
-	m_font->DrawString(m_sprites.get(), name4, Vector2(300.0f, 106.0f), Colors::Red);
+	m_font->DrawString(m_sprites.get(), name4, Vector2(300.0f, 106.0f), Colors::Red);*/
 	//wchar_t name5[30] = L"pos : ";
 	//wchar_t num4[30] = L"";
 	//wchar_t num5[30] = L"";
@@ -271,6 +275,7 @@ void Game::Clear()
 
     // Set the viewport.
     auto viewport = m_deviceResources->GetScreenViewport();
+
     context->RSSetViewports(1, &viewport);
 
     m_deviceResources->PIXEndEvent();
@@ -354,53 +359,11 @@ void Game::CreateDeviceDependentResources()
 	SpriteData* spriteData = SpriteData::GetInstance();
 	spriteData->Create(device);
 
-	// オブジェクトのコンテナクラス
-	EntityVector* entityVector = EntityVector::GetInstance();
+	SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->SetGame(this);
 
-	Entity* entity = nullptr;
-
-	// 車のファクトリの生成
-	CarFactory* carFactory = CarFactory::GetInstance();
-
-	// プレイヤーの作成
-	// 車の作成
-	entity = carFactory->CreateCar();
-	entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 0.0f));
-	// 入力コンポーネントを追加
-	entity->AddComponent(new InputComponent());
-	entity->SetName("Player");
-	// コンテナに追加
-	entityVector->Add(entity);
-
-	// カメラの設定
-	m_camera.SetPlayer(entity);
-
-	//// 敵
-	//// 車の作成
-	//entity = carFactory->CreateCar();
-	//entity->GetTrans().SetTrans(Vector3(0.0f, 2.0f, 10.0f));
-	//// コンテナに追加
-	//entityVector->Add(entity);
-
-	//// 部屋の作成
-	//entity = new Entity();
-	//// モデルコンポーネントの追加
-	//entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
-	//// 球の当たり判定コンポーネントの追加
-	//entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
-	//// コンテナに追加
-	//entityVector->Add(entity);
-
-	//// UIスプライト
-	//entity = new Entity();
-	//entity->AddComponent(new UIRenderer(spriteData->GetSprite()));
-
-	//entity->AddComponent(new HPComponent());
-
-	//entity->GetTrans().SetTrans(Vector3(100, 100, 0));
-	//entityVector->Add(entity);
-
-	entityVector->Initialize();
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
+	sceneManager->Initialize();
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.
@@ -446,9 +409,10 @@ void Game::OnDeviceLost()
 	CLiner8TreeManager::Lost();
 
 	// 車モデルの開放
-
-	EntityVector* entityVector = EntityVector::GetInstance();
-	entityVector->Finalize();
+	SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->Finalize();
+	/*EntityVector* entityVector = EntityVector::GetInstance();
+	entityVector->Finalize();*/
 }
 
 void Game::OnDeviceRestored()

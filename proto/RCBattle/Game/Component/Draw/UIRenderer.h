@@ -22,11 +22,11 @@
 class UIRenderer : public Component
 {
 public:
-	UIRenderer(Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture);
+	UIRenderer(Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture, RECT rect);
 	~UIRenderer();
 
 	// •`‰æ
-	void Draw(Entity & entity, Game* game) override;
+	void Draw(Game* game) override;
 
 	void SetRECT(RECT rect) { m_rect = rect; }
 	RECT GetRECT() { return m_rect; }

@@ -38,10 +38,15 @@ LeftCommand::~LeftCommand()
 void LeftCommand::Excute(Entity & entity)
 {
 	Vector3 angle = entity.GetTrans().GetAngle();
-	angle.y += XMConvertToRadians(1.0f);
+
+	if (entity.GetTrans().GetVel().z >= 0.0f)
+	{
+		angle.y += XMConvertToRadians(1.0f);
+	}
+	else if (entity.GetTrans().GetVel().z < 0.0f)
+	{
+		angle.y += XMConvertToRadians(-1.0f);
+	}
 
 	entity.GetTrans().SetAngle(angle);
-
-	//Vector3 vel = Vector3(0.1f, entity.GetVel().y, entity.GetVel().z);
-	//entity.SetVel(vel);
 }

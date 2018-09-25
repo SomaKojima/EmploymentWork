@@ -8,7 +8,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../../pch.h"
+#include "../../../pch.h"
 #include "ModelComponent.h"
 
 /// <summary>
@@ -38,38 +38,38 @@ ModelComponent::~ModelComponent()
 /// 描画
 /// </summary>
 /// <param name="game">ゲーム</param>
-void ModelComponent::Draw(Entity & entity, Game * game)
+void ModelComponent::Draw(Game * game)
 {
+	if (m_type == Type::Sky)
+	{
+		m_model->UpdateEffects([&](IEffect* effect) {
+			IEffectLights* lights = dynamic_cast<IEffectLights*>(effect);
+			if (lights) {
+				// ライトの影響をなくす 
+				lights->SetAmbientLightColor(Vector3(0.0f, 0.0f, 0.0f));
+				lights->SetLightEnabled(0, false);
+				lights->SetLightEnabled(1, false);
+				lights->SetLightEnabled(2, false);
+			}
+			BasicEffect* basicEffect = dynamic_cast<BasicEffect*>(effect);
+			if (basicEffect)
+			{
+				// エミッション色を白に設定する 
+				basicEffect->SetEmissiveColor(Vector3(1.0f, 1.0f, 1.0f));
+			}
+		});
+	}
+
 	if (game)
 	{
-		if (m_type == Type::Sky)
-		{
-			m_model->UpdateEffects([&](IEffect* effect) {
-				IEffectLights* lights = dynamic_cast<IEffectLights*>(effect);
-				if (lights) {
-					// ライトの影響をなくす 
-					lights->SetAmbientLightColor(Vector3(0.0f, 0.0f, 0.0f));
-					lights->SetLightEnabled(0, false);
-					lights->SetLightEnabled(1, false);
-					lights->SetLightEnabled(2, false);
-				}
-				BasicEffect* basicEffect = dynamic_cast<BasicEffect*>(effect);
-				if (basicEffect)
-				{
-					// エミッション色を白に設定する 
-					basicEffect->SetEmissiveColor(Vector3(1.0f, 1.0f, 1.0f));
-				}
-			});
-		}
-
-		m_model->Draw(game->GetContext(), *game->GetStates(), entity.GetTrans().GetWorld(), game->GetView(), game->GetProjection());
+		m_model->Draw(game->GetContext(), *game->GetStates(), m_me->GetTrans().GetWorld(), game->GetView(), game->GetProjection());
 	}
 }
 
 /// <summary>
 /// 終了
 /// </summary>
-void ModelComponent::Finalize(Entity & entity)
+void ModelComponent::Finalize()
 {
 	m_model = nullptr;
 }

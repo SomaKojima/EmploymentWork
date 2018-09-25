@@ -4,8 +4,8 @@
 
 EntityVector::EntityVector()
 	:
-	m_vector(new EntityCell()),
-	m_destroy(new EntityCell())
+	m_vector(new EntityList()),
+	m_destroy(new EntityList())
 {
 }
 

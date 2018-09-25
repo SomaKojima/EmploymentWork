@@ -79,6 +79,7 @@ bool CLiner8TreeManager::Init(unsigned int Level, float left, float top, float r
 	return true;
 }
 
+
 DWORD CLiner8TreeManager::BitSeparateFor3D(BYTE n)
 {
 	DWORD s = n;
@@ -269,3 +270,4 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 
 	return o;
 }
+

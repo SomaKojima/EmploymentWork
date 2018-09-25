@@ -8,7 +8,7 @@ void FunctionComponent::InitializeComponent()
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->Initialize(*m_me);
+		(*ite)->Initialize();
 	}
 }
 
@@ -16,7 +16,7 @@ bool FunctionComponent::UpdateComponent(DX::StepTimer const & timer)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->Update(*m_me, timer);
+		(*ite)->Update(timer);
 	}
 	return false;
 }
@@ -25,7 +25,7 @@ bool FunctionComponent::LateComponentUpdate(DX::StepTimer const & timer)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->LateUpdate(*m_me, timer);
+		(*ite)->LateUpdate(timer);
 	}
 	return false;
 }
@@ -34,7 +34,7 @@ void FunctionComponent::OnCollideComponent(Entity& entity)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->OnCollide(*m_me, entity);
+		(*ite)->OnCollide(entity);
 	}
 }
 
@@ -42,7 +42,7 @@ void FunctionComponent::DrawCompoennt(Game* game)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->Draw(*m_me, game);
+		(*ite)->Draw(game);
 	}
 }
 
@@ -50,7 +50,7 @@ void FunctionComponent::FinalizeComponent()
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->Finalize(*m_me);
+		(*ite)->Finalize();
 		delete (*ite);
 	}
 	m_componentlist.clear();
@@ -59,4 +59,5 @@ void FunctionComponent::FinalizeComponent()
 void FunctionComponent::AddComponent(Component * component)
 {
 	m_componentlist.push_back(component);
+	component->SetEntity(m_me);
 }

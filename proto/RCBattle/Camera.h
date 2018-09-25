@@ -58,7 +58,10 @@ public:
 	void SetCameraDistance(float distance) { m_distance = distance; }
 
 	// カメラの切り替え時の初期化関数（切り替え時に呼び出すと補間しないよ！）
-	void ResetCamera();
+	void ResetCamera()
+	{
+		m_resetFlag = true;
+	}
 
 	// カメラの位置とターゲットを指定する関数
 	void SetPositionTarget(DirectX::SimpleMath::Vector3& eye, DirectX::SimpleMath::Vector3& target);

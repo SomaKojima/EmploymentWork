@@ -55,6 +55,9 @@
 
 #include <Model.h>
 
+#include "Game/Component/ComponentLib.h"
+#include "Game/Object/Entity.h"
+
 namespace DX
 {
     // Helper class for COM exceptions
