@@ -96,10 +96,10 @@ void PhysicsComponent::Update(DX::StepTimer const& timer)
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 {
-	Vector3 trans = m_me->GetTrans().GetTrans();
+	Vector3 pos = m_me->GetTrans().GetPos();
 
-	trans += m_repulsionVel;
-	m_me->GetTrans().SetTrans(trans);
+	pos += m_repulsionVel;
+	m_me->GetTrans().SetPos(pos);
 	m_repulsionVel = Vector3::Zero;
 }
 

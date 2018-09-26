@@ -26,6 +26,8 @@ public:
 	SphereCollisionComponent(DirectX::SimpleMath::Vector3 center, float radius);
 	~SphereCollisionComponent();
 
+	// 更新
+	void Update(DX::StepTimer const& timer) override;
 	// 描画
 	void Draw(Game* game) override;
 	// 終了
@@ -33,6 +35,7 @@ public:
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	float GetRadius() { return m_radius; }
+	Collision::Sphere& GetSphere(){ return m_sphere; }
 private:
 	DirectX::SimpleMath::Vector3 m_center; // 球の中心
 	float m_radius;   // 球の半径

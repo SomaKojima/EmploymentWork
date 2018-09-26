@@ -36,7 +36,7 @@ public:
 		m_angle(DirectX::SimpleMath::Vector3::Zero),
 		m_dir(DirectX::SimpleMath::Quaternion::Identity),
 		m_vel(DirectX::SimpleMath::Vector3::Zero),
-		m_trans(DirectX::SimpleMath::Vector3::Zero),
+		m_pos(DirectX::SimpleMath::Vector3::Zero),
 		m_radius(0.0f),
 		m_world(DirectX::SimpleMath::Matrix::Identity),
 		m_local(DirectX::SimpleMath::Matrix::Identity)
@@ -53,7 +53,7 @@ public:
 			DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
 	}
 	void SetVel(DirectX::SimpleMath::Vector3 &vel) { m_vel = vel; }
-	void SetTrans(DirectX::SimpleMath::Vector3 trans) { m_trans = trans; }
+	void SetPos(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
 	void SetRadius(float radius) { m_radius = radius; }
 	void SetWorld(DirectX::SimpleMath::Matrix& world) { m_world = world; }
 	void SetLocal(DirectX::SimpleMath::Matrix& local) { m_local = local; }
@@ -61,7 +61,7 @@ public:
 	DirectX::SimpleMath::Quaternion GetDir() { return m_dir; }
 	DirectX::SimpleMath::Vector3 GetAngle() { return m_angle; }
 	DirectX::SimpleMath::Vector3 GetVel() { return m_vel; }
-	DirectX::SimpleMath::Vector3 GetTrans() { return m_trans; }
+	DirectX::SimpleMath::Vector3 GetPos() { return m_pos; }
 	float GetRadius() { return m_radius; }
 	DirectX::SimpleMath::Matrix GetWorld() { return m_world; }
 	DirectX::SimpleMath::Matrix GetLocal() { return m_local; }
@@ -70,7 +70,7 @@ private:
 	DirectX::SimpleMath::Quaternion m_dir;		// 方向
 	DirectX::SimpleMath::Vector3 m_angle;		// 角度				
 	DirectX::SimpleMath::Vector3 m_vel;			// 速度
-	DirectX::SimpleMath::Vector3 m_trans;		// 移動
+	DirectX::SimpleMath::Vector3 m_pos;			// 座標
 	float m_radius;
 
 	DirectX::SimpleMath::Matrix m_world;		// ワールド座標

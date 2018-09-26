@@ -16,6 +16,7 @@ PlaneCollisionComponent::PlaneCollisionComponent(Vector3 center, Vector3 angle, 
 	m_height(height),
 	m_obj(nullptr)
 {
+	
 }
 
 PlaneCollisionComponent::~PlaneCollisionComponent()
@@ -24,10 +25,39 @@ PlaneCollisionComponent::~PlaneCollisionComponent()
 
 void PlaneCollisionComponent::Initialize()
 {
+	// ¶ã
+	Vector3 pos1 = m_center;
+	pos1.x -= (m_width / 2.0f);
+	pos1.y += (m_height / 2.0f);
+
+	// ‰Eã
+	Vector3 pos2 = m_center;
+	pos2.x += (m_width / 2.0f);
+	pos2.y += (m_height / 2.0f);
+
+	// ¶‰º
+	Vector3 pos3 = m_center;
+	pos3.x -= (m_width / 2.0f);
+	pos3.y -= (m_height / 2.0f);
+
+	// ‰E‰º
+	Vector3 pos4 = m_center;
+	pos4.x += (m_width / 2.0f);
+	pos4.y -= (m_height / 2.0f);
+
+	m_triangle[0].Set_Triangle(pos1, pos2, pos3);
+	m_triangle[1].Set_Triangle(pos2, pos4, pos3);
 }
 
 void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 {
+	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	Quaternion dir = DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 0.0f, 1.0f), m_angle.z) *
+		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
+		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
+
+	m_triangle[0].MoveRotation(world, dir);
+	m_triangle[1].MoveRotation(world, dir);
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)

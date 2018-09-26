@@ -26,7 +26,7 @@ Entity::~Entity()
 void Entity::Initialize()
 {
 	// 初期移動
-	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_trans);
+	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
 
 	UpdateMatrix();
 
@@ -38,8 +38,8 @@ void Entity::Initialize()
 bool Entity::Update(DX::StepTimer const & timer)
 {
 	// マトリクス/座標の更新
-	m_transform.m_trans += Vector3::Transform(m_transform.m_vel, m_transform.m_dir);
-	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_trans);
+	m_transform.m_pos += Vector3::Transform(m_transform.m_vel, m_transform.m_dir);
+	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
 
 	UpdateMatrix();
 

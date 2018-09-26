@@ -29,6 +29,7 @@ SphereCollisionComponent::SphereCollisionComponent(DirectX::SimpleMath::Vector3 
 	m_radius(radius),
 	m_obj(nullptr)
 {
+	m_sphere.radius = radius;
 }
 
 /// <summary>
@@ -37,6 +38,12 @@ SphereCollisionComponent::SphereCollisionComponent(DirectX::SimpleMath::Vector3 
 SphereCollisionComponent::~SphereCollisionComponent()
 {
 
+}
+
+void SphereCollisionComponent::Update(DX::StepTimer const & timer)
+{
+	//Vector3 pos = Vector3::Transform(Vector3::Zero, (m_me->GetTrans().GetWorld()));
+	m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
 }
 
 /// <summary>
@@ -50,7 +57,7 @@ void SphereCollisionComponent::Draw(Game * game)
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成
-		//m_obj = std::make_unique<DebugSphere>(game->GetDevice(), m_center, m_radius);
+		m_obj = std::make_unique<DebugSphere>(game->GetDevice(), m_center, m_radius);
 	}
 	else
 	{

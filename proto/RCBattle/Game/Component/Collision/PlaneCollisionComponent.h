@@ -15,6 +15,7 @@
 /// </summary>
 #include "../Component.h"
 #include "../../DebugCollision/DebugPlane.h"
+#include "../../Collision/Collision.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
@@ -36,11 +37,16 @@ public:
 	// 終了
 	void Finalize() override;
 
+	Collision::Triangle* GetTriangle() { return m_triangle; }
+	int GetTriangleIndex() { return 2; }
+
 private:
 	DirectX::SimpleMath::Vector3 m_center;	// 中心
 	DirectX::SimpleMath::Vector3 m_angle;	// 角度
 	float m_width;							// 横幅
 	float m_height;							// 縦幅
+
+	Collision::Triangle m_triangle[2];		// 平面の情報
 
 	// 当たり判定の表示用オブジェクト
 	std::unique_ptr<DebugPlane> m_obj;

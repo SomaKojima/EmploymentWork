@@ -45,6 +45,7 @@ public:
 	virtual void OnCollide(Entity& collide) {}
 
 	void SetEntity(Entity* me) { m_me = me; }
+	Entity* GetEntity() { return m_me; }
 protected:
 	Entity* m_me;
 };

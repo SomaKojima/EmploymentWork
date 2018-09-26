@@ -49,7 +49,7 @@ void ShotCommand::Excute(Entity & entity)
 
 	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld());
 	pos += Vector3::Transform(Vector3(0.0f, -1.0f, 3.0f), entity.GetTrans().GetDir());
-	_entity->GetTrans().SetTrans(pos);
+	_entity->GetTrans().SetPos(pos);
 	
 	entityVector->Add(_entity);
 }
