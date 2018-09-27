@@ -42,7 +42,7 @@ void BulletComponent::Finalize()
 {
 }
 
-void BulletComponent::OnCollide(Entity & collide)
+void BulletComponent::OnCollide(Entity & collide, DirectX::SimpleMath::Vector3& hit_pos)
 {
 	m_me->Destroy();
 }

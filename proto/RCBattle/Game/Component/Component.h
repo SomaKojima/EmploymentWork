@@ -42,7 +42,7 @@ public:
 	virtual void Finalize() {};
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	virtual void OnCollide(Entity& collide) {}
+	virtual void OnCollide(Entity& collide, DirectX::SimpleMath::Vector3& hit_pos) {}
 
 	void SetEntity(Entity* me) { m_me = me; }
 	Entity* GetEntity() { return m_me; }

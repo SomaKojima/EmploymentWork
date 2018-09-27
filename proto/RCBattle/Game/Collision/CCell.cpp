@@ -215,21 +215,21 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 	OBJECT_FOR_TREE* pNextOFT = nullptr;
 	int pushCount = 0;
 
+	Vector3 hit_pos;
 	while (pOFT)
 	{
 		// スタック内のオブジェクトと当たり判定を取る
 		for (auto ite = cStack.begin(); ite != cStack.end(); ite++)
 		{
 			o++;
-			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj()))
+			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj(), &hit_pos))
 			{
-				pOFT->GetObj()->OnCollideComponent(*(*ite)->GetObj());
-				(*ite)->GetObj()->OnCollideComponent(*pOFT->GetObj());
+				pOFT->GetObj()->OnCollideComponent(*(*ite)->GetObj(), &hit_pos);
+				(*ite)->GetObj()->OnCollideComponent(*pOFT->GetObj(), &hit_pos);
 			}
 		}
 		// 同じ空間内のオブジェクトと当たり判定を取る
-		// スタックに追加
-		cStack.push_back(pOFT);
+		
 		pushCount++;
 
 		pNextOFT = pOFT->GetNext();
@@ -237,13 +237,21 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		while (pNextOFT)
 		{
 			o++;
-			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj()))
+			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj(), &hit_pos))
 			{
-				pOFT->GetObj()->OnCollideComponent(*pNextOFT->GetObj());
-				pNextOFT->GetObj()->OnCollideComponent(*pOFT->GetObj());
+				pOFT->GetObj()->OnCollideComponent(*pNextOFT->GetObj(), &hit_pos);
+				pNextOFT->GetObj()->OnCollideComponent(*pOFT->GetObj(), &hit_pos);
 			}
 			pNextOFT = pNextOFT->GetNext();
 		}
+		pOFT = pOFT->GetNext();
+	}
+
+	pOFT = room->GetTop();
+	while (pOFT)
+	{
+		// スタックに追加
+		cStack.push_back(pOFT);
 		pOFT = pOFT->GetNext();
 	}
 

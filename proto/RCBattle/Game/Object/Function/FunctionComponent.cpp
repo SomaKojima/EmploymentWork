@@ -4,6 +4,8 @@
 #include "../Entity.h"
 #include "../../../Game.h"
 
+using namespace DirectX::SimpleMath;
+
 void FunctionComponent::InitializeComponent()
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
@@ -30,11 +32,11 @@ bool FunctionComponent::LateComponentUpdate(DX::StepTimer const & timer)
 	return false;
 }
 
-void FunctionComponent::OnCollideComponent(Entity& entity)
+void FunctionComponent::OnCollideComponent(Entity& entity, Vector3* hit_pos)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->OnCollide(entity);
+		(*ite)->OnCollide(entity, *hit_pos);
 	}
 }
 

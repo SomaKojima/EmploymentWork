@@ -103,7 +103,7 @@ void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 	m_repulsionVel = Vector3::Zero;
 }
 
-void PhysicsComponent::OnCollide(Entity& collide)
+void PhysicsComponent::OnCollide(Entity& collide, DirectX::SimpleMath::Vector3& hit_pos)
 {
 	Collision::HitCheck(m_me, &collide, &m_repulsionVel);
 }

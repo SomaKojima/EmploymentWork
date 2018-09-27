@@ -39,7 +39,7 @@ public:
 	// コンポーネントの遅延更新
 	bool LateComponentUpdate(DX::StepTimer const& timer);
 	// 当たり判定の処理
-	void OnCollideComponent(Entity& entity);
+	void OnCollideComponent(Entity& entity, DirectX::SimpleMath::Vector3* hit_pos);
 	// コンポーネントの描画
 	void DrawCompoennt(Game* game);
 	// コンポーネントの終了

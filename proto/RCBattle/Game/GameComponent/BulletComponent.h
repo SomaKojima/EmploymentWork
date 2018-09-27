@@ -26,5 +26,5 @@ public:
 	void Finalize() override;
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide) override;
+	void OnCollide(Entity& collide, DirectX::SimpleMath::Vector3& hit_pos) override;
 };
