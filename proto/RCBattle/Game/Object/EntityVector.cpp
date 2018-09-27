@@ -54,10 +54,6 @@ void EntityVector::Update(DX::StepTimer const& timer)
 		entity = entity->GetNext();
 	}
 
-	// 当たり判定を取る
-	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
-	cLiner8TreeManager->HitCheck();
-
 	// コンポーネントの遅延処理
 	entity = m_vector->GetTop();
 	while (entity)
@@ -65,6 +61,10 @@ void EntityVector::Update(DX::StepTimer const& timer)
 		entity->GetObj()->LateComponentUpdate(timer);
 		entity = entity->GetNext();
 	}
+
+	// 当たり判定を取る
+	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
+	cLiner8TreeManager->HitCheck();
 
 	// オブジェクトの更新処理
 	entity = m_vector->GetTop();

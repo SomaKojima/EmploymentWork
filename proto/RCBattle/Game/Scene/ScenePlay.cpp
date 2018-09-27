@@ -28,12 +28,11 @@ void ScenePlay::Initialize(Game * game)
 
 	// プレイヤーの作成
 	// 車の作成
-	entity = carFactory->CreateCar();
-	entity->GetTrans().SetPos(Vector3(2.5f, 1.0f, 0.0f));
+	entity = carFactory->CreateCar(); 
+	entity->SetName("Player");
+	entity->GetTrans().SetPos(Vector3(0.0f, 0.0f, 2.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
-	entity->SetName("Player");
-
 	entity->AddComponent(new TestComponent());
 
 	// コンテナに追加
@@ -51,11 +50,12 @@ void ScenePlay::Initialize(Game * game)
 
 	// 部屋の作成
 	entity = new Entity();
+	entity->SetName("room");
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
 	// 球の当たり判定コンポーネントの追加
 	//entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
-	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.01f, 0.0f), Vector3(0.0f, 2.0f, 0.0f), 2, 3));
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), 2, 2));
 	// コンテナに追加
 	entityVector->Add(entity);
 }

@@ -14,6 +14,7 @@
 /// ヘッダのインクルード
 /// </summary>
 #include "../../StepTimer.h"
+#include "../Collision/Collision.h"
 #include "../Object/Entity.h"
 #include "../../Game.h"
 
@@ -42,7 +43,7 @@ public:
 	virtual void Finalize() {};
 
 	// 当たり判定の処理
-	virtual void OnCollide(Entity& collide, DirectX::SimpleMath::Vector3& hit_pos) {}
+	virtual void OnCollide(Entity& collide, CollisionData* data) {}
 
 	void SetEntity(Entity* me) { m_me = me; }
 	Entity* GetEntity() { return m_me; }

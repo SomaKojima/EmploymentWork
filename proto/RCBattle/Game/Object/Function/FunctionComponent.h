@@ -23,6 +23,7 @@
 class Component;
 class Entity;
 class Game;
+class CollisionData;
 
 /// <summary>
 /// コンポーネント機能のクラス
@@ -39,7 +40,7 @@ public:
 	// コンポーネントの遅延更新
 	bool LateComponentUpdate(DX::StepTimer const& timer);
 	// 当たり判定の処理
-	void OnCollideComponent(Entity& entity, DirectX::SimpleMath::Vector3* hit_pos);
+	void OnCollideComponent(Entity& entity, CollisionData* data);
 	// コンポーネントの描画
 	void DrawCompoennt(Game* game);
 	// コンポーネントの終了
@@ -50,6 +51,8 @@ public:
 
 	template<class T>
 	inline T* GetComponent();
+	template<class T>
+	inline std::list<T*> GetComponentList();
 
 protected:
 	std::list<Component*> m_componentlist;	// コンポーネントのコンテナ
@@ -71,4 +74,20 @@ inline T * FunctionComponent::GetComponent()
 		}
 	}
 	return nullptr;
+}
+
+template<class T>
+inline std::list<T*> FunctionComponent::GetComponentList()
+{
+	T* sub = nullptr;
+	std::list<T*> list;
+	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
+	{
+		sub = dynamic_cast<T*>((*ite));
+		if (sub)
+		{
+			list.push_back(sub);
+		}
+	}
+	return list;
 }

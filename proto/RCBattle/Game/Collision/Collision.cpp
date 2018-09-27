@@ -224,7 +224,7 @@ bool Collision::HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_inde
 /// <param name="entity">ŽÀ‘Ì</param>
 /// <param name="repulsionVel">”½”­‘¬“x</param>
 /// <returns>“–‚½‚è”»’è</returns>
-bool Collision::HitCheck(Entity * entity, Entity* entity2, Vector3* hit_pos)
+bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data)
 {
 	if(!entity || !entity2)
 	{
@@ -240,18 +240,31 @@ bool Collision::HitCheck(Entity * entity, Entity* entity2, Vector3* hit_pos)
 	{
 		if (sphereCollision2)
 		{
-			return HitCheck_Sphere(entity, *sphereCollision, entity2, *sphereCollision2, hit_pos);
+			if (HitCheck_Sphere(entity, *sphereCollision, entity2, *sphereCollision2, &data->hit_pos))
+			{
+				data->type = CollisionType::SPHERE_SPHERE;
+				return true;
+			}
 		}
 		if (planeCollision2)
 		{
-			return HitCheck_Sphere_Triagnles(planeCollision2->GetTriangle(), planeCollision2->GetTriangleIndex(), sphereCollision->GetSphere());
+			if (HitCheck_Sphere_Triagnles(planeCollision2->GetTriangle(), planeCollision2->GetTriangleIndex(), sphereCollision->GetSphere(), &data->hit_pos))
+			{
+				data->type = CollisionType::SPHERE_PLANE;
+				return true;
+			}
 		}
 	}
 	if (planeCollision)
 	{
 		if (sphereCollision2)
 		{
-			return HitCheck_Sphere_Triagnles(planeCollision->GetTriangle(), planeCollision->GetTriangleIndex(), sphereCollision2->GetSphere());
+			if (HitCheck_Sphere_Triagnles(planeCollision->GetTriangle(), planeCollision->GetTriangleIndex(), sphereCollision2->GetSphere(), &data->hit_pos))
+			{
+
+				data->type = CollisionType::SPHERE_PLANE;
+				return true;
+			}
 		}
 	}
 

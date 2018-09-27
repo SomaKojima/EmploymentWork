@@ -21,6 +21,19 @@
 class SphereCollisionComponent;
 class BoxCollisionComponent;
 class PlaneCollisionComponent;
+enum CollisionType
+{
+	NONE = 1,
+	SPHERE_PLANE = 1 << 1,
+	SPHERE_SPHERE = 1 << 2,
+
+	COLLISION_MAX
+};
+struct CollisionData
+{
+	DirectX::SimpleMath::Vector3 hit_pos;
+	float typeFlag;
+};
 
 /// <summary>
 /// “–‚½‚è”»’èƒNƒ‰ƒX
@@ -129,5 +142,5 @@ protected:
 	}
 
 public:
-	static bool HitCheck(Entity* entity, Entity* entity2, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
+	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData *data);
 };
