@@ -28,3 +28,8 @@ public:
 		return &singleton;
 	}
 };
+
+void A(int value)
+{
+	static int a = value;
+}

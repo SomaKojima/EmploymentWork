@@ -37,7 +37,7 @@ public:
 	// ’x‰„XV
 	void LateUpdate(DX::StepTimer const& timer) override;
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide, DirectX::SimpleMath::Vector3& hit_pos) override;
+	void OnCollide(Entity& collide, CollisionData& data) override;
 
 	SphereCollisionComponent* GetSphereCollision() { return sphere; }
 	BoxCollisionComponent* GetBoxCollision() { return box; }

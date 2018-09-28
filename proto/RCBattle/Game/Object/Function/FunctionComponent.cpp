@@ -32,11 +32,11 @@ bool FunctionComponent::LateComponentUpdate(DX::StepTimer const & timer)
 	return false;
 }
 
-void FunctionComponent::OnCollideComponent(Entity& entity, Vector3* hit_pos)
+void FunctionComponent::OnCollideComponent(Entity& entity, CollisionData& data)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{
-		(*ite)->OnCollide(entity, *hit_pos);
+		(*ite)->OnCollide(entity, data);
 	}
 }
 

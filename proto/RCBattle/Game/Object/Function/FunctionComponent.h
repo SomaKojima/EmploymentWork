@@ -23,6 +23,7 @@
 class Component;
 class Entity;
 class Game;
+class CollisionData;
 
 /// <summary>
 /// コンポーネント機能のクラス
@@ -39,7 +40,7 @@ public:
 	// コンポーネントの遅延更新
 	bool LateComponentUpdate(DX::StepTimer const& timer);
 	// 当たり判定の処理
-	void OnCollideComponent(Entity& entity, DirectX::SimpleMath::Vector3* hit_pos);
+	void OnCollideComponent(Entity& entity, CollisionData& data);
 	// コンポーネントの描画
 	void DrawCompoennt(Game* game);
 	// コンポーネントの終了
