@@ -49,7 +49,7 @@ bool Collision::HitCheck_Sphere(Entity* entity, SphereCollisionComponent& sphere
 	return false;
 }
 
-bool Collision::HitCheck_Segment_Plane(Segment & segment, Plane & plane, Vector3 * hit_pos)
+bool Collision::HitCheck_Segment_Plane(Segment & segment, Plane & plane, DirectX::SimpleMath::Vector3 * hit_pos)
 {
 	// 線分始点と平面の距離を計算
 	float length = Plane_Length(plane, segment.pos);
@@ -71,10 +71,10 @@ bool Collision::HitCheck_Segment_Plane(Segment & segment, Plane & plane, Vector3
 	{
 		*hit_pos = segment.pos + (vec * plane_vec_length);
 	}
-	return false;
+	return true;
 }
 
-bool Collision::HitCheck_Segment_Sphere(Segment & segment, Sphere & sphere, Vector3 * hit_pos)
+bool Collision::HitCheck_Segment_Sphere(Segment & segment, Sphere & sphere, DirectX::SimpleMath::Vector3 * hit_pos)
 {
 	// (2次方程式) = at^2 + bt + c = 0;
 	// 2次方程式におけるa,b,cを計算
@@ -114,7 +114,7 @@ bool Collision::HitCheck_Segment_Sphere(Segment & segment, Sphere & sphere, Vect
 	return true;
 }
 
-bool Collision::HitCheck_Segment_Triangle(Segment & segment, Triangle & triangle, Vector3 * hit_pos)
+bool Collision::HitCheck_Segment_Triangle(Segment & segment, Triangle & triangle, DirectX::SimpleMath::Vector3 * hit_pos)
 {
 	// 三角形の平面とチェック
 	Vector3 tmp_hit_pos;
@@ -135,37 +135,73 @@ bool Collision::HitCheck_Segment_Triangle(Segment & segment, Triangle & triangle
 	}
 }
 
-bool Collision::Triangle_CheckInner(Triangle & triangle, Vector3& point)
+bool Collision::Triangle_CheckInner(Triangle & triangle, DirectX::SimpleMath::Vector3& point)
 {
-	// 任意点から各頂点へのベクトル作成
-	Vector3 vt0 = triangle.pos[0] - point;
-	Vector3 vt1 = triangle.pos[1] - point;
-	Vector3 vt2 = triangle.pos[2] - point;
+	Vector3 AB = triangle.pos[1] - triangle.pos[0];
+	Vector3 BP = point - triangle.pos[1];
 
-	// 三角形の辺のベクトル
-	Vector3 v0 = triangle.pos[1] - triangle.pos[0];
-	Vector3 v1 = triangle.pos[2] - triangle.pos[1];
-	Vector3 v2 = triangle.pos[0] - triangle.pos[2];
+	Vector3 BC = triangle.pos[2] - triangle.pos[1];
+	Vector3 CP = point - triangle.pos[2];
 
-	// 各外積を求める
-	Vector3 c0 = vt0.Cross(v0);
-	Vector3 c1 = vt1.Cross(v1);
-	Vector3 c2 = vt2.Cross(v2);
+	Vector3 CA = triangle.pos[0] - triangle.pos[2];
+	Vector3 AP = point - triangle.pos[0];
 
-	// 外積の向きがそろっているかチェック(すべて掛け算をしマイナス値になっているかどうか)
-	float dot0 = c0.Dot(c1);
-	float dot1 = c1.Dot(c2);
-	if ((dot0 * dot1) <= 0.0f)
-	{
-		return false;
+	Vector3 c1 = AB.Cross(BP);
+	Vector3 c2 = BC.Cross(CP);
+	Vector3 c3 = CA.Cross(AP);
+
+
+	//内積で順方向か逆方向か調べる
+	double dot_12 = c1.Dot(c2);
+	double dot_13 = c1.Dot(c3);
+
+	if (dot_12 > 0 && dot_13 > 0) {
+		//三角形の内側に点がある
+		return true;
 	}
-	else
+	return false;
+
+	//// 任意点から各頂点へのベクトル作成
+	//Vector3 vt0 = triangle.pos[0] - point;
+	//Vector3 vt1 = triangle.pos[1] - point;
+	//Vector3 vt2 = triangle.pos[2] - point;
+
+	//// 三角形の辺のベクトル
+	//Vector3 v0 = triangle.pos[1] - triangle.pos[0];
+	//Vector3 v1 = triangle.pos[2] - triangle.pos[1];
+	//Vector3 v2 = triangle.pos[0] - triangle.pos[2];
+
+	//// 各外積を求める
+	//Vector3 c0 = vt0.Cross(v0);
+	//Vector3 c1 = vt1.Cross(v1);
+	//Vector3 c2 = vt2.Cross(v2);
+
+	//// 外積の向きがそろっているかチェック(すべて掛け算をしマイナス値になっているかどうか)
+	//float dot0 = c0.Dot(c1);
+	//float dot1 = c1.Dot(c2);
+	//float dot2 = c2.Dot(c0);
+
+	/*if ((dot0 <= 0.0f && dot1 <= 0.0f && dot2 <= 0.0f) ||
+		(dot0 >= 0.0f && dot1 >= 0.0f && dot2 >= 0.0f))
 	{
 		return true;
 	}
+	else
+	{
+		return false;
+	}*/
+	//if ((dot0 * dot1) <= 0.0f)
+	/*if (dot0 >= 0.0f && dot1 >= 0.0f)
+	{
+		return true;
+	}
+	else
+	{
+  		return false;
+	}*/
 }
 
-bool Collision::HitCheck_Sphere_Plane(Sphere & sphere, Plane & plane, Vector3* hit_pos)
+bool Collision::HitCheck_Sphere_Plane(Sphere & sphere, Plane & plane, DirectX::SimpleMath::Vector3* hit_pos)
 {
 	float length = Plane_Length(plane, sphere.center);
 	if (length > sphere.radius) return false;
@@ -179,7 +215,7 @@ bool Collision::HitCheck_Sphere_Plane(Sphere & sphere, Plane & plane, Vector3* h
 	return true;
 }
 
-bool Collision::HitCheck_Sphere_Triangle(Sphere & sphere, Triangle & triangle, Vector3 * hit_pos)
+bool Collision::HitCheck_Sphere_Triangle(Sphere & sphere, Triangle & triangle, DirectX::SimpleMath::Vector3 * hit_pos)
 {
 	if (!HitCheck_Sphere_Plane(sphere, triangle.plane, hit_pos)) return false;
 
@@ -187,31 +223,47 @@ bool Collision::HitCheck_Sphere_Triangle(Sphere & sphere, Triangle & triangle, V
 	Vector3 vec;
 	vec = triangle.pos[1] - triangle.pos[0];
 	Segment segment = Segment{Vector3(triangle.pos[0]), Vector3(vec)};
-	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos)) return true;
+	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos))
+	{
+		Game::AddText(L"Hit1");
+		return true;
+	}
 
 	vec = triangle.pos[2] - triangle.pos[1];
 	segment = Segment{ Vector3(triangle.pos[1]), Vector3(vec) };
-	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos)) return true;
+	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos)) 
+	{
+		Game::AddText(L"Hit2");
+		return true;
+	}
 
 	vec = triangle.pos[0] - triangle.pos[2];
 	segment = Segment{ Vector3(triangle.pos[2]), Vector3(vec) };
-	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos)) return true;
+	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos))
+	{
+		Game::AddText(L"Hit3");
+		return true;
+	}
 
 	// 球が三角形の中央にめり込むかどうか
 	vec = Vector3(-triangle.plane.a * sphere.radius, -triangle.plane.b * sphere.radius, -triangle.plane.c * sphere.radius);
 	segment = Segment{ Vector3(sphere.center), Vector3(vec) };
-	if (HitCheck_Segment_Triangle(segment, triangle, hit_pos)) return true;
+	if (HitCheck_Segment_Triangle(segment, triangle, hit_pos))
+	{
+		Game::AddText(L"Hit4");
+		return true;
+	}
 
 	return false;
 }
 
-bool Collision::HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_index, Sphere & sphere, Vector3 * hit_pos)
+bool Collision::HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_index, Sphere & sphere, DirectX::SimpleMath::Vector3 * hit_pos)
 {
 	for (int i = 0; i < triangle_index; i++)
 	{
 		if (HitCheck_Sphere_Triangle(sphere, triangle[i], hit_pos))
 		{
-			Game::AddText(L"Hit");
+			
 			return true;
 		}
 	}
@@ -238,31 +290,37 @@ bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data)
 
 	if (sphereCollision)
 	{
+		data->sphere[0] = sphereCollision;
 		if (sphereCollision2)
 		{
-			if (HitCheck_Sphere(entity, *sphereCollision, entity2, *sphereCollision2, &data->hit_pos))
+			data->sphere[1] = sphereCollision2;
+			if (HitCheck_Sphere(entity, *sphereCollision, entity2, *sphereCollision2, &data->hitPos))
 			{
-				data->type = CollisionType::SPHERE_SPHERE;
+				data->typeFlag = CollisionType::SPHERE_SPHERE;
 				return true;
 			}
 		}
 		if (planeCollision2)
 		{
-			if (HitCheck_Sphere_Triagnles(planeCollision2->GetTriangle(), planeCollision2->GetTriangleIndex(), sphereCollision->GetSphere(), &data->hit_pos))
+			data->plane[1] = planeCollision2;
+			if (HitCheck_Sphere_Triagnles(planeCollision2->GetTriangle(), planeCollision2->GetTriangleIndex(), sphereCollision->GetSphere(), &data->hitPos))
 			{
-				data->type = CollisionType::SPHERE_PLANE;
+				data->typeFlag = CollisionType::SPHERE_PLANE;
 				return true;
 			}
 		}
 	}
+
 	if (planeCollision)
 	{
+		data->plane[0] = planeCollision;
 		if (sphereCollision2)
 		{
-			if (HitCheck_Sphere_Triagnles(planeCollision->GetTriangle(), planeCollision->GetTriangleIndex(), sphereCollision2->GetSphere(), &data->hit_pos))
+			data->sphere[1] = sphereCollision2;
+			if (HitCheck_Sphere_Triagnles(planeCollision->GetTriangle(), planeCollision->GetTriangleIndex(), sphereCollision2->GetSphere(), &data->hitPos))
 			{
 
-				data->type = CollisionType::SPHERE_PLANE;
+				data->typeFlag = CollisionType::SPHERE_PLANE;
 				return true;
 			}
 		}

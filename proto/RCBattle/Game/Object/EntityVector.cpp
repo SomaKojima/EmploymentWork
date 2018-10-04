@@ -32,6 +32,7 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	EntityOfTree* entity = nullptr;
 	EntityOfTree* entityBuf = nullptr;
 
+
 	// デストロイリストのオブジェクトの処理
 	entity = m_destroy->GetTop();
 	Entity* obj = nullptr;
@@ -73,6 +74,7 @@ void EntityVector::Update(DX::StepTimer const& timer)
 		entity->GetObj()->Update(timer);
 		entity = entity->GetNext();
 	}
+
 }
  
 void EntityVector::Render(Game* game)

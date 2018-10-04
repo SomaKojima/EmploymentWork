@@ -52,6 +52,8 @@ public:
 	template<class T>
 	inline T* GetComponent();
 	template<class T>
+	inline T* GetComponent(Component* component);
+	template<class T>
 	inline std::list<T*> GetComponentList();
 
 protected:
@@ -69,6 +71,21 @@ inline T * FunctionComponent::GetComponent()
 	{
 		sub = dynamic_cast<T*>((*ite));
 		if (sub)
+		{
+			return sub;
+		}
+	}
+	return nullptr;
+}
+
+template<class T>
+inline T * FunctionComponent::GetComponent(Component * component)
+{
+	T* sub = nullptr;
+	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
+	{
+		sub = dynamic_cast<T*>((*ite));
+		if (sub == component)
 		{
 			return sub;
 		}

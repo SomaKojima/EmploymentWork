@@ -59,6 +59,15 @@
     <Filter Include="Game\GameComponent\Button">
       <UniqueIdentifier>{eb434c89-6064-4901-8fcb-15bad58fc3aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameComponent\BaseObject">
+      <UniqueIdentifier>{10e480d4-d826-4d78-a374-69d35d5de545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameComponent\Wall">
+      <UniqueIdentifier>{b35dd07a-a5a5-4a08-92b2-95f8077d594d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Data">
+      <UniqueIdentifier>{c562a829-36de-4be3-b8d5-0214eef5fbb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -199,6 +208,18 @@
     <ClInclude Include="Game\DebugCollision\DebugPlane.h">
       <Filter>DebugCollision</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameComponent\BaseObject\BaseObjectComponent.h">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Wall\WallComponent.h">
+      <Filter>Game\GameComponent\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Data\Data.h">
+      <Filter>Game\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\GameComponentLib.h">
+      <Filter>Game\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -318,6 +339,12 @@
     </ClCompile>
     <ClCompile Include="Game\DebugCollision\DebugPlane.cpp">
       <Filter>DebugCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\BaseObject\BaseObjectComponent.cpp">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Wall\WallComponent.cpp">
+      <Filter>Game\GameComponent\Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

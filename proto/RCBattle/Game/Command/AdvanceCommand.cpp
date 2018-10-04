@@ -26,7 +26,6 @@ AdvanceCommand::~AdvanceCommand()
 void AdvanceCommand::Excute(Entity & entity)
 {
 	Vector3 vel = entity.GetTrans().GetVel();
-	
 	// Œã‘Ş‚µ‚Ä‚¢‚½ê‡
 	if (vel.z <= 0.1f)
 	{

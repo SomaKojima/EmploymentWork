@@ -33,4 +33,6 @@ public:
 	void TitleCamera();
 
 	void GameCamera();
+
+	DirectX::SimpleMath::Vector3 GetUp();
 };

@@ -41,14 +41,23 @@ public:
 	// “–‚½‚è”»’è‚Ìˆ—
 	void OnCollide(Entity& collide, CollisionData* data) override;
 
-	//SphereCollisionComponent* GetSphereCollision() { return sphere; }
-	//BoxCollisionComponent* GetBoxCollision() { return box; }
-
+	void SetGravityDir(DirectX::SimpleMath::Vector3 dir) { m_gravityDir = dir; }
+	void SetFriction(DirectX::SimpleMath::Vector3 friction) { m_friction = friction; }
 	void SetIsFriction(bool isFriction) { m_isFriction = isFriction; }
 	void SetIsGravity(bool isGravity) { m_isGravity = isGravity; }
 
+	DirectX::SimpleMath::Vector3 GetGravityDir() { return m_gravityDir; }
+	DirectX::SimpleMath::Vector3 GetFriction() { return m_friction; }
+
+private:
+	SphereCollisionComponent* CheckSphereList(Entity* entity, CollisionData* data);
+	PlaneCollisionComponent* CheckPlaneList(Entity* entity, CollisionData* data);
+
 private:
 	float m_gravity;	// d—Í
+	DirectX::SimpleMath::Vector3 m_gravityDir;	// –€C‚ÌŒü‚«
+
+	DirectX::SimpleMath::Vector3 m_friction;	// –€C
 	bool m_isFriction;	// –€C
 	bool m_isGravity;	// d—Í‚Ìƒtƒ‰ƒO
 

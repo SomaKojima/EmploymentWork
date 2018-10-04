@@ -37,16 +37,8 @@ RightCommand::~RightCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void RightCommand::Excute(Entity & entity)
 {
-	Vector3 angle = entity.GetTrans().GetAngle();
+	Quaternion dir = Quaternion::CreateFromYawPitchRoll(XMConvertToRadians(-1.0f), 0.0f, 0.0f) * entity.GetTrans().GetDir();
+	dir = Quaternion::Slerp(entity.GetTrans().GetDir(), dir, 1.0f);
 
-	if (entity.GetTrans().GetVel().z >= 0.0f)
-	{
-		angle.y += XMConvertToRadians(-1.0f);
-	}
-	else if (entity.GetTrans().GetVel().z < 0.0f)
-	{
-		angle.y += XMConvertToRadians(1.0f);
-	}
-
-	entity.GetTrans().SetAngle(angle);
+	entity.GetTrans().SetDir(dir);
 }

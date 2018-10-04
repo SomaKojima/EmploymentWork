@@ -38,11 +38,24 @@ void MyCamera::TitleCamera()
 
 void MyCamera::GameCamera()
 {
-	Vector3 eye = Vector3(0.0f, 2.0f, -5.0f);
+	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().GetDir());
+	Vector3 eyePos =  m_target->GetTrans().GetWorld().Translation() + eyeVec;
 
-	Matrix rotY = Matrix::CreateRotationY(m_target->GetTrans().GetAngle().y);
-	eye = Vector3::Transform(eye, rotY);
-	eye += Vector3::Transform(Vector3::Zero, m_target->GetTrans().GetWorld());
+	SetPositionTarget(eyePos, m_target->GetTrans().GetWorld().Translation());
+}
 
-	SetPositionTarget(eye, Vector3::Transform(Vector3::Zero, m_target->GetTrans().GetWorld()));
+DirectX::SimpleMath::Vector3 MyCamera::GetUp()
+{
+	Vector3 up = Vector3::Up;
+	switch (m_mode)
+	{
+	case MyCamera::TITLE:
+		up = Vector3::Up;
+		break;
+	case MyCamera::GAME:
+		up = Vector3::Transform(Vector3::Up, m_target->GetTrans().GetDir());
+		break;
+	}
+
+	return up;
 }

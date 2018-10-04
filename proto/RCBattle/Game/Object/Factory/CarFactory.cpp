@@ -26,7 +26,6 @@ CarFactory::CarFactory()
 {
 	ModelData* modelData = ModelData::GetInstance();
 	m_carModel = modelData->GetCar();
-
 }
 
 CarFactory::~CarFactory()
@@ -44,8 +43,10 @@ Entity* CarFactory::CreateCar()
 
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(m_carModel, ModelComponent::Type::Nomal));
-	// 物理コンポーネントの追加
-	entity->AddComponent(new PhysicsComponent());
+	//// 物理コンポーネントの追加
+	//PhysicsComponent* physics = new PhysicsComponent();
+	////physics->SetIsGravity(false);
+	//entity->AddComponent(physics);
 	// 球の当たり判定コンポーネントの追加
 	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 1.5f));
 

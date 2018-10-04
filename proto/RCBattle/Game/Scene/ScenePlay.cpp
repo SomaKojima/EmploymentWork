@@ -5,8 +5,10 @@
 #include "../Object/EntityVector.h"
 #include "../Object/Entity.h"
 #include "../Component/TestComponent.h"
+#include "../GameComponent/GameComponentLib.h"
 
 using namespace std;
+using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 void ScenePlay::Initialize(Game * game)
@@ -29,11 +31,15 @@ void ScenePlay::Initialize(Game * game)
 	// プレイヤーの作成
 	// 車の作成
 	entity = carFactory->CreateCar(); 
+	// 物理コンポーネントの追加
+	PhysicsComponent* physics = new PhysicsComponent();
+	//physics->SetIsGravity(false);
+	entity->AddComponent(physics);
 	entity->SetName("Player");
-	entity->GetTrans().SetPos(Vector3(0.0f, 0.0f, 2.0f));
+	entity->GetTrans().SetPos(Vector3(0.0f, 3.0f, -5.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
-	entity->AddComponent(new TestComponent());
+	entity->AddComponent(new BaseObjectComponent());
 
 	// コンテナに追加
 	entityVector->Add(entity);
@@ -41,21 +47,67 @@ void ScenePlay::Initialize(Game * game)
 	// カメラの設定
 	game->GetCamera()->SetPlayer(entity);
 
-	//// 敵
-	//// 車の作成
-	//entity = carFactory->CreateCar();
-	//entity->GetTrans().SetPos(Vector3(0.0f, 2.0f, 10.0f));
-	//// コンテナに追加
-	//entityVector->Add(entity);
+	// 敵
+	// 車の作成
+	entity = carFactory->CreateCar();
+	entity->GetTrans().SetPos(Vector3(0.0f, 1.5f, 10.0f));
+	// コンテナに追加
+	entityVector->Add(entity);
 
 	// 部屋の作成
 	entity = new Entity();
-	entity->SetName("room");
+	entity->SetName("Room");
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
-	// 球の当たり判定コンポーネントの追加
-	//entity->AddComponent(new BoxCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f,1.0f,1.0f)));
-	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), 2, 2));
+	// コンテナに追加
+	entityVector->Add(entity);
+	
+	// 床
+	entity = new Entity();
+	entity->SetName("Bottom");
+	entity->GetTrans().SetRadius(50.0f);
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(XMConvertToRadians(90.0f), 0.0f, 0.0f), 50, 50));
+	entity->AddComponent(new WallComponent(WallType::Bottom));
+	// コンテナに追加
+	entityVector->Add(entity);
+
+	// 右の壁
+	entity = new Entity();
+	entity->SetName("Right");
+	entity->GetTrans().SetPos(Vector3(25.0f, 25.0f, 0.0f));
+	entity->GetTrans().SetRadius(50.0f);
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, XMConvertToRadians(90.0f), 0.0f), 50, 50));
+	entity->AddComponent(new WallComponent(WallType::Right));
+	// コンテナに追加
+	entityVector->Add(entity);
+
+	// 前の壁
+	entity = new Entity();
+	entity->SetName("Front");
+	entity->GetTrans().SetPos(Vector3(0.0f, 25.0f, 25.0f));
+	entity->GetTrans().SetRadius(50.0f);
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f), 50, 50));
+	entity->AddComponent(new WallComponent(WallType::Front));
+	// コンテナに追加
+	entityVector->Add(entity);
+
+	// 左の壁
+	entity = new Entity();
+	entity->SetName("Left");
+	entity->GetTrans().SetPos(Vector3(-25.0f, 25.0f, 0.0f));
+	entity->GetTrans().SetRadius(50.0f);
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, XMConvertToRadians(-90.0f), 0.0f), 50, 50));
+	entity->AddComponent(new WallComponent(WallType::Left));
+	// コンテナに追加
+	entityVector->Add(entity);
+
+	// 後ろの壁
+	entity = new Entity();
+	entity->SetName("Back");
+	entity->GetTrans().SetPos(Vector3(0.0f, 25.0f, -25.0f));
+	entity->GetTrans().SetRadius(50.0f);
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, XMConvertToRadians(180.0f), 0.0f), 50, 50));
+	entity->AddComponent(new WallComponent(WallType::Back));
 	// コンテナに追加
 	entityVector->Add(entity);
 }

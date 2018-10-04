@@ -51,13 +51,15 @@ void PlaneCollisionComponent::Initialize()
 
 void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 {
-	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
-	Quaternion dir = DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 0.0f, 1.0f), m_angle.z) *
-		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
-		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
+	Quaternion dir = Quaternion::CreateFromAxisAngle(Vector3(0.0f, 0.0f, 1.0f), m_angle.z) *
+		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
+		Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
 
-	m_triangle[0].MoveRotation(world, dir);
-	m_triangle[1].MoveRotation(world, dir);
+	Matrix world = Matrix::CreateFromQuaternion(dir) * m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+
+	m_triangle[0].MoveRotation(world, dir, m_angle);
+	m_triangle[1].MoveRotation(world, dir, m_angle);
+
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)
@@ -67,6 +69,7 @@ void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)
 void PlaneCollisionComponent::Draw(Game * game)
 {
 	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成
@@ -74,7 +77,7 @@ void PlaneCollisionComponent::Draw(Game * game)
 	}
 	else
 	{
-		m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
+		//m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
 	}
 }
 

@@ -28,6 +28,8 @@ using namespace DirectX::SimpleMath;
 PhysicsComponent::PhysicsComponent()
 	:
 	m_gravity(9.8f),
+	m_friction(Vector3(0.9f, 1.0f, 0.9f)),
+	m_gravityDir(Vector3::Down),
 	m_isFriction(true),
 	m_isGravity(true)
 {
@@ -48,6 +50,7 @@ void PhysicsComponent::Initialize()
 {
 	m_spherelist = m_me->GetComponentList<SphereCollisionComponent>();
 	m_planelist = m_me->GetComponentList<PlaneCollisionComponent>();
+	int a = 0;
 }
 
 /// <summary>
@@ -58,24 +61,21 @@ void PhysicsComponent::Initialize()
 void PhysicsComponent::Update(DX::StepTimer const& timer)
 {
 	Vector3 vel = m_me->GetTrans().GetVel();
-	vel *= 0.9f;
-	/*if(m_isFriction)
+
+	if(m_isFriction)
 	{
-		vel.x *= 0.9f;
-		vel.z *= 0.9f;
+		vel *= m_friction;
 	}
+	
 	if(m_isGravity)
 	{
-		vel.y -= (m_gravity / (60 * 60));
-	}*/
-
-	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().GetWorld()) + vel;
-	/*if (pos.y <= 1.5f)
-	{
-		m_me->GetTrans().SetWorld(m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(Vector3(0.0f, -pos.y + 1.5f, 0.0f)));
-		vel.y = 0.0f;
+		Quaternion inverse;
+		m_me->GetTrans().GetDir().Inverse(inverse);
+		Vector3 gravity = (m_gravityDir * (m_gravity / (60 * 60)));
+		gravity = Vector3::Transform(gravity, inverse);
+		vel += gravity;
 	}
-*/
+
 	m_me->GetTrans().SetVel(vel);
 }
 
@@ -86,22 +86,68 @@ void PhysicsComponent::Update(DX::StepTimer const& timer)
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 {
-	/*Vector3 pos = m_me->GetTrans().GetPos();
-
-	pos += m_repulsionVel;
-	m_me->GetTrans().SetPos(pos);
-	m_repulsionVel = Vector3::Zero;*/
 }
 
 void PhysicsComponent::OnCollide(Entity& collide, CollisionData* data)
 {
-	// Œü‚¢‚Ä‚¢‚éŒü‚«‚É•Ï‚¦‚½‘¬“x
-	switch (data->type)
-	{
-	case CollisionType::SPHERE_PLANE:
+	PhysicsComponent* collidePhysics = collide.GetComponent<PhysicsComponent>();
+	/// //////////////////////////////
+	//’µ‚Ë•Ô‚è‚ðŒvŽZ
+	/// //////////////////////////////
 
-		break;
+	//// ‹…‚Æ–Ê
+	//if (data->typeFlag & CollisionType::SPHERE_PLANE)
+	//{
+	//	SphereCollisionComponent* sphere = CheckSphereList(m_me ,data);
+	//	PlaneCollisionComponent* collidePlane = nullptr;
+	//	if (sphere)
+	//	{
+	//		collidePlane = CheckPlaneList(&collide, data);
+	//		// ŒvŽZ
+	//		Vector3 hitPosVec = sphere->HitPlanePosToVec(collidePlane, data->hitPos);
+	//	}
+	//	else
+	//	{
+	//		sphere = CheckSphereList(&collide, data);
+	//		collidePlane = CheckPlaneList(m_me, data);
+	//		// ŒvŽZ
+	//	}
+	//}
+
+	//// ‹…‚Æ‹…
+	//if (data->typeFlag & CollisionType::SPHERE_SPHERE)
+	//{
+	//	SphereCollisionComponent* sphere = CheckSphereList(m_me, data);
+	//	/*if ()
+	//	{
+
+	//	}*/
+	//}
+	//SphereCollisionComponent* sphere = CheckSphereList(m_me, data);
+	//if (sphere)
+	//{
+	//	Vector3 hitPosVec = sphere->HitPosToVec(data->hitPos);
+	//	//Vecctor3 diffVec = m_me->GetTrans().GetVel() - hitPosVec;
+	//	//m_me->GetTrans().SetVel(-hitPosVec);
+	//}
+}
+
+SphereCollisionComponent * PhysicsComponent::CheckSphereList(Entity* entity, CollisionData * data)
+{
+	SphereCollisionComponent* sphere = entity->GetComponent<SphereCollisionComponent>(data->sphere[0]);
+	if (!sphere)
+	{
+		sphere = entity->GetComponent<SphereCollisionComponent>(data->sphere[1]);
 	}
-	Vector3 vel = Vector3::Transform(m_me->GetTrans().GetVel(), m_me->GetTrans().GetDir());
-	Vector3 pos = Vector3::Transform(vel, m_me->GetTrans().GetWorld());
+	return sphere;
+}
+
+PlaneCollisionComponent * PhysicsComponent::CheckPlaneList(Entity* entity, CollisionData * data)
+{
+	PlaneCollisionComponent* plane = entity->GetComponent<PlaneCollisionComponent>(data->plane[0]);
+	if (!plane)
+	{
+		plane = entity->GetComponent<PlaneCollisionComponent>(data->plane[1]);
+	}
+	return plane;
 }

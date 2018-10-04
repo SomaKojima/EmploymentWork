@@ -28,10 +28,14 @@ public:
 
 	// 更新
 	void Update(DX::StepTimer const& timer) override;
+	// 遅延更新
+	void LateUpdate(DX::StepTimer const& timer) override;
 	// 描画
 	void Draw(Game* game) override;
 	// 終了
 	void Finalize() override;
+
+	DirectX::SimpleMath::Vector3 HitPlanePosToVec(PlaneCollisionComponent* plane, DirectX::SimpleMath::Vector3& hitPos);
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	float GetRadius() { return m_radius; }

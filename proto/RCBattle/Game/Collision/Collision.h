@@ -23,16 +23,19 @@ class BoxCollisionComponent;
 class PlaneCollisionComponent;
 enum CollisionType
 {
-	NONE = 1,
+	NONE = 0,
 	SPHERE_PLANE = 1 << 1,
 	SPHERE_SPHERE = 1 << 2,
 
 	COLLISION_MAX
 };
+
 struct CollisionData
 {
-	DirectX::SimpleMath::Vector3 hit_pos;
-	float typeFlag;
+	DirectX::SimpleMath::Vector3 hitPos;
+	int typeFlag;
+	SphereCollisionComponent* sphere[2];
+	PlaneCollisionComponent* plane[2];
 };
 
 /// <summary>
@@ -73,10 +76,12 @@ public:
 			DirectX::SimpleMath::Vector3 normal = vec_a.Cross(vec_b);
 			Set_Plane(normal, pos1);
 		}
-		void Rotation(DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 point)
+		void Rotation(DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 point, DirectX::SimpleMath::Vector3 angle)
 		{
-			DirectX::SimpleMath::Vector3 normal = DirectX::SimpleMath::Vector3(a, b, c);
-			normal = DirectX::SimpleMath::Vector3::Transform(normal, dir);
+			DirectX::SimpleMath::Vector3 normal(a, b, c);
+			DirectX::SimpleMath::Matrix _dir = DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(angle.y, angle.x, angle.z);
+			normal = DirectX::SimpleMath::Vector3::Transform(normal, _dir);
+
 			a = normal.x;
 			b = normal.y;
 			c = normal.z;
@@ -96,23 +101,19 @@ public:
 			startPos[1] = pos2;
 			startPos[2] = pos3;
 		}
-		void MoveRotation(DirectX::SimpleMath::Matrix world, DirectX::SimpleMath::Quaternion dir)
+		void MoveRotation(DirectX::SimpleMath::Matrix world, DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 angle)
 		{
-			pos[0] = DirectX::SimpleMath::Vector3::Transform(startPos[0],world * DirectX::SimpleMath::Matrix::CreateFromQuaternion(dir));
-			pos[1] = DirectX::SimpleMath::Vector3::Transform(startPos[1], world * DirectX::SimpleMath::Matrix::CreateFromQuaternion(dir));
-			pos[2] = DirectX::SimpleMath::Vector3::Transform(startPos[2], world * DirectX::SimpleMath::Matrix::CreateFromQuaternion(dir));
+			pos[0] = DirectX::SimpleMath::Vector3::Transform(startPos[0], world);
+			pos[1] = DirectX::SimpleMath::Vector3::Transform(startPos[1], world);
+			pos[2] = DirectX::SimpleMath::Vector3::Transform(startPos[2], world);
 
-			plane.Rotation(dir, pos[0]);
+			plane.Rotation(dir, pos[0], angle);
 		}
 		DirectX::SimpleMath::Vector3 pos[3];
 		DirectX::SimpleMath::Vector3 startPos[3];
 		Plane plane;
 	};
 
-
-protected:
-	Collision();
-	~Collision();
 	static bool HitCheck_Sphere(Entity* entity, SphereCollisionComponent& sphere, Entity* entity2, SphereCollisionComponent& sphere2, DirectX::SimpleMath::Vector3* repulsionVel = nullptr);
 	// ê¸ï™Ç∆ïΩñ ÇÃìñÇΩÇËîªíË
 	static bool HitCheck_Segment_Plane(Segment& segment, Plane& plane, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
@@ -141,6 +142,10 @@ protected:
 		return l;
 	}
 
+public:
+	Collision();
+	~Collision();
+	
 public:
 	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData *data);
 };

@@ -44,7 +44,7 @@ void ShotCommand::Excute(Entity & entity)
 	BulletFactory* bulletFactory = BulletFactory::GetInstance();
 	Entity* _entity = bulletFactory->CreateBullet();
 
-	_entity->GetTrans().SetAngle(entity.GetTrans().GetAngle());
+	_entity->GetTrans().SetDir(entity.GetTrans().GetDir());
 	_entity->GetTrans().SetVel(Vector3(0.0f, 0.0f, 0.2f));
 
 	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().GetWorld());

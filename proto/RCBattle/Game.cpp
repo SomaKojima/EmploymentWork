@@ -177,11 +177,12 @@ void Game::Render()
 	auto context = m_deviceResources->GetD3DDeviceContext();
 
 	// ビュー行列の作成
-	m_view = Matrix::CreateLookAt(m_camera.GetEyePosition(), m_camera.GetTargetPosition(), Vector3::Up);
+	m_view = Matrix::CreateLookAt(m_camera.GetEyePosition(), m_camera.GetTargetPosition(), m_camera.GetUp());
+	//m_view = Matrix::CreateLookAt(m_camera.GetEyePosition(), m_camera.GetTargetPosition(), Vector3::Right);
 	//m_view = m_debugCamera->GetCameraMatrix();
 
 	// グリッドの床の描画
-	m_gridFloor->Render(context, m_view, m_projection);
+	//m_gridFloor->Render(context, m_view, m_projection);
 
 	// ここから描画処理を記述する
 	// スプライトの描画 
@@ -195,41 +196,41 @@ void Game::Render()
 	entityVector->Render(this);*/
 
 	Vector2 pos = Vector2::Zero;
-	// デバッグテキストの描画
-	for (int i = 0; i < 18; i++)
-	{
-		if (m_debugText[i] == nullptr)
-		{
-			break;
-		}
-		m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
-		pos.y += 32;
-	}
-	//	FPSの描画
-	wchar_t name[30] = L"fps : ";
-	wchar_t fpsBuf[30] = L"";
-	int a = m_timer.GetFramesPerSecond();
-	_itow( a , fpsBuf, 10);
-	wcscat(name, fpsBuf);
-	m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
+	//// デバッグテキストの描画
+	//for (int i = 0; i < 18; i++)
+	//{
+	//	if (m_debugText[i] == nullptr)
+	//	{
+	//		break;
+	//	}
+	//	m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
+	//	pos.y += 32;
+	//}
+	////	FPSの描画
+	//wchar_t name[30] = L"fps : ";
+	//wchar_t fpsBuf[30] = L"";
+	//int a = m_timer.GetFramesPerSecond();
+	//_itow( a , fpsBuf, 10);
+	//wcscat(name, fpsBuf);
+	//m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
 
 
-	wchar_t name2[30] = L"num : ";
-	wchar_t num[30] = L"";
-	_itow(m_numText, num, 10);
-	wcscat(name2, num);
-	m_font->DrawString(m_sprites.get(), name2, Vector2(300.0f, 42.0f), Colors::Red);
-	wchar_t name3[30] = L"pos : ";
-	wchar_t num2[30] = L"";
-	_itow((int)m_posText.x, num, 10);
-	_itow((int)m_posText.y, num2, 10);
-	wcscat(num, L",");
-	wcscat(num, num2);
-	_itow((int)m_posText.z, num2, 10);
-	wcscat(num, L",");
-	wcscat(num, num2);
-	wcscat(name3, num);
-	m_font->DrawString(m_sprites.get(), name3, Vector2(300, 74.0f), Colors::Red);
+	//wchar_t name2[30] = L"num : ";
+	//wchar_t num[30] = L"";
+	//_itow(m_numText, num, 10);
+	//wcscat(name2, num);
+	//m_font->DrawString(m_sprites.get(), name2, Vector2(300.0f, 42.0f), Colors::Red);
+	//wchar_t name3[30] = L"pos : ";
+	//wchar_t num2[30] = L"";
+	//_itow((int)m_posText.x, num, 10);
+	//_itow((int)m_posText.y, num2, 10);
+	//wcscat(num, L",");
+	//wcscat(num, num2);
+	//_itow((int)m_posText.z, num2, 10);
+	//wcscat(num, L",");
+	//wcscat(num, num2);
+	//wcscat(name3, num);
+	//m_font->DrawString(m_sprites.get(), name3, Vector2(300, 74.0f), Colors::Red);
 
 	/*wchar_t name4[30] = L"num2 : ";
 	wchar_t num3[30] = L"";
