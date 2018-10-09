@@ -59,7 +59,6 @@ void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 
 	m_triangle[0].MoveRotation(world, dir, m_angle);
 	m_triangle[1].MoveRotation(world, dir, m_angle);
-
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)
@@ -77,7 +76,7 @@ void PlaneCollisionComponent::Draw(Game * game)
 	}
 	else
 	{
-		//m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
+		m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
 	}
 }
 

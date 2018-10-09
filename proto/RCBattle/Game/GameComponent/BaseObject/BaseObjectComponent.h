@@ -43,7 +43,7 @@ private:
 	WallType m_wallType;		// Œ»İ‚Ç‚Ì•Ç‚É’£‚è•t‚¢‚Ä‚¢‚é‚©
 	DirectX::SimpleMath::Vector3 m_normal;	// d—Í‚ÌŒü‚«
 	WallComponent* m_currentWall;					// Œ»İ‚Ì°
-	WallComponent* m_lastWall;					// Œ»İ‚Ì°
+	WallComponent* m_lastWall;						// ‘O‚Ì°
 	PhysicsComponent* m_physics;
 	float m_count;
 	DirectX::SimpleMath::Quaternion m_rotate;

@@ -56,7 +56,6 @@ public:
 	void SetWorld(DirectX::SimpleMath::Matrix& world) {
 		m_world = world;
 		m_pos = m_world.Translation();
-		//m_pos = DirectX::SimpleMath::Vector3::Transform(m_world.Translation(), -m_dir);
 	}
 	void SetLocal(DirectX::SimpleMath::Matrix& local) { m_local = local; }
 

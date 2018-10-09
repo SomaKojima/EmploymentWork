@@ -95,59 +95,14 @@ void PhysicsComponent::OnCollide(Entity& collide, CollisionData* data)
 	//’µ‚Ë•Ô‚è‚ðŒvŽZ
 	/// //////////////////////////////
 
-	//// ‹…‚Æ–Ê
-	//if (data->typeFlag & CollisionType::SPHERE_PLANE)
-	//{
-	//	SphereCollisionComponent* sphere = CheckSphereList(m_me ,data);
-	//	PlaneCollisionComponent* collidePlane = nullptr;
-	//	if (sphere)
-	//	{
-	//		collidePlane = CheckPlaneList(&collide, data);
-	//		// ŒvŽZ
-	//		Vector3 hitPosVec = sphere->HitPlanePosToVec(collidePlane, data->hitPos);
-	//	}
-	//	else
-	//	{
-	//		sphere = CheckSphereList(&collide, data);
-	//		collidePlane = CheckPlaneList(m_me, data);
-	//		// ŒvŽZ
-	//	}
-	//}
-
-	//// ‹…‚Æ‹…
-	//if (data->typeFlag & CollisionType::SPHERE_SPHERE)
-	//{
-	//	SphereCollisionComponent* sphere = CheckSphereList(m_me, data);
-	//	/*if ()
-	//	{
-
-	//	}*/
-	//}
-	//SphereCollisionComponent* sphere = CheckSphereList(m_me, data);
-	//if (sphere)
-	//{
-	//	Vector3 hitPosVec = sphere->HitPosToVec(data->hitPos);
-	//	//Vecctor3 diffVec = m_me->GetTrans().GetVel() - hitPosVec;
-	//	//m_me->GetTrans().SetVel(-hitPosVec);
-	//}
-}
-
-SphereCollisionComponent * PhysicsComponent::CheckSphereList(Entity* entity, CollisionData * data)
-{
-	SphereCollisionComponent* sphere = entity->GetComponent<SphereCollisionComponent>(data->sphere[0]);
-	if (!sphere)
+	// ‹…‚Æ–Ê
+	if (data->typeFlag & CollisionType::SPHERE_PLANE)
 	{
-		sphere = entity->GetComponent<SphereCollisionComponent>(data->sphere[1]);
-	}
-	return sphere;
-}
 
-PlaneCollisionComponent * PhysicsComponent::CheckPlaneList(Entity* entity, CollisionData * data)
-{
-	PlaneCollisionComponent* plane = entity->GetComponent<PlaneCollisionComponent>(data->plane[0]);
-	if (!plane)
-	{
-		plane = entity->GetComponent<PlaneCollisionComponent>(data->plane[1]);
+		SphereCollisionComponent* sphere = m_me->GetComponent<SphereCollisionComponent>();
+		PlaneCollisionComponent* collidePlane = collide.GetComponent<PlaneCollisionComponent>();
+		// ŒvŽZ
+		sphere->HitPlanePosToVec(collidePlane, data->hitPos);
 	}
-	return plane;
+
 }

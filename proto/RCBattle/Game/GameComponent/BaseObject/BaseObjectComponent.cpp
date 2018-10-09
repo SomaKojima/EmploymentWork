@@ -152,6 +152,7 @@ void BaseObjectComponent::OnCollide(Entity & collide, CollisionData * data)
 		WallComponent* wall = collide.GetComponent<WallComponent>();
 		if(wall)
 		{
+			m_lastWall = wall;
 			m_wallType = wall->GetWallType();
 			m_normal = wall->GetNomal();
 

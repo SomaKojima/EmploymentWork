@@ -64,7 +64,7 @@ void SphereCollisionComponent::Draw(Game * game)
 	}
 	else
 	{
-		//m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
+		m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
 	}
 }
 
@@ -80,31 +80,31 @@ void SphereCollisionComponent::Finalize()
 DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCollisionComponent* plane, DirectX::SimpleMath::Vector3& hitPos)
 {
 	Vector3 vec = Vector3::Transform(m_me->GetTrans().GetVel(), m_me->GetTrans().GetDir());
-	
-	/*float radian_xy = atan2(plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.a);
-	float radian_xz = atan2(plane->GetTriangle()->plane.c, plane->GetTriangle()->plane.a);
-*/
-	//// ‹ÂŠp
-	//float phi = (radian_xy)* XM_PI / 180;
-	//// •ûˆÊŠp
-	//float theta = (radian_xz - 180) * XM_PI / 180;
 
-	//float radian = 1;
+	Vector3 hitPos_ = m_me->GetTrans().GetWorld().Translation() - hitPos;
 
-	//float x = -radian * cos(phi) * cos(theta);
-	//float y = radian * sin(phi);
-	//float z = radian * cos(phi) * sin(theta);
+	hitPos_.Normalize();
 
-	//Quaternion dir = Quaternion::CreateFromAxisAngle(Vector3(0.0f, 0.0f, 1.0f), -z) *
-	//	Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), -y) *
-	//	Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), -x);
+	Vector3 normal(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
 
-	//vec = Vector3::Transform(vec, dir);
+	Matrix world = Matrix::CreateTranslation(-normal * m_sphere.radius);
 
-	//vec = Vector3(plane->GetTriangle()->plane.a * vec.x, plane->GetTriangle()->plane.b * vec.y, plane->GetTriangle()->plane.c * vec.z);
-	//Vector3 world = m_me->GetTrans().GetWorld().Translation() + vec;
-	//m_me->GetTrans().SetPos(world);
+	Vector3 pos = world.Translation();
 
-	return DirectX::SimpleMath::Vector3();
+	m_me->GetTrans().SetWorld(world);
+	m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
+
+	/*if (Collision::HitCheck_Sphere_Triangle(m_sphere, *plane->GetTriangle(), &hitPos_))
+	{
+		hitPos_ = m_me->GetTrans().GetWorld().Translation() - hitPos_;
+		hitPos_.Normalize();
+
+		world = Matrix::CreateTranslation(hitPos_ * m_sphere.radius);
+
+		m_me->GetTrans().SetWorld(world);
+		m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
+	}*/
+
+	return hitPos_;
 }
 

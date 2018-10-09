@@ -50,10 +50,6 @@ public:
 	DirectX::SimpleMath::Vector3 GetFriction() { return m_friction; }
 
 private:
-	SphereCollisionComponent* CheckSphereList(Entity* entity, CollisionData* data);
-	PlaneCollisionComponent* CheckPlaneList(Entity* entity, CollisionData* data);
-
-private:
 	float m_gravity;	// d—Í
 	DirectX::SimpleMath::Vector3 m_gravityDir;	// –€C‚ÌŒü‚«
 
