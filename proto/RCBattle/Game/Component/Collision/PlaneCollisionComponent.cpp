@@ -55,10 +55,13 @@ void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
 		Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
 
-	Matrix world = Matrix::CreateFromQuaternion(dir) * m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	dir *= m_me->GetTrans().GetDir();
+	Vector3 pos = m_me->GetTrans().GetPos() + m_center;
 
-	m_triangle[0].MoveRotation(world, dir, m_angle);
-	m_triangle[1].MoveRotation(world, dir, m_angle);
+	Matrix world = Matrix::CreateFromQuaternion(dir) * Matrix::CreateTranslation(pos);
+
+	m_triangle[0].Set_Triangle(world, dir);
+	m_triangle[1].Set_Triangle(world, dir);
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)

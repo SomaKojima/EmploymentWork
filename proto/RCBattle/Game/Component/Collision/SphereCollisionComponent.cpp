@@ -79,32 +79,30 @@ void SphereCollisionComponent::Finalize()
 
 DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCollisionComponent* plane, DirectX::SimpleMath::Vector3& hitPos)
 {
+	// ベクトルを取得（向きの計算済ませる）
 	Vector3 vec = Vector3::Transform(m_me->GetTrans().GetVel(), m_me->GetTrans().GetDir());
 
-	Vector3 hitPos_ = m_me->GetTrans().GetWorld().Translation() - hitPos;
-
-	hitPos_.Normalize();
-
+	// 面の法線
 	Vector3 normal(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
 
-	Matrix world = Matrix::CreateTranslation(-normal * m_sphere.radius);
+	Vector3 hitPosVec = m_sphere.center - hitPos;
+	hitPosVec.Normalize();
+	Vector3 a = m_sphere.center - (hitPosVec * m_sphere.radius) - hitPos;
+	float length = a.Length();
 
-	Vector3 pos = world.Translation();
+	// 法線の向きのベクトルをなくす
+	Vector3 w = vec - vec.Dot(normal) * normal;
 
-	m_me->GetTrans().SetWorld(world);
-	m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
+	Quaternion inverse;
+	m_me->GetTrans().GetDir().Inverse(inverse);
 
-	/*if (Collision::HitCheck_Sphere_Triangle(m_sphere, *plane->GetTriangle(), &hitPos_))
-	{
-		hitPos_ = m_me->GetTrans().GetWorld().Translation() - hitPos_;
-		hitPos_.Normalize();
+	Vector3 vel = Vector3::Transform(w + (hitPosVec * length), inverse);
 
-		world = Matrix::CreateTranslation(hitPos_ * m_sphere.radius);
+	m_me->GetTrans().SetVel(vel);
 
-		m_me->GetTrans().SetWorld(world);
-		m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
-	}*/
 
-	return hitPos_;
+	// 壁にひっつく
+
+	return Vector3::Zero;
 }
 

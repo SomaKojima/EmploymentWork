@@ -35,7 +35,7 @@ void ScenePlay::Initialize(Game * game)
 	entity->GetTrans().SetPos(Vector3(0.0f, 3.0f, -5.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
-	//entity->AddComponent(new BaseObjectComponent());
+	entity->AddComponent(new BaseObjectComponent());
 
 	// コンテナに追加
 	entityVector->Add(entity);

@@ -26,16 +26,10 @@ AdvanceCommand::~AdvanceCommand()
 void AdvanceCommand::Excute(Entity & entity)
 {
 	Vector3 vel = entity.GetTrans().GetVel();
-	// å„ëﬁÇµÇƒÇ¢ÇΩèÍçá
-	if (vel.z <= 0.1f)
+	vel.z += 0.1f;
+	if (vel.z >= 0.2f)
 	{
-		vel.z = 0.1f;
+		vel.z = 0.2f;
 	}
-	else
-	{
-		int a = 0;
-	}
-	vel.z += (vel.z / 60.0f);
-
 	entity.GetTrans().SetVel(vel);
 }

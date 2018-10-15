@@ -60,19 +60,21 @@ void PhysicsComponent::Initialize()
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::Update(DX::StepTimer const& timer)
 {
-	Vector3 vel = m_me->GetTrans().GetVel();
+	Vector3 vec = m_me->GetTrans().GetVel();
+	Vector3 accel = m_me->GetTrans().GetAccel();
 
 	if(m_isFriction)
 	{
-		vel *= m_friction;
+		vec *= m_friction;
+		accel *= m_friction;
 	}
 	
 	if(m_isGravity)
 	{
-		Quaternion inverse;
-		m_me->GetTrans().GetDir().Inverse(inverse);
+		//Quaternion inverse;
+		//m_me->GetTrans().GetDir().Inverse(inverse);
 		Vector3 gravity = (m_gravityDir * (m_gravity / (60 * 60)));
-		gravity = Vector3::Transform(gravity, inverse);
+		//gravity = Vector3::Transform(gravity, inverse);
 		vel += gravity;
 	}
 
@@ -104,5 +106,4 @@ void PhysicsComponent::OnCollide(Entity& collide, CollisionData* data)
 		// ŒvŽZ
 		sphere->HitPlanePosToVec(collidePlane, data->hitPos);
 	}
-
 }

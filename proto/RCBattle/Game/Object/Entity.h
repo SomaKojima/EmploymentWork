@@ -35,6 +35,7 @@ public:
 	Transform() :
 		m_dir(DirectX::SimpleMath::Quaternion::Identity),
 		m_vel(DirectX::SimpleMath::Vector3::Zero),
+		m_accel(DirectX::SimpleMath::Vector3::Zero),
 		m_pos(DirectX::SimpleMath::Vector3::Zero),
 		m_radius(0.0f),
 		m_world(DirectX::SimpleMath::Matrix::Identity),
@@ -51,6 +52,7 @@ public:
 			DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(1.0f, 0.0f, 0.0f), angle.x);
 	}
 	void SetVel(DirectX::SimpleMath::Vector3 &vel) { m_vel = vel; }
+	void SetAccel(DirectX::SimpleMath::Vector3 &accel) { m_accel = accel; }
 	void SetPos(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
 	void SetRadius(float radius) { m_radius = radius; }
 	void SetWorld(DirectX::SimpleMath::Matrix& world) {
@@ -61,6 +63,7 @@ public:
 
 	DirectX::SimpleMath::Quaternion GetDir() { return m_dir; }
 	DirectX::SimpleMath::Vector3 GetVel() { return m_vel; }
+	DirectX::SimpleMath::Vector3 GetAccel() { return m_accel; }
 	DirectX::SimpleMath::Vector3 GetPos() { return m_pos; }
 	float GetRadius() { return m_radius; }
 	DirectX::SimpleMath::Matrix GetWorld() { return m_world; }
@@ -69,6 +72,7 @@ public:
 private:
 	DirectX::SimpleMath::Quaternion m_dir;		// ï˚å¸			
 	DirectX::SimpleMath::Vector3 m_vel;			// ë¨ìx
+	DirectX::SimpleMath::Vector3 m_accel;		// â¡ë¨ìx
 	DirectX::SimpleMath::Vector3 m_pos;			// ç¿ïW
 	float m_radius;
 

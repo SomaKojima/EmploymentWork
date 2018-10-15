@@ -76,11 +76,9 @@ public:
 			DirectX::SimpleMath::Vector3 normal = vec_a.Cross(vec_b);
 			Set_Plane(normal, pos1);
 		}
-		void Rotation(DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 point, DirectX::SimpleMath::Vector3 angle)
+		void Set_Plane(DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 point)
 		{
-			DirectX::SimpleMath::Vector3 normal(a, b, c);
-			DirectX::SimpleMath::Matrix _dir = DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(angle.y, angle.x, angle.z);
-			normal = DirectX::SimpleMath::Vector3::Transform(normal, _dir);
+			DirectX::SimpleMath::Vector3 normal = DirectX::SimpleMath::Vector3::Transform(DirectX::SimpleMath::Vector3::Forward, dir);
 
 			a = normal.x;
 			b = normal.y;
@@ -101,13 +99,13 @@ public:
 			startPos[1] = pos2;
 			startPos[2] = pos3;
 		}
-		void MoveRotation(DirectX::SimpleMath::Matrix world, DirectX::SimpleMath::Quaternion dir, DirectX::SimpleMath::Vector3 angle)
+		void Set_Triangle(DirectX::SimpleMath::Matrix world, DirectX::SimpleMath::Quaternion dir)
 		{
 			pos[0] = DirectX::SimpleMath::Vector3::Transform(startPos[0], world);
 			pos[1] = DirectX::SimpleMath::Vector3::Transform(startPos[1], world);
 			pos[2] = DirectX::SimpleMath::Vector3::Transform(startPos[2], world);
 
-			plane.Rotation(dir, pos[0], angle);
+			plane.Set_Plane(dir, pos[0]);
 		}
 		DirectX::SimpleMath::Vector3 pos[3];
 		DirectX::SimpleMath::Vector3 startPos[3];

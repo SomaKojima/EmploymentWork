@@ -3,6 +3,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
+#include <list>
 #include "../../Component/Component.h"
 #include "../../Data/Data.h"
 
@@ -34,18 +35,13 @@ public:
 	void OnCollide(Entity& collide, CollisionData* data) override;
 
 	// 角度を回転させる関数
-	DirectX::SimpleMath::Quaternion GetRotateDir();
-	bool IsSomeDir();
-
-	WallType GetWallType() { return m_wallType; }
+	//DirectX::SimpleMath::Quaternion GetRotateDir();
+	//bool IsSomeDir();
 
 private:
-	WallType m_wallType;		// 現在どの壁に張り付いているか
 	DirectX::SimpleMath::Vector3 m_normal;	// 重力の向き
-	WallComponent* m_currentWall;					// 現在の床
-	WallComponent* m_lastWall;						// 前の床
-	PhysicsComponent* m_physics;
-	float m_count;
+	std::list<WallComponent*> m_current;
+	std::list<WallComponent*> m_last;
 	DirectX::SimpleMath::Quaternion m_rotate;
 };
 
