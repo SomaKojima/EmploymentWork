@@ -64,6 +64,11 @@ void BaseObjectComponent::Update(DX::StepTimer const & timer)
 
 	// d—Í‚ÌŒvŽZ
 	Vector3 vec = m_me->GetTrans().GetVel();
+	Vector3 accel = m_me->GetTrans().GetAccel();
+
+	accel += (m_normal * (9.8f / (60 * 60)));
+
+	m_me->GetTrans().SetAccel(accel);
 
 	m_last = m_current;
 	m_current.clear();

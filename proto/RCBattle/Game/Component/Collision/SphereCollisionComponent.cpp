@@ -79,8 +79,9 @@ void SphereCollisionComponent::Finalize()
 
 DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCollisionComponent* plane, DirectX::SimpleMath::Vector3& hitPos)
 {
-	// ベクトルを取得（向きの計算済ませる）
-	Vector3 vec = Vector3::Transform(m_me->GetTrans().GetVel(), m_me->GetTrans().GetDir());
+	// 速度を取得
+	Vector3 vec = m_me->GetTrans().GetVel();
+	Vector3 accel = m_me->GetTrans().GetAccel();
 
 	// 面の法線
 	Vector3 normal(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
@@ -91,18 +92,22 @@ DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCol
 	float length = a.Length();
 
 	// 法線の向きのベクトルをなくす
-	Vector3 w = vec - vec.Dot(normal) * normal;
-
 	Quaternion inverse;
 	m_me->GetTrans().GetDir().Inverse(inverse);
 
-	Vector3 vel = Vector3::Transform(w + (hitPosVec * length), inverse);
 
-	m_me->GetTrans().SetVel(vel);
+	Vector3 normal2 = Vector3::Transform(normal, inverse);
 
+	Vector3 w_vec = vec - vec.Dot(normal2) * normal2;
+	Vector3 w_accel = accel - accel.Dot(normal) * normal;
+
+	Vector3 vec2 = w_vec;
+	Vector3 accel2 = accel + (hitPosVec * length);
+
+	m_me->GetTrans().SetVel(vec2);
+	m_me->GetTrans().SetAccel(accel2);
 
 	// 壁にひっつく
-
 	return Vector3::Zero;
 }
 
