@@ -31,10 +31,8 @@ public:
 
 	WallType GetWallType() { return m_wallType; }
 	DirectX::SimpleMath::Vector3 GetNomal() { return m_normal; }
-	DirectX::SimpleMath::Vector3 GetAngle() { return m_angle; }
 
 private:
 	WallType m_wallType;		// Œ»İ‚Ç‚Ì•Ç‚É’£‚è•t‚¢‚Ä‚¢‚é‚©
 	DirectX::SimpleMath::Vector3 m_normal;	// •Ç‚Ì–@ü
-	DirectX::SimpleMath::Vector3 m_angle;
 };

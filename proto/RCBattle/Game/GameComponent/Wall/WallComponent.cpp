@@ -8,8 +8,7 @@ using namespace DirectX::SimpleMath;
 WallComponent::WallComponent(WallType wallType)
 	:
 	m_wallType(wallType),
-	m_normal(Vector3::Down),
-	m_angle(Vector3::Zero)
+	m_normal(Vector3::Down)
 {
 }
 
@@ -23,23 +22,18 @@ void WallComponent::Initialize()
 	{
 	case Bottom:
 		m_normal = Vector3::Down;
-		m_angle = Vector3::Zero;
 		break;
 	case Right:
 		m_normal = Vector3::Right;
-		m_angle = Vector3(0.0f, 0.0f, XMConvertToRadians(90.0f));
 		break;
 	case Front:
 		m_normal = Vector3::Backward;
-		m_angle = Vector3(XMConvertToRadians(-90.0f), 0.0f, 0.0f);
 		break;
 	case Left:
 		m_normal = Vector3::Left;
-		m_angle = Vector3(0.0f, 0.0f, XMConvertToRadians(-90.0f));
 		break;
 	case Back:
 		m_normal = Vector3::Forward;
-		m_angle = Vector3(XMConvertToRadians(90.0f), 0.0f, 0.0f);
 		break;
 	}
 }

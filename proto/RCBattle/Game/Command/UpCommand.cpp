@@ -14,6 +14,12 @@ UpCommand::~UpCommand()
 
 void UpCommand::Excute(Entity & entity)
 {
-	Vector3 vel = Vector3(entity.GetTrans().GetVel().x, 0.1f, entity.GetTrans().GetVel().z);
+	Vector3 vel = entity.GetTrans().GetVel();
+	entity.GetTrans().SetVel(vel);
+	vel.z += 0.1f;
+	if (vel.z >= 0.2f)
+	{
+		vel.z = 0.2f;
+	}
 	entity.GetTrans().SetVel(vel);
 }

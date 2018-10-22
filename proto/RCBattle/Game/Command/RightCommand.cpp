@@ -37,8 +37,26 @@ RightCommand::~RightCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void RightCommand::Excute(Entity & entity)
 {
-	Quaternion dir = Quaternion::CreateFromYawPitchRoll(XMConvertToRadians(-1.0f), 0.0f, 0.0f) * entity.GetTrans().GetDir();
-	dir = Quaternion::Slerp(entity.GetTrans().GetDir(), dir, 1.0f);
+	float degree = 1.0f;
+
+	Vector3 upDir = Vector3::Transform(Vector3::Up, entity.GetTrans().GetDir());
+
+	Vector3 forward = Vector3::Forward;
+	Vector3 entityForward = Vector3::Transform(forward, entity.GetTrans().GetDir());
+	float cos_ = forward.Dot(entityForward);
+	float currentRot = acos(cos_);
+
+	Vector3 right = Vector3::Right;
+	float rightFlag = right.Dot(entityForward);
+	Quaternion dir = Quaternion::Identity;
+	if (rightFlag <= 0)
+	{
+		dir = Quaternion::CreateFromAxisAngle(upDir, currentRot - XMConvertToRadians(degree));
+	}
+	else
+	{
+		dir = Quaternion::CreateFromAxisAngle(upDir, -currentRot - XMConvertToRadians(degree));
+	}
 
 	entity.GetTrans().SetDir(dir);
 }

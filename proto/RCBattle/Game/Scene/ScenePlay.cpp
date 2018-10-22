@@ -63,7 +63,7 @@ void ScenePlay::Initialize(Game * game)
 	entity->SetName("Bottom");
 	entity->GetTrans().SetRadius(50.0f);
 	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(XMConvertToRadians(90.0f), 0.0f, 0.0f), 50, 50));
-	//entity->AddComponent(new WallComponent(WallType::Bottom));
+	entity->AddComponent(new WallComponent(WallType::Bottom));
 	// コンテナに追加
 	entityVector->Add(entity);
 
@@ -73,7 +73,7 @@ void ScenePlay::Initialize(Game * game)
 	entity->GetTrans().SetPos(Vector3(5.0f, 0.0f, 0.0f));
 	entity->GetTrans().SetRadius(50.0f);
 	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, XMConvertToRadians(90.0f), 0.0f), 10, 10));
-	//entity->AddComponent(new WallComponent(WallType::Right));
+	entity->AddComponent(new WallComponent(WallType::Right));
 	// コンテナに追加
 	entityVector->Add(entity);
 

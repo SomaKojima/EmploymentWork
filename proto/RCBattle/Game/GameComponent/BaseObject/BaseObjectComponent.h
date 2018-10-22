@@ -35,7 +35,7 @@ public:
 	void OnCollide(Entity& collide, CollisionData* data) override;
 
 	// Šp“x‚ğ‰ñ“]‚³‚¹‚éŠÖ”
-	//DirectX::SimpleMath::Quaternion GetRotateDir();
+	DirectX::SimpleMath::Quaternion GetRotateDir();
 	//bool IsSomeDir();
 
 private:

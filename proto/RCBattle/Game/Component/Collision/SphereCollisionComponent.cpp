@@ -94,15 +94,13 @@ DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCol
 	// 法線の向きのベクトルをなくす
 	Quaternion inverse;
 	m_me->GetTrans().GetDir().Inverse(inverse);
-
-
 	Vector3 normal2 = Vector3::Transform(normal, inverse);
 
 	Vector3 w_vec = vec - vec.Dot(normal2) * normal2;
 	Vector3 w_accel = accel - accel.Dot(normal) * normal;
 
 	Vector3 vec2 = w_vec;
-	Vector3 accel2 = accel + (hitPosVec * length);
+	Vector3 accel2 = w_accel + (hitPosVec * length);
 
 	m_me->GetTrans().SetVel(vec2);
 	m_me->GetTrans().SetAccel(accel2);
