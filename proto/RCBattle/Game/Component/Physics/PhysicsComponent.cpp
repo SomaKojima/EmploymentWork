@@ -61,12 +61,12 @@ void PhysicsComponent::Initialize()
 void PhysicsComponent::Update(DX::StepTimer const& timer)
 {
 	Vector3 vel = m_me->GetTrans().GetVel();
-	Vector3 accel = m_me->GetTrans().GetAccel();
+	//Vector3 accel = m_me->GetTrans().GetAccel();
 
 	if(m_isFriction)
 	{
 		vel *= m_friction;
-		accel *= m_friction;
+		//accel *= m_friction;
 	}
 	
 	if(m_isGravity)
@@ -74,12 +74,15 @@ void PhysicsComponent::Update(DX::StepTimer const& timer)
 		//Quaternion inverse;
 		//m_me->GetTrans().GetDir().Inverse(inverse);
 		Vector3 gravity = (m_gravityDir * (m_gravity / (60 * 60)));
+		Quaternion q;
+		m_me->GetTrans().GetDir().Conjugate(q);
+		gravity = Vector3::Transform(gravity, q);
 		//gravity = Vector3::Transform(gravity, inverse);
-		accel += gravity;
+		vel += gravity;
 	}
 
 	m_me->GetTrans().SetVel(vel);
-	m_me->GetTrans().SetAccel(accel);
+	//_me->GetTrans().SetAccel(accel);
 }
 
 /// <summary>

@@ -194,9 +194,8 @@ Vector2 DebugPlane::GetWidthHeight()
 void DebugPlane::SetAngle(DirectX::SimpleMath::Vector3 angle)
 {
 	m_angle = angle;
-	Quaternion dir = DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 0.0f, 1.0f), m_angle.z) *
-		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
-		DirectX::SimpleMath::Quaternion::CreateFromAxisAngle(DirectX::SimpleMath::Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
+	Quaternion::CreateFromYawPitchRoll(m_angle.y,m_angle.x, m_angle.z);
+	Quaternion dir = Quaternion::CreateFromYawPitchRoll(m_angle.y, m_angle.x, m_angle.z);
 
 	m_rotation = Matrix::CreateFromQuaternion(dir);
 }

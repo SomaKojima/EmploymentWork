@@ -16,10 +16,6 @@ void UpCommand::Excute(Entity & entity)
 {
 	Vector3 vel = entity.GetTrans().GetVel();
 	entity.GetTrans().SetVel(vel);
-	vel.z += 0.1f;
-	if (vel.z >= 0.2f)
-	{
-		vel.z = 0.2f;
-	}
+  	vel.y = 0.05f;
 	entity.GetTrans().SetVel(vel);
 }

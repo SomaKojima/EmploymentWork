@@ -54,7 +54,7 @@ void ScenePlay::Initialize(Game * game)
 	entity = new Entity();
 	entity->SetName("Room");
 	// モデルコンポーネントの追加
-	//entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
+	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
 	// コンテナに追加
 	entityVector->Add(entity);
 	
@@ -72,9 +72,8 @@ void ScenePlay::Initialize(Game * game)
 	entity->SetName("Right");
 	entity->GetTrans().SetPos(Vector3(5.0f, 0.0f, 0.0f));
 	entity->GetTrans().SetRadius(50.0f);
-	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, XMConvertToRadians(90.0f), 0.0f), 10, 10));
+	entity->AddComponent(new PlaneCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), Vector3(XMConvertToRadians(45.0f), XMConvertToRadians(45.0f), 0.0f), 20, 20));
 	entity->AddComponent(new WallComponent(WallType::Right));
 	// コンテナに追加
 	entityVector->Add(entity);
-
 }

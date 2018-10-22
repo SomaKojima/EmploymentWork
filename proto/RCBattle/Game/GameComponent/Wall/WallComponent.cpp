@@ -36,10 +36,21 @@ void WallComponent::Initialize()
 		m_normal = Vector3::Forward;
 		break;
 	}
+
+	/*PlaneCollisionComponent* plane = m_me->GetComponent<PlaneCollisionComponent>();
+	if (plane)
+	{
+		m_normal = Vector3(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
+	}*/
 }
 
 void WallComponent::Update(DX::StepTimer const & timer)
 {
+	PlaneCollisionComponent* plane = m_me->GetComponent<PlaneCollisionComponent>();
+	if (plane)
+	{
+		m_normal = -Vector3(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
+	}
 }
 
 void WallComponent::LateUpdate(DX::StepTimer const & timer)

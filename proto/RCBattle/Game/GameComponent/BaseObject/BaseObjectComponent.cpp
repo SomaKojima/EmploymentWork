@@ -42,8 +42,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 
 		/////// Œü‚«‚ð•Ï‚¦‚é
 
-		// Žp¨‚ð‡‚í‚¹‚é
-
+		// Žp¨‚ð‡‚í‚¹
 		Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
 		// ‰ñ“]Ž²ŒvŽZ
 		Vector3 axis = upDir.Cross(-m_normal);
@@ -53,7 +52,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 			float rot = acos(upDir.Dot(-m_normal));
 			Quaternion  Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
 
-			m_me->GetTrans().SetDir(Q1);
+			m_me->GetTrans().SetDir(m_me->GetTrans().GetDir() * Q1);
 		}
 
 		//// Œü‚«‚ð‡‚í‚¹‚é
@@ -70,19 +69,20 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 
 	// ‘¬“x‚ðŽæ“¾
 	Vector3 vel = m_me->GetTrans().GetVel();
-	Vector3 accel = m_me->GetTrans().GetAccel();
 
 	// –€ŽC‚ÌŒvŽZ
 	vel *= Vector3(0.9f, 1.0f, 0.9f);
-	accel *= Vector3(0.9f, 1.0f, 0.9f);
 
 	// d—Í‚ÌŒvŽZ
-	accel += (m_normal * (9.8f / (60 * 60)));
+	Vector3 gravity = (m_normal * (9.8f / (60 * 60)));
+	Quaternion q;
+	m_me->GetTrans().GetDir().Conjugate(q);
+	gravity = Vector3::Transform(gravity, q);
+	vel += gravity;
 
-	m_me->GetTrans().SetAccel(accel);
+	//m_me->GetTrans().SetAccel(accel);
 	m_me->GetTrans().SetVel(vel);
 
-	m_last = m_current;
 	m_current.clear();
 }
 
@@ -100,8 +100,9 @@ void BaseObjectComponent::OnCollide(Entity & collide, CollisionData * data)
 	
 	if (wall)
 	{
+
 		m_current.push_back(wall);
-		m_normal = wall->GetNomal();
+		//m_normal = wall->GetNomal();
 	}
 }
 

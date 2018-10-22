@@ -37,26 +37,28 @@ LeftCommand::~LeftCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void LeftCommand::Excute(Entity & entity)
 {
+	Quaternion dir = Quaternion::Identity;
 	float degree = -1.0f;
 
 	Vector3 upDir = Vector3::Transform(Vector3::Up, entity.GetTrans().GetDir());
 
-	Vector3 forward = Vector3::Forward;
+	dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
+
+	/*Vector3 forward = Vector3::Forward;
 	Vector3 entityForward = Vector3::Transform(forward, entity.GetTrans().GetDir());
 	float cos_ = forward.Dot(entityForward);
 	float currentRot = acos(cos_);
 
 	Vector3 right = Vector3::Right;
 	float rightFlag = right.Dot(entityForward);
-	Quaternion dir = Quaternion::Identity;
 	if (rightFlag <= 0)
 	{
-		dir = Quaternion::CreateFromAxisAngle(upDir, currentRot - XMConvertToRadians(degree));
+		dir = Quaternion::CreateFromAxisAngle(upDir,  -XMConvertToRadians(degree));
 	}
 	else
 	{
-		dir = Quaternion::CreateFromAxisAngle(upDir, -currentRot - XMConvertToRadians(degree));
-	}
+		dir = Quaternion::CreateFromAxisAngle(upDir,  -XMConvertToRadians(degree));
+	}*/
 
-	entity.GetTrans().SetDir(dir);
+	entity.GetTrans().SetDir(entity.GetTrans().GetDir() * dir);
 }

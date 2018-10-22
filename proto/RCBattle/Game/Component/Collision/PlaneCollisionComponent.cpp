@@ -51,9 +51,7 @@ void PlaneCollisionComponent::Initialize()
 
 void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 {
-	Quaternion dir = Quaternion::CreateFromAxisAngle(Vector3(0.0f, 0.0f, 1.0f), m_angle.z) *
-		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), m_angle.y) *
-		Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), m_angle.x);
+	Quaternion dir = Quaternion::CreateFromYawPitchRoll(m_angle.y, m_angle.x, m_angle.z);
 
 	dir *= m_me->GetTrans().GetDir();
 	Vector3 pos = m_me->GetTrans().GetPos() + m_center;
