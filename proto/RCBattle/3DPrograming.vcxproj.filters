@@ -220,6 +220,12 @@
     <ClInclude Include="Game\GameComponent\GameComponentLib.h">
       <Filter>Game\GameComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Component\Collision\MeshCollisionComponent.h">
+      <Filter>Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DebugCollision\DebugMesh.h">
+      <Filter>DebugCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -346,6 +352,12 @@
     <ClCompile Include="Game\GameComponent\Wall\WallComponent.cpp">
       <Filter>Game\GameComponent\Wall</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Component\Collision\MeshCollisionComponent.cpp">
+      <Filter>Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\DebugCollision\DebugMesh.cpp">
+      <Filter>DebugCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -364,10 +376,10 @@
     <MeshContentTask Include="FBX\car.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="FBX\room.FBX">
+    <MeshContentTask Include="FBX\burret.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="FBX\burret.FBX">
+    <MeshContentTask Include="FBX\room.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
   </ItemGroup>
