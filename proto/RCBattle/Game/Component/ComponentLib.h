@@ -20,3 +20,4 @@
 #include "Collision/SphereCollisionComponent.h"
 #include "Collision/BoxCollisionComponent.h"
 #include "Collision/PlaneCollisionComponent.h"
+#include "Collision/MeshCollisionComponent.h"

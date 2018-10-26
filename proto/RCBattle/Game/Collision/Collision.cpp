@@ -16,6 +16,7 @@
 /// <summary>
 /// 名前空間
 /// </summary>
+using namespace std;
 using namespace DirectX::SimpleMath;
 
 Collision::Collision()
@@ -263,7 +264,19 @@ bool Collision::HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_inde
 	{
 		if (HitCheck_Sphere_Triangle(sphere, triangle[i], hit_pos))
 		{
-			
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Collision::HitCheck_Sphere_Triagnles(list<Triangle> triangle, Sphere & sphere, DirectX::SimpleMath::Vector3 * hit_pos)
+{
+
+	for (auto ite = triangle.begin(); ite != triangle.end(); ite++)
+	{
+		if (HitCheck_Sphere_Triangle(sphere, (*ite), hit_pos))
+		{
 			return true;
 		}
 	}
@@ -276,7 +289,7 @@ bool Collision::HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_inde
 /// <param name="entity">実体</param>
 /// <param name="repulsionVel">反発速度</param>
 /// <returns>当たり判定</returns>
-bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data)
+bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data, CollisionData* data2)
 {
 	if(!entity || !entity2)
 	{
@@ -288,43 +301,68 @@ bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data)
 	PlaneCollisionComponent* planeCollision = entity->GetComponent<PlaneCollisionComponent>();
 	PlaneCollisionComponent* planeCollision2 = entity2->GetComponent<PlaneCollisionComponent>();
 
+	MeshCollisionComponent* meshCollision = entity->GetComponent<MeshCollisionComponent>();
+	MeshCollisionComponent* meshCollision2 = entity2->GetComponent<MeshCollisionComponent>();
+
+	// 1.球
 	if (sphereCollision)
 	{
-		data->sphere[0] = sphereCollision;
+		data2->typeFlag = CollisionType::SPHERE;
+		sphereCollision->SetHit(true);
+		// 2.球
 		if (sphereCollision2)
 		{
-			data->sphere[1] = sphereCollision2;
 			if (HitCheck_Sphere(entity, *sphereCollision, entity2, *sphereCollision2, &data->hitPos))
 			{
-				data->typeFlag = CollisionType::SPHERE_SPHERE;
+				data->typeFlag = CollisionType::SPHERE;
+				sphereCollision2->SetHit(true);
+				data2->hitPos = data->hitPos;
 				return true;
 			}
 		}
-		if (planeCollision2)
+		// 2.四角辺
+		else if (planeCollision2)
 		{
-			data->plane[1] = planeCollision2;
 			if (HitCheck_Sphere_Triagnles(planeCollision2->GetTriangle(), planeCollision2->GetTriangleIndex(), sphereCollision->GetSphere(), &data->hitPos))
 			{
-				data->typeFlag = CollisionType::SPHERE_PLANE;
+				data->typeFlag = CollisionType::PLANE;
+				planeCollision2->SetHit(true);
+				data2->hitPos = data->hitPos;
+				return true;
+			}
+		}
+		// 2.メッシュ
+		else if (meshCollision2)
+		{
+			if (HitCheck_Sphere_Triagnles(meshCollision2->GetTriangles(), sphereCollision->GetSphere(), &data->hitPos))
+			{
+				data->typeFlag = CollisionType::PLANE;
+				meshCollision2->SetHit(true);
+				data2->hitPos = data->hitPos;
 				return true;
 			}
 		}
 	}
 
-	if (planeCollision)
+	// 1.四角辺
+	else if (planeCollision)
 	{
-		data->plane[0] = planeCollision;
+		data2->typeFlag = CollisionType::PLANE;
+		planeCollision->SetHit(true);
+		// 2.球
 		if (sphereCollision2)
 		{
-			data->sphere[1] = sphereCollision2;
 			if (HitCheck_Sphere_Triagnles(planeCollision->GetTriangle(), planeCollision->GetTriangleIndex(), sphereCollision2->GetSphere(), &data->hitPos))
 			{
-
-				data->typeFlag = CollisionType::SPHERE_PLANE;
+				data->typeFlag = CollisionType::SPHERE;
+				sphereCollision2->SetHit(true);
+				data2->hitPos = data->hitPos;
 				return true;
 			}
 		}
 	}
 
+	if(sphereCollision)sphereCollision->SetHit(false);
+	if(planeCollision)planeCollision->SetHit(false);
 	return false;
 }

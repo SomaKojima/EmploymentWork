@@ -97,17 +97,21 @@ void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 void PhysicsComponent::OnCollide(Entity& collide, CollisionData* data)
 {
 	PhysicsComponent* collidePhysics = collide.GetComponent<PhysicsComponent>();
+
+	// ©•ª‚Ìî•ñ‚ğæ“¾
+	SphereCollisionComponent* sphere = m_me->GetComponent<SphereCollisionComponent>();
+	PlaneCollisionComponent* plane = m_me->GetComponent<PlaneCollisionComponent>();
+	MeshCollisionComponent* mesh = m_me->GetComponent<MeshCollisionComponent>();
 	/// //////////////////////////////
 	//’µ‚Ë•Ô‚è‚ğŒvZ
 	/// //////////////////////////////
 
 	// ‹…‚Æ–Ê
-	if (data->typeFlag & CollisionType::SPHERE_PLANE)
+	if (data->typeFlag & CollisionType::PLANE)
 	{
-
-		SphereCollisionComponent* sphere = m_me->GetComponent<SphereCollisionComponent>();
-		PlaneCollisionComponent* collidePlane = collide.GetComponent<PlaneCollisionComponent>();
+		// ‘Šè‚Ìî•ñ‚ğæ“¾
+		PlaneCollisionComponent* plane2 = collide.GetComponent<PlaneCollisionComponent>();
 		// ŒvZ
-		sphere->HitPlanePosToVec(collidePlane, data->hitPos);
+		if(sphere)sphere->HitBackExecution(plane2->GetTriangle(), data->hitPos);
 	}
 }

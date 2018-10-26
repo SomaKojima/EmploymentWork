@@ -13,6 +13,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
+#include <list>
 #include "../Object/Entity.h"
 
 /// <summary>
@@ -21,11 +22,18 @@
 class SphereCollisionComponent;
 class BoxCollisionComponent;
 class PlaneCollisionComponent;
+
+class Sphere;
+class Segment;
+class Plane;
+class Triangle;
+
 enum CollisionType
 {
 	NONE = 0,
-	SPHERE_PLANE = 1 << 1,
-	SPHERE_SPHERE = 1 << 2,
+	SPHERE = 1 << 1,
+	PLANE = 1 << 2,
+	TRIANGLE = 1 << 3,
 
 	COLLISION_MAX
 };
@@ -34,8 +42,10 @@ struct CollisionData
 {
 	DirectX::SimpleMath::Vector3 hitPos;
 	int typeFlag;
-	SphereCollisionComponent* sphere[2];
-	PlaneCollisionComponent* plane[2];
+	const Sphere* sphere;
+	const Segment* segment;
+	const Plane* plane;
+	const Triangle* triangle;
 };
 
 /// <summary>
@@ -126,6 +136,7 @@ public:
 	// 球と三角形の衝突判定
 	static bool HitCheck_Sphere_Triangle(Sphere& sphere, Triangle& triangle, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
 	static bool HitCheck_Sphere_Triagnles(Triangle triangle[], int triangle_index, Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
+	static bool HitCheck_Sphere_Triagnles(std::list<Triangle> triangle, Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
 
 	/// <summary>
 	/// 平面の方程式
@@ -145,5 +156,5 @@ public:
 	~Collision();
 	
 public:
-	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData *data);
+	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData* data, CollisionData* data2);
 };

@@ -13,14 +13,14 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../Component.h"
+#include "CollisionComponent.h"
 #include "../../DebugCollision/DebugPlane.h"
 #include "../../Collision/Collision.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
 /// </summary>
-class PlaneCollisionComponent : public Component
+class PlaneCollisionComponent : public CollisionComponent
 {
 public:
 	PlaneCollisionComponent(DirectX::SimpleMath::Vector3 center, DirectX::SimpleMath::Vector3 angle, float width, float height);

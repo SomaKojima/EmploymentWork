@@ -42,6 +42,7 @@ SphereCollisionComponent::~SphereCollisionComponent()
 
 void SphereCollisionComponent::Update(DX::StepTimer const & timer)
 {
+	CollisionComponent::Update(timer);
 }
 
 void SphereCollisionComponent::LateUpdate(DX::StepTimer const & timer)
@@ -77,14 +78,14 @@ void SphereCollisionComponent::Finalize()
 	m_obj.reset();
 }
 
-DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCollisionComponent* plane, DirectX::SimpleMath::Vector3& hitPos)
+void SphereCollisionComponent::HitBack(Collision::Triangle * triangle, DirectX::SimpleMath::Vector3 & hitPos)
 {
 	// 速度を取得
 	Vector3 vec = m_me->GetTrans().GetVel();
 	//Vector3 accel = m_me->GetTrans().GetAccel();
 
 	// 面の法線
-	Vector3 normal(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
+	Vector3 normal(triangle->plane.a, triangle->plane.b, triangle->plane.c);
 
 	// 法線の向きのベクトルをなくす
 	Quaternion q;
@@ -114,8 +115,5 @@ DirectX::SimpleMath::Vector3 SphereCollisionComponent::HitPlanePosToVec(PlaneCol
 	}
 
 	m_me->GetTrans().SetVel(w_vec);
-
-	// 壁にひっつく
-	return Vector3::Zero;
 }
 

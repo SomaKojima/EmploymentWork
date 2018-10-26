@@ -54,7 +54,10 @@ void ScenePlay::Initialize(Game * game)
 	entity = new Entity();
 	entity->SetName("Room");
 	// モデルコンポーネントの追加
-	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
+	//entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
+	// メッシュの当たり判定の追加
+	//entity->AddComponent(new MeshCollisionComponent(L"room.obj"));
+	entity->AddComponent(new MeshCollisionComponent(L"Resources\\Obj\\room.obj"));
 	// コンテナに追加
 	entityVector->Add(entity);
 	

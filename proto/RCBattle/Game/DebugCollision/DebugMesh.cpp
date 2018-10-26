@@ -107,7 +107,7 @@ DebugMesh::DebugMesh(ID3D11Device * device, wchar_t * fname)
 	data.SysMemPitch = 0;
 	data.SysMemSlicePitch = 0;
 
-	// インデックスバッファの作成
+	// インデックスバッファの作成　
 	device->CreateBuffer(&desc, &data, m_indexBuffer.GetAddressOf());
 
 	// 定数バッファの作成
@@ -174,7 +174,6 @@ void DebugMesh::Draw(ID3D11DeviceContext* context, const Matrix& world, const Ma
 {
 
 #ifdef _DEBUG
-
 	// 深度ステンシルステートの設定
 	context->OMSetDepthStencilState(m_depthStencilState.Get(), 0);
 

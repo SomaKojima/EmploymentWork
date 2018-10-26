@@ -13,14 +13,15 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../Component.h"
+#include <list>
+#include "CollisionComponent.h"
 #include "../../DebugCollision/DebugMesh.h"
 #include "../../Collision/Collision.h"
 
 /// <summary>
 /// 球の当たり判定のコンポーネントクラス
 /// </summary>
-class MeshCollisionComponent : public Component
+class MeshCollisionComponent : public CollisionComponent
 {
 public:
 	MeshCollisionComponent(wchar_t* file);
@@ -34,9 +35,13 @@ public:
 	void Draw(Game* game) override;
 	// 終了
 	void Finalize() override;
+
+	std::list<Collision::Triangle>& GetTriangles() { return m_triangles; }
+
 private:
+	wchar_t* m_file;
+	std::list<Collision::Triangle> m_triangles;
 
 	// 当たり判定の表示用オブジェクト
 	std::unique_ptr<DebugMesh> m_obj;
-	wchar_t* m_file;
 };

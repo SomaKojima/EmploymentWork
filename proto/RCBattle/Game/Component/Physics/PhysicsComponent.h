@@ -41,6 +41,8 @@ public:
 	// “–‚½‚è”»’è‚Ìˆ—
 	void OnCollide(Entity& collide, CollisionData* data) override;
 
+	void HitSphereTriangle();
+
 	void SetGravityDir(DirectX::SimpleMath::Vector3 dir) { m_gravityDir = dir; }
 	void SetFriction(DirectX::SimpleMath::Vector3 friction) { m_friction = friction; }
 	void SetIsFriction(bool isFriction) { m_isFriction = isFriction; }
