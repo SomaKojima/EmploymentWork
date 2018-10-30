@@ -78,7 +78,7 @@ void SphereCollisionComponent::Finalize()
 	m_obj.reset();
 }
 
-void SphereCollisionComponent::HitBack(Collision::Triangle * triangle, DirectX::SimpleMath::Vector3 & hitPos)
+void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, DirectX::SimpleMath::Vector3 & hitPos)
 {
 	// ‘¬“x‚ğæ“¾
 	Vector3 vec = m_me->GetTrans().GetVel();

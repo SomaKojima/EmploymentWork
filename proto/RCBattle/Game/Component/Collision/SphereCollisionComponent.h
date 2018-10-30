@@ -36,11 +36,18 @@ public:
 	// èIóπ
 	void Finalize() override;
 
-	void HitBack(Collision::Triangle* triangle, DirectX::SimpleMath::Vector3& hitPos) override;
+	void HitBack(const Collision::Triangle* triangle, DirectX::SimpleMath::Vector3& hitPos) override;
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	float GetRadius() { return m_radius; }
-	Collision::Sphere& GetSphere(){ return m_sphere; }
+	const Collision::Sphere& GetSphere() override { return m_sphere; }
+
+	Collision::CollisionData2 GetShape()
+	{
+		Collision::CollisionData2 collision;
+		collision.typeFlag = Collision::CollisionType::SPHERE;
+		collision.shape.sphere = &m_sphere;
+	}
 
 private:
 	DirectX::SimpleMath::Vector3 m_center; // ãÖÇÃíÜêS

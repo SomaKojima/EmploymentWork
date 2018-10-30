@@ -45,8 +45,11 @@ void PlaneCollisionComponent::Initialize()
 	pos4.x += (m_width / 2.0f);
 	pos4.y -= (m_height / 2.0f);
 
-	m_triangle[0].Set_Triangle(pos1, pos2, pos3);
-	m_triangle[1].Set_Triangle(pos2, pos4, pos3);
+	Collision::Triangle triangle;
+	triangle.Set_Triangle(pos1, pos2, pos3);
+	m_triangle.push_back(triangle);
+	triangle.Set_Triangle(pos2, pos4, pos3);
+	m_triangle.push_back(triangle);
 }
 
 void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
@@ -59,8 +62,10 @@ void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 
 	Matrix world = Matrix::CreateFromQuaternion(dir) * Matrix::CreateTranslation(pos);
 
-	m_triangle[0].Set_Triangle(world, dir);
-	m_triangle[1].Set_Triangle(world, dir);
+	for (auto ite = m_triangle.begin(); ite != m_triangle.end(); ite++)
+	{
+		(*ite).Set_Triangle(world, dir);
+	}
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)

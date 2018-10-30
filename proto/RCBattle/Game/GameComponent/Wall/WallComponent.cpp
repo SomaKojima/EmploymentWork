@@ -49,7 +49,8 @@ void WallComponent::Update(DX::StepTimer const & timer)
 	PlaneCollisionComponent* plane = m_me->GetComponent<PlaneCollisionComponent>();
 	if (plane)
 	{
-		m_normal = -Vector3(plane->GetTriangle()->plane.a, plane->GetTriangle()->plane.b, plane->GetTriangle()->plane.c);
+		Collision::Plane plane2 = (*plane->GetTriangleList().begin()).plane;
+		m_normal = -Vector3(plane2.a, plane2.b, plane2.c);
 	}
 }
 

@@ -96,22 +96,42 @@ void PhysicsComponent::LateUpdate(DX::StepTimer const & timer)
 
 void PhysicsComponent::OnCollide(Entity& collide, CollisionData* data)
 {
-	PhysicsComponent* collidePhysics = collide.GetComponent<PhysicsComponent>();
-
 	// ©•ª‚Ìî•ñ‚ğæ“¾
-	SphereCollisionComponent* sphere = m_me->GetComponent<SphereCollisionComponent>();
-	PlaneCollisionComponent* plane = m_me->GetComponent<PlaneCollisionComponent>();
-	MeshCollisionComponent* mesh = m_me->GetComponent<MeshCollisionComponent>();
+	list<CollisionComponent*> collisionList1 = m_me->GetComponentList<CollisionComponent>();
+	list<CollisionComponent*> collisionList2 = collide.GetComponentList<CollisionComponent>();
+	CollisionComponent* collision1 = nullptr;
+	CollisionComponent* collision2 = nullptr;
+	for (auto ite = collisionList1.begin(); ite != collisionList1.end(); ite++)
+	{
+		if ((*ite)->IsHit())
+		{
+			collision1 = (*ite);
+		}
+	}
+	for (auto ite2 = collisionList2.begin(); ite2 != collisionList2.end(); ite2++)
+	{
+		if ((*ite2)->IsHit())
+		{
+			collision2 = (*ite2);
+		}
+	}
 	/// //////////////////////////////
 	//’µ‚Ë•Ô‚è‚ğŒvZ
 	/// //////////////////////////////
 
-	// ‹…‚Æ–Ê
-	if (data->typeFlag & CollisionType::PLANE)
+	if (collision1 && collision2)
 	{
-		// ‘Šè‚Ìî•ñ‚ğæ“¾
-		PlaneCollisionComponent* plane2 = collide.GetComponent<PlaneCollisionComponent>();
-		// ŒvZ
-		if(sphere)sphere->HitBackExecution(plane2->GetTriangle(), data->hitPos);
+		const Collision::Sphere* sphere;
+		const Collision::Plane* plane;
+		const Collision::Triangle* triangle;
+		const list<Collision::Triangle>* triangleList;
+		collision2->GetShape(&sphere, &plane, &triangle, &triangleList);
+		collision1->HitBack(sphere, data->hitPos);
+		collision1->HitBack(plane, data->hitPos);
+		collision1->HitBack(triangle, data->hitPos);
+		for (auto ite3 = (*triangleList).begin(); ite3 != (*triangleList).end(); ite3++)
+		{
+			collision1->HitBack(&(*ite3), data->hitPos);
+		}
 	}
 }

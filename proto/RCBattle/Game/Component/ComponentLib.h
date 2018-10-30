@@ -21,3 +21,4 @@
 #include "Collision/BoxCollisionComponent.h"
 #include "Collision/PlaneCollisionComponent.h"
 #include "Collision/MeshCollisionComponent.h"
+#include "Collision/CollisionComponent.h"

@@ -13,6 +13,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
+#include <list>
 #include "CollisionComponent.h"
 #include "../../DebugCollision/DebugPlane.h"
 #include "../../Collision/Collision.h"
@@ -37,8 +38,7 @@ public:
 	// 終了
 	void Finalize() override;
 
-	Collision::Triangle* GetTriangle() { return m_triangle; }
-	int GetTriangleIndex() { return 2; }
+	const std::list<Collision::Triangle>& GetTriangleList() override { return m_triangle; }
 
 private:
 	DirectX::SimpleMath::Vector3 m_center;	// 中心
@@ -46,7 +46,7 @@ private:
 	float m_width;							// 横幅
 	float m_height;							// 縦幅
 
-	Collision::Triangle m_triangle[2];		// 平面の情報
+	std::list<Collision::Triangle> m_triangle;		// 平面の情報
 
 	// 当たり判定の表示用オブジェクト
 	std::unique_ptr<DebugPlane> m_obj;
