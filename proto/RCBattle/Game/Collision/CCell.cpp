@@ -170,10 +170,6 @@ bool CLiner8TreeManager::Register(Entity* entity)
 	c += Vector3(-radius, 0.0f, -radius);
 	DWORD elem = Get2PointMortonOrder(b, c);
 
-/*
-	Game::SetNumText(elem);
-	Game::SetPosText(Vector3::Transform(Vector3::Zero, entity->GetWorld()));*/
-
 	entity->GetOFT()->Remove();
 	if (!ppCellAry[elem])
 	{
@@ -197,32 +193,28 @@ bool CLiner8TreeManager::HitCheck()
 	vector<OBJECT_FOR_TREE*> cStack;
 
 	// ルート空間の当たり判定
-	int a = 0;
-	a = HitCheckRoom(ppCellAry[elem], elem, cStack);
+	HitCheckRoom(ppCellAry[elem], elem, cStack);
 
 	return false;
 }
 
-int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_FOR_TREE*>& cStack)
+void CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_FOR_TREE*>& cStack)
 {
 	if (!room)
 	{
-		return 0;
+		return;
 	}
-	int o = 0;
 
 	OBJECT_FOR_TREE* pOFT = room->GetTop();
 	OBJECT_FOR_TREE* pNextOFT = nullptr;
-	int pushCount = 0;
 
-	CollisionData data;
-	CollisionData data2;
+	Collision::CollisionData data;
+	Collision::CollisionData data2;
 	while (pOFT)
 	{
 		// スタック内のオブジェクトと当たり判定を取る
 		for (auto ite = cStack.begin(); ite != cStack.end(); ite++)
 		{
-			o++;
 			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj(), &data, &data2))
 			{
 				pOFT->GetObj()->OnCollideComponent(*(*ite)->GetObj(), &data);
@@ -230,14 +222,10 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 			}
 		}
 		// 同じ空間内のオブジェクトと当たり判定を取る
-		
-		pushCount++;
-
 		pNextOFT = pOFT->GetNext();
 
 		while (pNextOFT)
 		{
-			o++;
 			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj(), &data, &data2))
 			{
 				pOFT->GetObj()->OnCollideComponent(*pNextOFT->GetObj(), &data);
@@ -248,11 +236,15 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		pOFT = pOFT->GetNext();
 	}
 
+	int pushCount = 0;
+
 	pOFT = room->GetTop();
 	while (pOFT)
 	{
 		// スタックに追加
 		cStack.push_back(pOFT);
+
+		pushCount++;
 		pOFT = pOFT->GetNext();
 	}
 
@@ -266,7 +258,7 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		{
 			if (ppCellAry[(elem + i)])
 			{
-				o += HitCheckRoom(ppCellAry[(elem + i)], (elem + i), cStack);
+				HitCheckRoom(ppCellAry[(elem + i)], (elem + i), cStack);
 			}
 		}
 	}
@@ -277,6 +269,6 @@ int CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_F
 		cStack.pop_back();
 	}
 
-	return o;
+	return;
 }
 

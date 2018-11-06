@@ -40,14 +40,9 @@ public:
 
 	DirectX::SimpleMath::Vector3 GetCenter() { return m_center; }
 	float GetRadius() { return m_radius; }
-	const Collision::Sphere& GetSphere() override { return m_sphere; }
 
-	Collision::CollisionData2 GetShape()
-	{
-		Collision::CollisionData2 collision;
-		collision.typeFlag = Collision::CollisionType::SPHERE;
-		collision.shape.sphere = &m_sphere;
-	}
+	const Collision::Sphere* GetSphere() { return &m_sphere; }
+	Collision::CollisionType GetShapeType() { return Collision::CollisionType::SPHERE; }
 
 private:
 	DirectX::SimpleMath::Vector3 m_center; // ãÖÇÃíÜêS

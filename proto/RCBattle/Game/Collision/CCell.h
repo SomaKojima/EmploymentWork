@@ -42,7 +42,7 @@ public:
 	bool CreateNewCell(DWORD Elem);
 	bool Register(Entity* entity);
 	bool HitCheck();
-	int  HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_FOR_TREE*>& cStack);
+	void  HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_FOR_TREE*>& cStack);
 
 	CCell** GetCCell() { return ppCellAry; }
 

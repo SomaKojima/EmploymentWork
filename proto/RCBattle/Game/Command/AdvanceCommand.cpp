@@ -25,8 +25,11 @@ AdvanceCommand::~AdvanceCommand()
 /// <param name="entity">ŽÀ‘Ì</param>
 void AdvanceCommand::Excute(Entity & entity)
 {
+	const float accelerator = 1.0f;
+	const float InitialVelocity = 1.0f;
 	Vector3 vel = entity.GetTrans().GetVel();
 	vel.z += 0.1f;
+
 	if (vel.z >= 0.2f)
 	{
 		vel.z = 0.2f;

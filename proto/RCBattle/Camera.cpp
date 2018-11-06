@@ -13,7 +13,7 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 // 適当な値です
-const float Camera::CAMERA_K = 1.0f / 1.0f;	//	ばね係数
+const float Camera::CAMERA_K = 1.0f / 1.0f;		//	ばね係数
 const float Camera::CAMERA_M = 1.0f / 2.0f;		//	摩擦係数
 const float Camera::CAMERA_DISTANCE = 10.0f;	//	基準の距離
 
@@ -39,12 +39,14 @@ void Camera::SetPositionTarget(Vector3& eye, Vector3& target)
 	float dis = vec.Length();
 
 	// ばね係数をカメラとターゲットの距離に応じて変更する
-	m_eyeSpeed += (eye - m_eyePt) * m_k * m_distance / dis;
+	/*m_eyeSpeed += (eye - m_eyePt) * m_k * m_distance / dis;
 	m_eyeSpeed -= m_eyeSpeed * m_m;
-	m_eyePt += m_eyeSpeed;
+	m_eyePt += m_eyeSpeed;*/
+	m_eyePt = eye;
 
 	// ばね係数をカメラとターゲットの距離に応じて変更する
-	m_targetSpeed += (target - m_targetPt) * m_k * m_distance / dis;
+	/*m_targetSpeed += (target - m_targetPt) * m_k * m_distance / dis;
 	m_targetSpeed -= m_targetSpeed * m_m;
-	m_targetPt += m_targetSpeed;
+	m_targetPt += m_targetSpeed;*/
+	m_targetPt = target;
 }

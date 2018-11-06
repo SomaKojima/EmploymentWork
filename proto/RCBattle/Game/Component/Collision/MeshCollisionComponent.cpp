@@ -62,8 +62,8 @@ MeshCollisionComponent::MeshCollisionComponent(wchar_t* file)
 	for (size_t i = 0; i < indexes.size() / 3; i++)
 	{
 		Collision::Triangle triangle;
-		triangle.Set_Triangle(vertexes[indexes[i * 3]], vertexes[indexes[i * 3 + 1]], vertexes[indexes[i * 3 + 2]]);
-		m_triangles.push_back(triangle);
+		triangle.Set_Triangle(vertexes[indexes[i * 3 + 2]], vertexes[indexes[i * 3 + 1]], vertexes[indexes[i * 3]]);
+		m_triangles.push_back(Collision::Triangle(triangle));
 	}
 }
 

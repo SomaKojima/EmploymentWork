@@ -14,12 +14,12 @@
 /// ヘッダのインクルード
 /// </summary>
 #include <list>
-#include "../Object/Entity.h"
 //#include "../Component/Collision/CollisionComponent.h"
 
 /// <summary>
 /// 前方宣言
 /// </summary>
+class Entity;
 class CollisionComponent;
 class SphereCollisionComponent;
 class BoxCollisionComponent;
@@ -88,6 +88,10 @@ public:
 			startPos[0] = pos1;
 			startPos[1] = pos2;
 			startPos[2] = pos3;
+			for (int i = 0; i < 3; i++)
+			{
+				pos[i] = startPos[i];
+			}
 		}
 		void Set_Triangle(DirectX::SimpleMath::Matrix world, DirectX::SimpleMath::Quaternion dir)
 		{
@@ -111,58 +115,88 @@ public:
 	{
 		NONE = 0,
 		SPHERE = 1 << 1,
-		PLANE = 1 << 2,
-		TRIANGLE = 1 << 3,
+		SEGMENT = 1 << 2,
+		PLANE = 1 << 3,
+		TRIANGLE = 1 << 4,
 
 		COLLISION_MAX
 	};
 
-	struct CollisionData
+	class CollisionData
 	{
+	public:
 		DirectX::SimpleMath::Vector3 hitPos;
-		int typeFlag;
-		Sphere* sphere;
-		Segment* segment;
-		Plane* plane;
-		Triangle* triangle;
-	};
+		const Sphere* sphere;
+		const Segment* segment;
+		const Plane* plane;
+		const Triangle* triangle;
+		std::list<const Triangle*> triangleList;
 
-	union ShapeType
-	{
-		Sphere* sphere;
-		Segment* segment;
-		Plane* plane;
-		Triangle* triangle;
+		CollisionData() :sphere(nullptr), segment(nullptr), plane(nullptr), triangle(nullptr) {}
 	};
-
-	struct CollisionData2
-	{
-		int typeFlag;
-		ShapeType shape;
-	};
-
 public:
+	/// <summary>
+	/// 当たり判定の式の元
+	/// </summary>
+	template<class T, class T2>
+	static bool HitCheck(const T& shape, const T2& shape2, DirectX::SimpleMath::Vector3* hit_pos = nullptr) 
+	{ 
+		return false; 
+	}
 
-	// 球と球の当たり判定
+	/// <summary>
+	/// 球と球の当たり判定
+	/// </summary>
 	static bool HitCheck_Sphere_Sphere(const Sphere& sphere, const Sphere& sphere2, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
 
-	// 線分と平面の当たり判定
+	template<>
+	static bool HitCheck<Sphere, Sphere>(const Sphere& sphere, const Sphere& sphere2, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Sphere_Sphere(sphere, sphere2, hit_pos);
+	}
+
+	/// <summary>
+	/// 線分と平面の当たり判定
+	/// </summary>
 	static bool HitCheck_Segment_Plane(const Segment& segment, const Plane& plane, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
-	static bool HitCheck_Segment_Plane(const Plane& plane, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos = nullptr)
+
+	template<>
+	static bool HitCheck<Segment, Plane>(const Segment& segment, const Plane& plane, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Segment_Plane(segment, plane, hit_pos);
+	}
+	template<>
+	static bool HitCheck<Plane, Segment>(const Plane& plane, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos)
 	{
 		return HitCheck_Segment_Plane(segment, plane, hit_pos);
 	}
 
-	// 線分と球の当たり判定
+	/// <summary>
+	/// 線分と球の当たり判定
+	/// </summary>
 	static bool HitCheck_Segment_Sphere(const Segment& segment, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
-	static bool HitCheck_Segment_Sphere(const Sphere& sphere, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos = nullptr)
+	template<>
+	static bool HitCheck<Segment, Sphere>(const Segment& segment, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Segment_Sphere(segment, sphere, hit_pos);
+	}
+	template<>
+	static bool HitCheck<Sphere, Segment>(const Sphere& sphere, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos)
 	{
 		return HitCheck_Segment_Sphere(segment, sphere, hit_pos);
 	}
 
-	// 線分と三角形の当たり判定
+	/// <summary>
+	/// 線分と三角形の当たり判定
+	/// </summary>
 	static bool HitCheck_Segment_Triangle(const Segment& segment, const Triangle& triangle, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
-	static bool HitCheck_Segment_Triangle(const Triangle& triangle, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos = nullptr)
+	template<>
+	static bool HitCheck<Segment, Triangle>(const Segment& segment, const Triangle& triangle, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Segment_Triangle(segment, triangle, hit_pos);
+	}
+	template<>
+	static bool HitCheck<Triangle, Segment>(const Triangle& triangle, const Segment& segment, DirectX::SimpleMath::Vector3* hit_pos)
 	{
 		return HitCheck_Segment_Triangle(segment, triangle, hit_pos);
 	}
@@ -172,14 +206,26 @@ public:
 
 	// 球と平面の当たり判定
 	static bool HitCheck_Sphere_Plane(const Sphere& sphere, const Plane& plane, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
-	static bool HitCheck_Sphere_Plane(const Plane& plane, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos = nullptr)
+	template<>
+	static bool HitCheck<Sphere, Plane>(const Sphere& sphere, const Plane& plane, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Sphere_Plane(sphere, plane, hit_pos);
+	}
+	template<>
+	static bool HitCheck<Plane, Sphere>(const Plane& plane, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos)
 	{
 		return HitCheck_Sphere_Plane(sphere, plane, hit_pos);
 	}
 
 	// 球と三角形の衝突判定
 	static bool HitCheck_Sphere_Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::SimpleMath::Vector3* hit_pos = nullptr);
-	static bool HitCheck_Sphere_Triangle(const Triangle& triangle, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos = nullptr)
+	template<>
+	static bool HitCheck<Sphere, Triangle>(const Sphere& sphere, const Triangle& triangle, DirectX::SimpleMath::Vector3* hit_pos)
+	{
+		return HitCheck_Sphere_Triangle(sphere, triangle, hit_pos);
+	}
+	template<>
+	static bool HitCheck<Triangle, Sphere>(const Triangle& triangle, const Sphere& sphere, DirectX::SimpleMath::Vector3* hit_pos)
 	{
 		return HitCheck_Sphere_Triangle(sphere, triangle, hit_pos);
 	}
@@ -202,8 +248,46 @@ public:
 	~Collision();
 	
 private:
-	static bool Check(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data);
+	static bool CheckOne(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data, CollisionData* data2);
+	template<class T>
+	static bool CheckTwo(const T* shape, CollisionComponent* collision, CollisionData* data);
 
 public:
 	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData* data, CollisionData* data2);
 };
+
+template<class T>
+inline bool Collision::CheckTwo(const T * shape, CollisionComponent * collision, CollisionData* data)
+{
+	const Sphere* sphere = collision->GetSphere();
+	const Plane* plane = collision->GetPlane();
+	const Triangle* triangle = collision->GetTriangle();
+	const list<Triangle>* triangleList = collision->GetTriangleList();
+
+	if (data)
+	{
+		data->sphere = sphere;
+		data->plane = plane;
+		data->triangle = triangle;
+	}
+
+	if (sphere) return HitCheck(*sphere, *shape, &data->hitPos);
+	if (plane)return HitCheck(*plane, *shape, &data->hitPos);
+	if (triangle)return HitCheck(*triangle, *shape, &data->hitPos);
+
+	if (triangleList)
+	{
+		bool flag = false;
+		for (auto ite = triangleList->begin(); ite != triangleList->end(); ite++)
+		{
+			triangle = &(*ite);
+			if (HitCheck(*triangle, *shape, &data->hitPos))
+			{
+				if (data) data->triangleList.push_back(&(*ite));
+				flag = true;
+			}
+		}
+		return flag;
+	}
+	return false;
+}

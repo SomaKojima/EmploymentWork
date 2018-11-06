@@ -27,7 +27,7 @@ public:
 	void Finalize() override;
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide, CollisionData* data) override;
+	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 
 	WallType GetWallType() { return m_wallType; }
 	DirectX::SimpleMath::Vector3 GetNomal() { return m_normal; }

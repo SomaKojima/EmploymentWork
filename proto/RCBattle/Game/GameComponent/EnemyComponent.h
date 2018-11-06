@@ -18,7 +18,7 @@ public:
 	void Update(DX::StepTimer const& timer) override;
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide, CollisionData* data) override;
+	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 
 private:
 	int count;

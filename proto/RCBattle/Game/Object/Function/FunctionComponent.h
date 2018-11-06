@@ -16,6 +16,7 @@
 #include <list>
 #include <typeinfo>
 #include "../../../StepTimer.h"
+#include "../../Collision/Collision.h"
 
 /// <summary>
 /// 前方宣言
@@ -23,7 +24,6 @@
 class Component;
 class Entity;
 class Game;
-class CollisionData;
 
 /// <summary>
 /// コンポーネント機能のクラス
@@ -40,7 +40,7 @@ public:
 	// コンポーネントの遅延更新
 	bool LateComponentUpdate(DX::StepTimer const& timer);
 	// 当たり判定の処理
-	void OnCollideComponent(Entity& entity, CollisionData* data);
+	void OnCollideComponent(Entity& entity, Collision::CollisionData* data);
 	// コンポーネントの描画
 	void DrawCompoennt(Game* game);
 	// コンポーネントの終了

@@ -9,6 +9,7 @@
 /// ヘッダのインクルード
 /// </summary>
 #include "../../pch.h"
+#include "../Object/Entity.h"
 #include "Collision.h"
 
 #include "../Component/ComponentLib.h"
@@ -189,7 +190,7 @@ bool Collision::HitCheck_Sphere_Plane(const Sphere & sphere, const Plane & plane
 
 bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle & triangle, DirectX::SimpleMath::Vector3 * hit_pos)
 {
-	if (!&sphere || !&triangle) return false;
+  	if (!&sphere || !&triangle) return false;
 
 	if (!HitCheck_Sphere_Plane(sphere, triangle.plane, hit_pos)) return false;
 
@@ -232,81 +233,36 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 }
 
 
-bool Collision::Check(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data)
+bool Collision::CheckOne(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data, CollisionData* data2)
 {
-	const Sphere* sphere;
-	const Plane* plane;
-	const Triangle* triangle;
-	const list<Triangle>* triangleList;
-	CollisionType type = collision->GetShape(&sphere, &plane, &triangle, &triangleList);
+	const Sphere* sphere = collision->GetSphere();
+	const Plane* plane = collision->GetPlane();
+	const Triangle* triangle = collision->GetTriangle();
+	const list<Triangle>* triangleList = collision->GetTriangleList();
 
-	const Sphere* sphere2;
-	const Plane* plane2;
-	const Triangle* triangle2;
-	const std::list<Triangle>* triangleList2;
-	CollisionType type2 = collision->GetShape(&sphere2, &plane2, &triangle2, &triangleList2);
-
-	// 球
-	if (sphere)
+	if (data2)
 	{
-		if (sphere2)		return HitCheck_Sphere_Sphere(*sphere, *sphere2, &data->hitPos);
-		if (plane2)			return HitCheck_Sphere_Plane(*sphere, *plane2, &data->hitPos);
-		if (triangle2)		return HitCheck_Sphere_Triangle(*sphere, *triangle2, &data->hitPos);
-		if (triangleList2)
-		{
-			for (auto ite = (*triangleList2).begin(); ite != (*triangleList2).end(); ite++)
-			{
-							return HitCheck_Sphere_Triangle(*sphere, (*ite), &data->hitPos);
-			}
-		}
- 	}
-
-	// 平面
-	if (plane)
-	{
-		if (sphere2)		return HitCheck_Sphere_Plane(*plane, *sphere2, &data->hitPos);
-		if (plane2)			return false;
-		if (triangle2)		return false;
-		if (triangleList2)
-		{
-			for (auto ite = (*triangleList2).begin(); ite != (*triangleList2).end(); ite++)
-			{
-							return false;
-			}
-		}
+		data2->sphere = sphere;
+		data2->plane = plane;
+		data2->triangle = triangle;
 	}
 
-	// 平面（三角形）
-	if (triangle)
-	{
-		if (sphere2)		return HitCheck_Sphere_Triangle(*triangle, *sphere2, &data->hitPos);
-		if (plane2)			return false;
-		if (triangle2)		return false;
-		if (triangleList2)
-		{
-			for (auto ite = (*triangleList2).begin(); ite != (*triangleList2).end(); ite++)
-			{
-							return false;
-			}
-		}
-	}
+	if (sphere)		return CheckTwo(sphere, collision2, data);
+	if (plane)		return CheckTwo(plane, collision2, data);
+	if (triangle)	return CheckTwo(triangle, collision2, data);
 
-	// 平面（三角形）リスト
 	if (triangleList)
 	{
-		for (auto ite = (*triangleList).begin(); ite != (*triangleList).end(); ite++)
+		bool flag = false;
+		for (auto ite = triangleList->begin(); ite != triangleList->end(); ite++)
 		{
-			if (sphere2)		return HitCheck_Sphere_Triangle((*ite), *sphere2, &data->hitPos);
-			if (plane2)			return false;
-			if (triangle2)		return false;
-			if (triangleList2)
+			if (CheckTwo(&(*ite), collision2, data))
 			{
-				for (auto ite2 = (*triangleList2).begin(); ite2 != (*triangleList2).end(); ite2++)
-				{
-					return false;
-				}
+				if (data2) data2->triangleList.push_back(&(*ite));
+				flag = true;
 			}
 		}
+		return flag;
 	}
 
 	return false;
@@ -333,9 +289,14 @@ bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data, 
 		for (auto ite2 = collisionList2.begin(); ite2 != collisionList2.end(); ite2++)
 		{
 			// 球
-			if (Check((*ite), (*ite2), data))
+			if (CheckOne((*ite), (*ite2), data, data2))
 			{
-				// 壁擦り
+				// 当たった
+				(*ite)->SetHit(true);
+				(*ite2)->SetHit(true);
+
+				// 当たった場所のデータを共有
+				data2->hitPos = data->hitPos;
 				return true;
 			}
 		}

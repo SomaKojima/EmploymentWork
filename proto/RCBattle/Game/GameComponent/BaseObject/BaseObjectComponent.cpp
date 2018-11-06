@@ -19,8 +19,6 @@ BaseObjectComponent::~BaseObjectComponent()
 
 void BaseObjectComponent::Initialize()
 {
-	EntityVector* entityVector = EntityVector::GetInstance();
-	Entity* wall = entityVector->GetEntity("Bottom");
 }
 
 void BaseObjectComponent::Update(DX::StepTimer const & timer)
@@ -36,11 +34,9 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 		m_normal = Vector3::Zero;
 		for (auto ite = m_current.begin(); ite != m_current.end(); ite++)
 		{
-			m_normal += (*ite)->GetNomal();
+			m_normal += (*ite);
 		}
 		m_normal.Normalize();
-
-		/////// Œü‚«‚ğ•Ï‚¦‚é
 
 		// p¨‚ğ‡‚í‚¹
 		Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
@@ -54,17 +50,6 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 
 			m_me->GetTrans().SetDir(m_me->GetTrans().GetDir() * Q1);
 		}
-
-		//// Œü‚«‚ğ‡‚í‚¹‚é
-
-		//Quaternion CQ1;
-		//Q1.Conjugate(CQ1);
-		//Quaternion ODQ(0, 0, 1, 0);
-		//Quaternion res = CQ1 * ODQ;
-		//res *= Q1;
-
-		//Vector3 od(res.x, res.y, res.z);
-
 	}
 
 	// ‘¬“x‚ğæ“¾
@@ -94,53 +79,14 @@ void BaseObjectComponent::Finalize()
 {
 }
 
-void BaseObjectComponent::OnCollide(Entity & collide, CollisionData * data)
+void BaseObjectComponent::OnCollide(Entity & collide, Collision::CollisionData * data)
 {
-	WallComponent* wall = collide.GetComponent<WallComponent>();
-	
-	if (wall)
+	if (collide.GetName() == "Wall")
 	{
-
-		m_current.push_back(wall);
-		//m_normal = wall->GetNomal();
+		for (auto ite = data->triangleList.begin(); ite != data->triangleList.end(); ite++)
+		{
+			m_current.push_back(-Vector3((*ite)->plane.a, (*ite)->plane.b, (*ite)->plane.c));
+		}
+		if (data->triangle) m_current.push_back(Vector3(data->triangle->plane.a, data->triangle->plane.b, data->triangle->plane.c));
 	}
 }
-
-DirectX::SimpleMath::Quaternion BaseObjectComponent::GetRotateDir()
-{
-	Vector3 upAngle = m_normal * XMConvertToRadians(90.0f);
-	Quaternion up =
-		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 0.0f, 1.0f), upAngle.z) *
-		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), upAngle.y) *
-		Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), upAngle.x);
-	Quaternion upDir = up;
-
-	/*Quaternion wallDir2 = 
-		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 0.0f, 1.0f), m_currentWall->GetAngle().z) *
-		Quaternion::CreateFromAxisAngle(Vector3(0.0f, 1.0f, 0.0f), m_currentWall->GetAngle().y) *
-		Quaternion::CreateFromAxisAngle(Vector3(1.0f, 0.0f, 0.0f), m_currentWall->GetAngle().x);
-
- 	return  Quaternion::Slerp(m_me->GetTrans().GetDir(), wallDir2, 0.1f);*/
-
-	return Quaternion::Identity;
-}
-
-//bool BaseObjectComponent::IsSomeDir()
-//{
-//	Vector3 up = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
-//	Vector3 normal = m_currentWall->GetNomal();
-//
-//	float cosTheta = up.Dot(normal);
-//
-//	float ragian = acos(cosTheta);
-//	float degree = XMConvertToDegrees(ragian);
-//
-//	float range = 0.5f;
-//
-//	if ((-range < degree && range > degree) ||
-//		(180 - range < degree && 180 + range > degree))
-//	{
-//		return true;
-//	}
-//	return false;
-//}

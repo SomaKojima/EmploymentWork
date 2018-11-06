@@ -42,7 +42,7 @@ void BulletComponent::Finalize()
 {
 }
 
-void BulletComponent::OnCollide(Entity & collide, CollisionData* data)
+void BulletComponent::OnCollide(Entity & collide, Collision::CollisionData* data)
 {
 	m_me->Destroy();
 }

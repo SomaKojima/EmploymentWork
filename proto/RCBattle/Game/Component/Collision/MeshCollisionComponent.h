@@ -36,7 +36,9 @@ public:
 	// èIóπ
 	void Finalize() override;
 
-	std::list<Collision::Triangle>& GetTriangles() { return m_triangles; }
+	const std::list<Collision::Triangle>* GetTriangleList() override { return &m_triangles; }
+
+	Collision::CollisionType GetShapeType() { return Collision::CollisionType::TRIANGLE; }
 
 private:
 	wchar_t* m_file;

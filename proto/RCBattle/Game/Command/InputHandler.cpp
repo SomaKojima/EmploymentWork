@@ -58,12 +58,8 @@ vector<Command*>& InputHandler::GetInputHnadle()
 	if (kb.Up) m_commandVector.push_back(m_keyUpArrow);
 	if (kb.Down) m_commandVector.push_back(m_keyDownArrow);
 
-
 	if (kb.Left) m_commandVector.push_back(m_keyLeftArrow);
 	if (kb.Right) m_commandVector.push_back(m_keyRightArrow);
-
-	//if (tracker.pressed.Left) m_commandVector.push_back(m_keyLeftArrow);
-	//if(tracker.pressed.Right) m_commandVector.push_back(m_keyRightArrow);
 
 	if (kb.Space) m_commandVector.push_back(m_keySpace);
 	if (kb.C) m_commandVector.push_back(m_keyC);

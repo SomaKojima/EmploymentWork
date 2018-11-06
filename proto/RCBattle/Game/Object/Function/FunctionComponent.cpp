@@ -1,6 +1,5 @@
 #include "../../../pch.h"
 #include "FunctionComponent.h"
-#include "../../Collision/Collision.h"
 #include "../../Component/Component.h"
 #include "../Entity.h"
 #include "../../../Game.h"
@@ -33,7 +32,7 @@ bool FunctionComponent::LateComponentUpdate(DX::StepTimer const & timer)
 	return false;
 }
 
-void FunctionComponent::OnCollideComponent(Entity& entity, CollisionData* data)
+void FunctionComponent::OnCollideComponent(Entity& entity, Collision::CollisionData* data)
 {
 	for (auto ite = m_componentlist.begin(); ite != m_componentlist.end(); ite++)
 	{

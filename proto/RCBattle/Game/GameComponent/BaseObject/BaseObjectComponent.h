@@ -32,16 +32,10 @@ public:
 	void Finalize() override;
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide, CollisionData* data) override;
-
-	// Šp“x‚ğ‰ñ“]‚³‚¹‚éŠÖ”
-	DirectX::SimpleMath::Quaternion GetRotateDir();
-	//bool IsSomeDir();
+	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 
 private:
 	DirectX::SimpleMath::Vector3 m_normal;	// d—Í‚ÌŒü‚«
-	std::list<WallComponent*> m_current;
-	std::list<WallComponent*> m_last;
-	DirectX::SimpleMath::Quaternion m_rotate;
+	std::list<DirectX::SimpleMath::Vector3> m_current;
 };
 

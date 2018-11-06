@@ -26,5 +26,5 @@ public:
 	void Finalize() override;
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	void OnCollide(Entity& collide, CollisionData* data) override;
+	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 };

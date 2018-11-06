@@ -38,7 +38,9 @@ public:
 	// I—¹
 	void Finalize() override;
 
-	const std::list<Collision::Triangle>& GetTriangleList() override { return m_triangle; }
+	const std::list<Collision::Triangle>* GetTriangleList() override { return &m_triangle; }
+
+	Collision::CollisionType GetShapeType() { return Collision::CollisionType::TRIANGLE; }
 
 private:
 	DirectX::SimpleMath::Vector3 m_center;	// ’†S

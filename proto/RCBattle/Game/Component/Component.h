@@ -43,7 +43,7 @@ public:
 	virtual void Finalize() {};
 
 	// “–‚½‚è”»’è‚Ìˆ—
-	virtual void OnCollide(Entity& collide, CollisionData* data) {}
+	virtual void OnCollide(Entity& collide, Collision::CollisionData* data) {}
 
 	void SetEntity(Entity* me) { m_me = me; }
 	Entity* GetEntity() { return m_me; }

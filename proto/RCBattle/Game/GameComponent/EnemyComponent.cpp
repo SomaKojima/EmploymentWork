@@ -12,6 +12,6 @@ void EnemeyComponent::Update(DX::StepTimer const & timer)
 {
 }
 
-void EnemeyComponent::OnCollide(Entity & collide, CollisionData* data)
+void EnemeyComponent::OnCollide(Entity & collide, Collision::CollisionData* data)
 {
 }

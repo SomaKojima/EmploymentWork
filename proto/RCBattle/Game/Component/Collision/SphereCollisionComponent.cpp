@@ -82,7 +82,6 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 {
 	// 速度を取得
 	Vector3 vec = m_me->GetTrans().GetVel();
-	//Vector3 accel = m_me->GetTrans().GetAccel();
 
 	// 面の法線
 	Vector3 normal(triangle->plane.a, triangle->plane.b, triangle->plane.c);
@@ -90,15 +89,6 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 	// 法線の向きのベクトルをなくす
 	Quaternion q;
 	m_me->GetTrans().GetDir().Conjugate(q);
-
-	// めり込み押し出し
-	/*Vector3 hitPosVec = m_sphere.center - hitPos;
-	hitPosVec.Normalize();
-	Vector3 a = m_sphere.center - (hitPosVec * m_sphere.radius) - hitPos;
-	float length = a.Length();
-	Vector3 vel = length * normal;
-	Vector3 pos = m_me->GetTrans().GetPos() + vel;
-	vel = Vector3::Transform(vel, q);*/
 
 	// 壁ずり
 	Vector3 normal2 = Vector3::Transform(normal, q);
@@ -113,6 +103,12 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 	{
 		w_vec = vec;
 	}
+
+	// 座標の更新
+	Vector3 pos = m_me->GetTrans().GetPos();
+	pos += Vector3::Transform(w_vec, m_me->GetTrans().GetDir());
+
+	//m_me->GetTrans().SetPos(pos);
 
 	m_me->GetTrans().SetVel(w_vec);
 }

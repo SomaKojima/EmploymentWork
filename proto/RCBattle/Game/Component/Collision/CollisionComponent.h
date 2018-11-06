@@ -36,38 +36,10 @@ public:
 	void SetHit(bool flag) { isHit = flag; }
 	bool IsHit() { return isHit; }
 
-	Collision::CollisionType GetShape(
-		const Collision::Sphere** sphere = nullptr,
-		const Collision::Plane** plane = nullptr,
-		const Collision::Triangle** triangle = nullptr,
-		const std::list<Collision::Triangle>** triangleList = nullptr)
-	{
-
-		if (sphere)		*sphere = &GetSphere();
-		if (plane)		*plane = &GetPlane();
-		if (triangle)		*triangle = &GetTriangle();
-		if (triangleList)	*triangleList = &GetTriangleList();
-
-		if (*sphere) return Collision::CollisionType::SPHERE;
-		if (*plane)return Collision::CollisionType::PLANE;
-		if (*triangle)return Collision::CollisionType::TRIANGLE;
-		if (*triangleList)return Collision::CollisionType::TRIANGLE;
-
-		return Collision::CollisionType::NONE;
-	}
-
-	virtual Collision::CollisionData2 GetShape() {};
-
-protected:
-	// ‹…‚ÌŽæ“¾
-	virtual const Collision::Sphere& GetSphere() { Collision::Sphere* sphere = nullptr; return *sphere; }
-	// –Ê‚ÌŽæ“¾
-	virtual const Collision::Plane& GetPlane() { Collision::Plane* plane = nullptr; return *plane; }
-	// ŽOŠpŒ`‚ÌŽæ“¾
-	virtual const Collision::Triangle& GetTriangle() { Collision::Triangle* triangle = nullptr; return *triangle; }
-
-	virtual const std::list<Collision::Triangle>& GetTriangleList() 
-	{ std::list<Collision::Triangle>* triangleList = nullptr; return *triangleList; }
+	virtual const Collision::Sphere* GetSphere() { return nullptr; }
+	virtual const Collision::Plane* GetPlane() { return nullptr; }
+	virtual const Collision::Triangle* GetTriangle() { return nullptr; }
+	virtual const std::list<Collision::Triangle>* GetTriangleList() { return nullptr; }
 
 private:
 	bool isHit;
