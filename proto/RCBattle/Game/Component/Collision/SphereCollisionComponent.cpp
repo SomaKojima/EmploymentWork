@@ -97,6 +97,7 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 	Vector3 w_vec;
 	if (l <= 0)
 	{
+		// 速度
 		w_vec = vec - l * normal2;
 	}
 	else
@@ -104,12 +105,18 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 		w_vec = vec;
 	}
 
+	// 速度の更新
+	//m_me->GetTrans().SetVel(w_vec);
+
+	// 距離の計算
+	Vector3 length = hitPos - m_sphere.center;
+	float l2 = length.Length();
+	l2 = m_sphere.radius - l2;
+
 	// 座標の更新
-	Vector3 pos = m_me->GetTrans().GetPos();
-	pos += Vector3::Transform(w_vec, m_me->GetTrans().GetDir());
+	//Vector3 pos = m_me->GetTrans().GetPos() + w_vec;
+	Vector3 pos = m_me->GetTrans().GetPos() + (l2 * normal);
 
-	//m_me->GetTrans().SetPos(pos);
-
-	m_me->GetTrans().SetVel(w_vec);
+	m_me->GetTrans().SetPos(pos);
 }
 

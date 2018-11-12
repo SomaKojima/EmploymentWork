@@ -37,21 +37,38 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 			m_normal += (*ite);
 		}
 		m_normal.Normalize();
-
+		                                        
 		// p¨‚ğ‡‚í‚¹
 		Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
+
 		// ‰ñ“]²ŒvZ
 		Vector3 axis = upDir.Cross(-m_normal);
 		if (axis != Vector3::Zero)
 		{
 			// Šp“x‚ğ‹‚ß‚é
 			float rot = acos(upDir.Dot(-m_normal));
-			Quaternion  Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
+			Quaternion Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
+
+			Quaternion Q2 = m_me->GetTrans().GetDir() * Q1;
 
 			m_me->GetTrans().SetDir(m_me->GetTrans().GetDir() * Q1);
 		}
-	}
 
+		//// p¨‚ğ‡‚í‚¹
+		//Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
+		//// ‰ñ“]²ŒvZ
+		//Vector3 axis = upDir.Cross(-m_normal);
+		//if (axis != Vector3::Zero)
+		//{
+		//	// Šp“x‚ğ‹‚ß‚é
+		//	float rot = acos(upDir.Dot(-m_normal));
+		//	Quaternion Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
+
+		//	Quaternion Q2 = m_me->GetTrans().GetDir() * Q1;
+
+		//	m_me->GetTrans().SetDir(m_me->GetTrans().GetDir() * Q1);
+		//}
+	}
 	// ‘¬“x‚ğæ“¾
 	Vector3 vel = m_me->GetTrans().GetVel();
 
