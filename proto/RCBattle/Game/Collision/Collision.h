@@ -130,7 +130,6 @@ public:
 		const Segment* segment;
 		const Plane* plane;
 		const Triangle* triangle;
-		std::list<const Triangle*> triangleList;
 
 		CollisionData() :sphere(nullptr), segment(nullptr), plane(nullptr), triangle(nullptr) {}
 	};
@@ -248,42 +247,67 @@ public:
 	~Collision();
 	
 private:
-	static bool CheckOne(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data, CollisionData* data2);
+	static bool CheckOne(CollisionComponent* collision, CollisionComponent* collision2, 
+		std::list<CollisionData>* data, std::list<CollisionData>* data2);
 	template<class T>
-	static bool CheckTwo(const T* shape, CollisionComponent* collision, CollisionData* data);
+	static bool CheckTwo(const T* shape, CollisionComponent* collision, 
+		std::list<CollisionData>* data, std::list<CollisionData>* data2);
 
 public:
-	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData* data, CollisionData* data2);
+	static bool HitCheck(Entity* entity, Entity* entity2, std::list<CollisionData>* data, std::list<CollisionData>* data2);
 };
 
 template<class T>
-inline bool Collision::CheckTwo(const T * shape, CollisionComponent * collision, CollisionData* data)
+inline bool Collision::CheckTwo(const T * shape, CollisionComponent * collision, std::list<CollisionData>* data, std::list<CollisionData>* data2)
 {
 	const Sphere* sphere = collision->GetSphere();
 	const Plane* plane = collision->GetPlane();
 	const Triangle* triangle = collision->GetTriangle();
 	const list<Triangle>* triangleList = collision->GetTriangleList();
 
-	if (data)
-	{
-		data->sphere = sphere;
-		data->plane = plane;
-		data->triangle = triangle;
-	}
 
-	if (sphere) return HitCheck(*sphere, *shape, &data->hitPos);
-	if (plane)return HitCheck(*plane, *shape, &data->hitPos);
-	if (triangle)return HitCheck(*triangle, *shape, &data->hitPos);
+	CollisionData collisionData;
+
+	if (sphere)
+	{
+		if(data)
+		{ 
+			collisionData.sphere = sphere;
+			data->push_back(collisionData);
+		}
+		return HitCheck(*sphere, *shape, &data->hitPos);
+	}
+	if (plane)
+	{
+		if (data)
+		{
+			collisionData.plane = plane;
+			data->push_back(collisionData);
+		}
+		return HitCheck(*plane, *shape, &data->hitPos);
+	}
+	if (triangle)
+	{
+		if (data)
+		{
+			collisionData.triangle = triangle;
+			data->push_back(collisionData);
+		}
+		return HitCheck(*triangle, *shape, &data->hitPos);
+	}
 
 	if (triangleList)
 	{
 		bool flag = false;
 		for (auto ite = triangleList->begin(); ite != triangleList->end(); ite++)
 		{
-			triangle = &(*ite);
-			if (HitCheck(*triangle, *shape, &data->hitPos))
+			if (HitCheck((*ite), *shape, &data->hitPos))
 			{
-				if (data) data->triangleList.push_back(&(*ite));
+				if (data)
+				{
+					collisionData.triangle = &(*ite);
+					data->push_back(collisionData);
+				}
 				flag = true;
 			}
 		}

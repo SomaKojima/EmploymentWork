@@ -233,32 +233,58 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 }
 
 
-bool Collision::CheckOne(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data, CollisionData* data2)
+bool Collision::CheckOne(CollisionComponent* collision, CollisionComponent* collision2, 
+	std::list<CollisionData>* data, std::list<CollisionData>* data2)
 {
 	const Sphere* sphere = collision->GetSphere();
 	const Plane* plane = collision->GetPlane();
 	const Triangle* triangle = collision->GetTriangle();
 	const list<Triangle>* triangleList = collision->GetTriangleList();
 
-	if (data2)
+	CollisionData collisionData;
+
+	if (sphere)
 	{
-		data2->sphere = sphere;
-		data2->plane = plane;
-		data2->triangle = triangle;
+		if (data2)
+		{
+			collisionData.sphere = sphere;
+			data2->push_back(collisionData);
+		}
+		return CheckTwo(sphere, collision2, data, data2);
+	}
+		
+	if (plane)
+	{
+		if (data2)
+		{
+			collisionData.plane = plane;
+			data2->push_back(collisionData);
+		}
+		return CheckTwo(plane, collision2, data, data2);
 	}
 
-	if (sphere)		return CheckTwo(sphere, collision2, data);
-	if (plane)		return CheckTwo(plane, collision2, data);
-	if (triangle)	return CheckTwo(triangle, collision2, data);
+	if (triangle)
+	{
+		if (data2)
+		{
+			collisionData.triangle = triangle;
+			data2->push_back(collisionData);
+		}
+		return CheckTwo(triangle, collision2, data, data2);
+	}
 
 	if (triangleList)
 	{
 		bool flag = false;
 		for (auto ite = triangleList->begin(); ite != triangleList->end(); ite++)
 		{
-			if (CheckTwo(&(*ite), collision2, data))
+			if (CheckTwo(&(*ite), collision2, data, data2))
 			{
-				if (data2) data2->triangleList.push_back(&(*ite));
+				if (data2)
+				{
+					collisionData.triangle = &(*ite);
+					data2->push_back(collisionData);
+				}
 				flag = true;
 			}
 		}
@@ -274,7 +300,7 @@ bool Collision::CheckOne(CollisionComponent* collision, CollisionComponent* coll
 /// <param name="entity">ŽÀ‘Ì</param>
 /// <param name="repulsionVel">”½”­‘¬“x</param>
 /// <returns>“–‚½‚è”»’è</returns>
-bool Collision::HitCheck(Entity * entity, Entity* entity2, CollisionData *data, CollisionData* data2)
+bool Collision::HitCheck(Entity * entity, Entity* entity2, std::list<CollisionData>* data, std::list<CollisionData>* data2)
 {
 	if(!entity || !entity2)
 	{

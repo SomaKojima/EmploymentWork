@@ -208,8 +208,8 @@ void CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_
 	OBJECT_FOR_TREE* pOFT = room->GetTop();
 	OBJECT_FOR_TREE* pNextOFT = nullptr;
 
-	Collision::CollisionData data;
-	Collision::CollisionData data2;
+	list<Collision::CollisionData> data;
+	list<Collision::CollisionData> data2;
 	while (pOFT)
 	{
 		// スタック内のオブジェクトと当たり判定を取る
