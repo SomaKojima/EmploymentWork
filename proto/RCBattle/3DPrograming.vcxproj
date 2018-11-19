@@ -195,7 +195,7 @@
     <ClInclude Include="Game\GameComponent\BaseObject\BaseObjectComponent.h" />
     <ClInclude Include="Game\GameComponent\BulletComponent.h" />
     <ClInclude Include="Game\GameComponent\Button\ButtonComponent.h" />
-    <ClInclude Include="Game\GameComponent\Button\StartButtonComponent.h" />
+    <ClInclude Include="Game\GameComponent\Button\StartButton.h" />
     <ClInclude Include="Game\GameComponent\EnemyComponent.h" />
     <ClInclude Include="Game\GameComponent\GameComponentLib.h" />
     <ClInclude Include="Game\GameComponent\Wall\WallComponent.h" />
@@ -250,7 +250,7 @@
     <ClCompile Include="Game\GameComponent\BaseObject\BaseObjectComponent.cpp" />
     <ClCompile Include="Game\GameComponent\BulletComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Button\ButtonComponent.cpp" />
-    <ClCompile Include="Game\GameComponent\Button\StartButtonComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Button\StartButton.cpp" />
     <ClCompile Include="Game\GameComponent\EnemyComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Wall\WallComponent.cpp" />
     <ClCompile Include="Game\Object\Entity.cpp" />

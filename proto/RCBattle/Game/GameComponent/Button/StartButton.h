@@ -6,11 +6,11 @@
 /// <summary>
 /// ボタンののコンポーネントクラス
 /// </summary>
-class StartButtonComponent : public Component, public ButtonComponent::ButtonFunc
+class StartButton : public ButtonComponent::ButtonFunc
 {
 public:
-	StartButtonComponent();
-	~StartButtonComponent();
+	StartButton();
+	~StartButton();
 
 	void Press() override;
 };

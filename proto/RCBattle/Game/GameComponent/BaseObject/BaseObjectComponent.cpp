@@ -45,7 +45,12 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 		if (axis != Vector3::Zero)
 		{
 			// Šp“x‚ð‹‚ß‚é
-			float rot = acos(upDir.Dot(-m_normal));
+			float cosign = upDir.Dot(-m_normal);
+			if (cosign > 1.0f)
+			{
+				cosign = 1.0f;
+			}
+			float rot = acos(cosign);
 			Quaternion  Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
 
 			m_me->GetTrans().SetDir(m_me->GetTrans().GetDir() * Q1);

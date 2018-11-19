@@ -22,7 +22,8 @@
 class UIRenderer : public Component
 {
 public:
-	UIRenderer(Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture, RECT rect);
+	UIRenderer(Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture, RECT rect, 
+		DirectX::XMVECTOR color = DirectX::Colors::White);
 	~UIRenderer();
 
 	// 描画
@@ -34,4 +35,5 @@ public:
 private:
 	RECT m_rect;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;			// テクスチャハンドル
+	DirectX::XMVECTOR m_color;	//色
 };

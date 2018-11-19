@@ -1,17 +1,17 @@
 #include "../../../pch.h"
-#include "StartButtonComponent.h"
+#include "StartButton.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Object/EntityVector.h"
 
-StartButtonComponent::StartButtonComponent()
+StartButton::StartButton()
 {
 }
 
-StartButtonComponent::~StartButtonComponent()
+StartButton::~StartButton()
 {
 }
 
-void StartButtonComponent::Press()
+void StartButton::Press()
 {
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);

@@ -60,6 +60,10 @@ void ButtonComponent::Update(DX::StepTimer const & timer)
 
 void ButtonComponent::Finalize()
 {
+	for (auto ite = m_pressList.begin(); ite != m_pressList.end(); ite++)
+	{
+		delete (*ite);
+	}
 	m_pressList.clear();
 }
 

@@ -77,6 +77,7 @@ void SceneManager::ChangeScene()
 		m_currentScene = new ScenePlay();
 		break;
 	}
+	m_currentSceneID = m_changeSceneID;
 
 	// ƒV[ƒ“‚Ì‰Šú‰» 
 	m_currentScene->Initialize(m_game);

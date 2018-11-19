@@ -363,7 +363,7 @@ void Game::CreateDeviceDependentResources()
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->SetGame(this);
 
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
 	sceneManager->Initialize();
 }
 
