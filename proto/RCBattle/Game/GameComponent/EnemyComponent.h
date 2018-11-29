@@ -21,5 +21,5 @@ public:
 	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 
 private:
-	int count;
+	int m_count;
 };

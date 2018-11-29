@@ -7,6 +7,7 @@
 #include "DownCommand.h"
 #include "UpCommand.h"
 #include "ShotCommand.h"
+#include "DriftCommand.h"
 
 #include "../Object/Factory/BulletFactory.h"
 
@@ -24,7 +25,7 @@ InputHandler::InputHandler()
 	m_keyRightArrow = new RightCommand();
 	m_keySpace = new UpCommand();
 	m_keyC = new DownCommand();
-	m_keyZ = new ShotCommand();
+	m_keyZ = new DriftCommand();
 }
 
 /// <summary>

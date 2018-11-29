@@ -13,7 +13,6 @@ class EntityOfTree : public BidirectionalList<EntityOfTree, Entity>
 public:
 	EntityOfTree(Entity* obj) : BidirectionalList(obj) {}
 	~EntityOfTree() {}
-
 };
 
 class EntityList : public BidirectionalList<EntityOfTree, Entity>::RegisterTo

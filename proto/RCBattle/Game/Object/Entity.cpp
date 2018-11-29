@@ -21,6 +21,10 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	m_pOFT->Remove();
+	m_pEOF->Remove();
+	delete m_pOFT;
+	delete m_pEOF;
 }
 
 void Entity::Initialize()
@@ -38,6 +42,8 @@ void Entity::Initialize()
 bool Entity::Update(DX::StepTimer const & timer)
 {
 	// マトリクス/座標の更新
+	m_transform.m_vel += m_transform.m_accel;
+	m_transform.m_accel = Vector3::Zero;
 	m_transform.m_pos += Vector3::Transform(m_transform.m_vel, m_transform.m_dir);
 	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
 
@@ -50,11 +56,6 @@ bool Entity::Update(DX::StepTimer const & timer)
 
 void Entity::Finalize()
 {
-	m_pOFT->Remove();
-	m_pEOF->Remove();
-
-	delete m_pOFT;
-	delete m_pEOF;
 }
 
 void Entity::Destroy()

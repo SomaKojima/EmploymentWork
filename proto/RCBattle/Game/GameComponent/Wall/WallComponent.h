@@ -28,11 +28,4 @@ public:
 
 	// “–‚½‚è”»’è‚Ìˆ—
 	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
-
-	WallType GetWallType() { return m_wallType; }
-	DirectX::SimpleMath::Vector3 GetNomal() { return m_normal; }
-
-private:
-	WallType m_wallType;		// Œ»İ‚Ç‚Ì•Ç‚É’£‚è•t‚¢‚Ä‚¢‚é‚©
-	DirectX::SimpleMath::Vector3 m_normal;	// •Ç‚Ì–@ü
 };

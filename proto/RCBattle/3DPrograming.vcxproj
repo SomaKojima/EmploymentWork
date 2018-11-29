@@ -168,6 +168,7 @@
     <ClInclude Include="Game\Command\AdvanceCommand.h" />
     <ClInclude Include="Game\Command\Command.h" />
     <ClInclude Include="Game\Command\DownCommand.h" />
+    <ClInclude Include="Game\Command\DriftCommand.h" />
     <ClInclude Include="Game\Command\InputHandler.h" />
     <ClInclude Include="Game\Command\LeftCommand.h" />
     <ClInclude Include="Game\Command\RecessionCommand.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Game\Collision\Collision.cpp" />
     <ClCompile Include="Game\Command\AdvanceCommand.cpp" />
     <ClCompile Include="Game\Command\DownCommand.cpp" />
+    <ClCompile Include="Game\Command\DriftCommand.cpp" />
     <ClCompile Include="Game\Command\InputHandler.cpp" />
     <ClCompile Include="Game\Command\LeftCommand.cpp" />
     <ClCompile Include="Game\Command\RecessionCommand.cpp" />

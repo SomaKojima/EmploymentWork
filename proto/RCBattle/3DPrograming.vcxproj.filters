@@ -229,6 +229,9 @@
     <ClInclude Include="Game\GameComponent\Button\StartButton.h">
       <Filter>Game\GameComponent\Button</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Command\DriftCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -363,6 +366,9 @@
     </ClCompile>
     <ClCompile Include="Game\GameComponent\Button\StartButton.cpp">
       <Filter>Game\GameComponent\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\DriftCommand.cpp">
+      <Filter>Game\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

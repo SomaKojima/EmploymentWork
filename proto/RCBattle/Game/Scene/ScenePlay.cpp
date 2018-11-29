@@ -47,6 +47,8 @@ void ScenePlay::Initialize(Game * game)
 	//// ŽÔ‚Ìì¬
 	//entity = carFactory->CreateCar();
 	//entity->GetTrans().SetPos(Vector3(0.0f, 1.5f, 10.0f));
+	//entity->AddComponent(new BaseObjectComponent());
+	//entity->AddComponent(new EnemeyComponent());
 	//// ƒRƒ“ƒeƒi‚É’Ç‰Á
 	//entityVector->Add(entity);
 

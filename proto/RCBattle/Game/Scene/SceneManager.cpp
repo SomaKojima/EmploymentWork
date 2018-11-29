@@ -25,7 +25,6 @@ void SceneManager::Initialize()
 
 void SceneManager::Update(DX::StepTimer const& timer)
 {
-	m_changeSceneID = m_currentSceneID;
 	EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Update(timer);
 

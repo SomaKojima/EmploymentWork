@@ -182,7 +182,7 @@ void Game::Render()
 	//m_view = m_debugCamera->GetCameraMatrix();
 
 	// グリッドの床の描画
-	m_gridFloor->Render(context, m_view, m_projection);
+	//m_gridFloor->Render(context, m_view, m_projection);
 
 	// ここから描画処理を記述する
 	// スプライトの描画 
@@ -363,7 +363,7 @@ void Game::CreateDeviceDependentResources()
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->SetGame(this);
 
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
 	sceneManager->Initialize();
 }
 

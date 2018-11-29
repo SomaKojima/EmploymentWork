@@ -1,14 +1,59 @@
 #pragma once
 
-//template<class T> class RegisterTo;
+/// <summary>
+/// 使い方の例
+/// </summary>
 
+/// <summary>
+/// 登録されるオブジェクトクラス（リストの要素となるクラス）
+/// </summary>
+/*
+
+class EntityOfTree : public BidirectionalList<EntityOfTree, Entity>
+{
+public:
+	EntityOfTree(Entity* obj) : BidirectionalList(obj) {}
+	~EntityOfTree() {}
+
+};
+
+*/
+
+/// <summary>
+/// 登録する先のクラス
+/// </summary>
+/*
+
+class EntityList : public BidirectionalList<EntityOfTree, Entity>::RegisterTo
+{
+public:
+	EntityList() {}
+	~EntityList() {}
+};
+
+*/
+
+/// <summary>
+/// 登録されるオブジェクトクラス（リストの要素となるクラス）
+/// </summary>
 template<class T,class T2> class BidirectionalList
 {
 public:
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="obj"></param>
 	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	virtual ~BidirectionalList() { m_pPre = nullptr; m_pNext = nullptr; m_pRegisterTo = nullptr; m_pObj = nullptr; }
 
 public:
+	/// <summary>
+	/// 登録先のクラス
+	/// </summary>
 	class RegisterTo
 	{
 	public:
@@ -25,6 +70,7 @@ public:
 	};
 
 public:
+	// リスト先のクラスから離れる(リストから削除)
 	bool Remove();
 
 	// getter
@@ -33,17 +79,19 @@ public:
 	RegisterTo* GetRegisterTo() { return m_pRegisterTo; }
 	T2* GetObj() { return m_pObj; }
 
+private:
 	// setter
 	void SetPre(T* bl) { m_pPre = bl; }
 	void SetNext(T* bl) { m_pNext = bl; }
 	void SetRegisterTo(RegisterTo* registerTo) { m_pRegisterTo = registerTo; }
 
-protected:
+private:
 	T* m_pPre;
 	T* m_pNext;
 
 	RegisterTo* m_pRegisterTo;
 
+	// 登録されているオブジェクトの削除
 	T2* m_pObj;
 };
 
@@ -56,6 +104,7 @@ inline bool BidirectionalList<T, T2>::Remove()
 		return false;
 	}
 
+	// 前のポインタの処理
 	if (!m_pPre)
 	{
 		m_pRegisterTo->SetTop(m_pNext);
@@ -64,6 +113,8 @@ inline bool BidirectionalList<T, T2>::Remove()
 	{
 		m_pPre->SetNext(m_pNext);
 	}
+
+	// 次のポインタの処理
 	if (m_pNext)
 	{
 		m_pNext->SetPre(m_pPre);
