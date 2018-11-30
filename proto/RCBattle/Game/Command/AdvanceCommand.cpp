@@ -35,7 +35,7 @@ void AdvanceCommand::Excute(Entity & entity)
 	//float accel = (vel.z * vel.z) - (firstVec * firstVec);
 	//// ‹——£
 	//float distance = firstVec + 
-	accel.z = 0.01f;
+	accel.z = 0.03f;
 
 	/*if (vel.z >= 0.2f)
 	{

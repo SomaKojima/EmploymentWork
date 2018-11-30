@@ -187,7 +187,7 @@ void Game::Render()
 	// ここから描画処理を記述する
 	// スプライトの描画 
 
-	m_sprites->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
+	m_sprites->Begin(SpriteSortMode_FrontToBack, m_states->NonPremultiplied());
 
 	// シーンの描画
 	SceneManager* sceneManager = SceneManager::GetInstance();
@@ -363,7 +363,7 @@ void Game::CreateDeviceDependentResources()
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->SetGame(this);
 
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
 	sceneManager->Initialize();
 }
 
@@ -407,7 +407,7 @@ void Game::OnDeviceLost()
 	// グリッドの床の解放
 	m_gridFloor.reset();
 
-	CLiner8TreeManager::Lost();
+	//CLiner8TreeManager::Lost();
 
 	// 車モデルの開放
 	SceneManager* sceneManager = SceneManager::GetInstance();

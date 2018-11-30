@@ -26,6 +26,8 @@ InputHandler::InputHandler()
 	m_keySpace = new UpCommand();
 	m_keyC = new DownCommand();
 	m_keyZ = new DriftCommand();
+
+	m_tKeyZ = new ShotCommand();
 }
 
 /// <summary>
@@ -40,6 +42,8 @@ InputHandler::~InputHandler()
 	delete m_keySpace;
 	delete m_keyC;
 	delete m_keyZ;
+
+	delete m_tKeyZ;
 	// ƒRƒ“ƒeƒi‚Ì‰Šú‰»
 	m_commandVector.clear();
 }
@@ -64,7 +68,9 @@ vector<Command*>& InputHandler::GetInputHnadle()
 
 	if (kb.Space) m_commandVector.push_back(m_keySpace);
 	if (kb.C) m_commandVector.push_back(m_keyC);
-	if (tracker.pressed.Z) m_commandVector.push_back(m_keyZ);
+	//if (kb.Z) m_commandVector.push_back(m_keyZ);
+
+	if (tracker.pressed.Z) m_commandVector.push_back(m_tKeyZ);
 
 	return m_commandVector;
 }

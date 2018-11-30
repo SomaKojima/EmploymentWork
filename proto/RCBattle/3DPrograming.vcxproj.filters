@@ -68,6 +68,9 @@
     <Filter Include="Game\Data">
       <UniqueIdentifier>{c562a829-36de-4be3-b8d5-0214eef5fbb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameComponent\Title">
+      <UniqueIdentifier>{17d2ccb8-2a30-4f09-8045-b5f25a800466}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -232,6 +235,9 @@
     <ClInclude Include="Game\Command\DriftCommand.h">
       <Filter>Game\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameComponent\Title\LineOfSightComponent.h">
+      <Filter>Game\GameComponent\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -369,6 +375,9 @@
     </ClCompile>
     <ClCompile Include="Game\Command\DriftCommand.cpp">
       <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Title\LineOfSightComponent.cpp">
+      <Filter>Game\GameComponent\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

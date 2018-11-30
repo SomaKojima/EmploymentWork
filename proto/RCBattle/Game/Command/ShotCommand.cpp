@@ -52,6 +52,9 @@ void ShotCommand::Excute(Entity & entity)
 	_entity->GetTrans().SetPos(pos);
 
 	_entity->SetName("Bullet");
+
+	// ƒvƒŒƒCƒ„[‚Ì’e‚ÌÝ’è
+	_entity->SetTag(Tag::Player1);
 	
 	entityVector->Add(_entity);
 }

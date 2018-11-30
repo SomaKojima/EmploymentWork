@@ -11,6 +11,7 @@ using namespace DirectX::SimpleMath;
 Entity::Entity()
 	:
 	m_name(""),
+	m_tag(Tag::Default),
 	m_transform(Transform()),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),

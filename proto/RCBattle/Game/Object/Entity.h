@@ -20,6 +20,8 @@
 #include "Function/FunctionComponent.h"
 #include "../Utility/BidirectionalList.h"
 
+#include "../Data/Data.h"
+
 /// <summary>
 /// クラスの宣言
 /// </summary>
@@ -109,10 +111,12 @@ public:
 	//　プロパティ
 	// セッター
 	void SetName(char* name) { m_name = name; }
+	void SetTag(Tag tag) { m_tag = tag; }
 	void SetParent(Entity* parent) { m_parent = parent; }
 
 	// ゲッター
 	char* GetName() { return m_name; }
+	Tag GetTag() { return m_tag; }
 	Transform& GetTrans() { return m_transform; }
 	Entity& GetParent() { return *m_parent; }
 	std::list<Entity*>* GetChildList() { return &m_childlist; }
@@ -121,6 +125,7 @@ public:
 
 private:
 	char* m_name;								// 名前
+	Tag m_tag;									// タグ
 	Transform m_transform;						// 変形の情報
 
 	Entity* m_parent;							// 親のポインタ

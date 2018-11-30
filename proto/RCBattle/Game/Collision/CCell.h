@@ -2,6 +2,8 @@
 
 #include <vector>
 #include "../Utility/BidirectionalList.h"
+#include "../Utility/Utility.h"
+#include "../Data/Data.h"
 
 class CCell;
 class Entity;
@@ -20,7 +22,7 @@ public:
 	~CCell();
 };
 
-class CLiner8TreeManager
+class CLiner8TreeManager : public SingletonBase<CLiner8TreeManager>
 {
 public:
 	static const int CLINER8TREEMANAGER_MAXLEVEL = 4;
@@ -46,17 +48,10 @@ public:
 
 	CCell** GetCCell() { return ppCellAry; }
 
-	static CLiner8TreeManager* GetInstance() 
-	{
-		if (!m_singleton)
-		{
-			m_singleton = new CLiner8TreeManager();
-		}
-		return m_singleton;
-	}
 
-	static void Lost() { delete m_singleton; };
-
+	void InitCollisionMatrix();
+	bool GetCollisionMatrix(Tag tag1, Tag tag2);
+	void SetCollisionMatrix(Tag tag1, Tag tag2, bool flag);
 private:
 	float m_fLeft;
 	float m_fBottom;
@@ -73,5 +68,7 @@ private:
 
 	CCell** ppCellAry;
 
-	static CLiner8TreeManager* m_singleton;
+	std::vector<std::vector<bool>> m_collisionMatrix;
+
+	//bool m_collisionMatrix[Tag::Max][Tag::Max];
 };

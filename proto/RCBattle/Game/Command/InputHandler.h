@@ -49,6 +49,10 @@ private:
 	// Zキーのコマンド
 	Command* m_keyZ;
 
+
+	// Zトリガーキーのコマンド
+	Command* m_tKeyZ;
+
 	// キーボードのトリガー
 	DirectX::Keyboard::KeyboardStateTracker tracker;
 

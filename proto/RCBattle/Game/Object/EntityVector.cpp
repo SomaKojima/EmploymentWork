@@ -5,6 +5,7 @@
 EntityVector::EntityVector()
 	:
 	m_vector(new EntityList()),
+	m_add(new EntityList()),
 	m_destroy(new EntityList())
 {
 }
@@ -13,37 +14,30 @@ EntityVector::~EntityVector()
 {
 	delete m_vector;
 	delete m_destroy;
-}
-
-void EntityVector::Initialize()
-{
-	EntityOfTree* entity = m_vector->GetTop();
-	while (entity)
-	{
-		entity->GetObj()->InitializeComponent();
-		entity->GetObj()->Initialize();
-		entity = entity->GetNext();
-	}
+	delete m_add;
 }
 
 void EntityVector::Update(DX::StepTimer const& timer)
 {
-
 	EntityOfTree* entity = nullptr;
-
-
-	// デストロイリストのオブジェクトの処理
-	entity = m_destroy->GetTop();
 	Entity* obj = nullptr;
-	while (entity)
-	{
-		obj = entity->GetObj();
-		entity = entity->GetNext();
 
-		obj->FinalizeComponent();
-		obj->Finalize();
-		delete obj;
+	// 追加リストのオブジェクトの処理(初期化処理)
+	while (m_add->GetTop())
+	{
+		entity = m_add->GetTop();
+		obj = entity->GetObj();
+
+		obj->InitializeComponent();
+		obj->Initialize();
+
+		// 別のリストに移す
+		obj->GetEOF()->Remove();
+		m_vector->Add(obj->GetEOF());
 	}
+
+	// デストロイリストのオブジェクトの処理(終了処理)
+	FinalizeList(m_destroy);
 
 	// コンポーネントの更新処理
 	entity = m_vector->GetTop();
@@ -87,30 +81,9 @@ void EntityVector::Render(Game* game)
 
 void EntityVector::Finalize()
 {
-	EntityOfTree* entity = m_vector->GetTop();
-	Entity* obj = nullptr;
-
-	while (entity)
-	{
-		obj = entity->GetObj();
-		entity = entity->GetNext();
-
-		obj->FinalizeComponent();
-		obj->Finalize();
-		delete obj;
-	}
-
-	// デストロイリストに残っているオブジェクトの終了処理
-	entity = m_destroy->GetTop();
-	while (entity)
-	{
-		obj = entity->GetObj();
-		entity = entity->GetNext();
-
-		obj->FinalizeComponent();
-		obj->Finalize();
-		delete obj;
-	}
+	FinalizeList(m_vector);
+	FinalizeList(m_destroy);
+	FinalizeList(m_add);
 }
 
 void EntityVector::Add(Entity * entity)
@@ -119,7 +92,8 @@ void EntityVector::Add(Entity * entity)
 	{
 		return;
 	}
-	m_vector->Add(entity->GetEOF());
+	//m_vector->Add(entity->GetEOF());
+	m_add->Add(entity->GetEOF());
 }
 
 void EntityVector::AddDestory(Entity * entity)
@@ -174,4 +148,19 @@ Entity * EntityVector::CheckChildList(std::list<Entity*>* childList, char * name
 		}
 	}
 	return nullptr;
+}
+
+void EntityVector::FinalizeList(EntityList* list)
+{
+	EntityOfTree* entity = list->GetTop();
+	Entity* obj = nullptr;
+	while (entity)
+	{
+		obj = entity->GetObj();
+		entity = entity->GetNext();
+
+		obj->FinalizeComponent();
+		obj->Finalize();
+		delete obj;
+	}
 }

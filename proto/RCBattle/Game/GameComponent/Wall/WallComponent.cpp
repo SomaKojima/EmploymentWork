@@ -5,7 +5,7 @@ using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-WallComponent::WallComponent(WallType wallType)
+WallComponent::WallComponent()
 {
 }
 

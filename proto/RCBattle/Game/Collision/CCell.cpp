@@ -8,8 +8,6 @@ using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-CLiner8TreeManager* CLiner8TreeManager::m_singleton = nullptr;
-
 
 OBJECT_FOR_TREE::OBJECT_FOR_TREE(Entity* pObject)
 	:
@@ -75,6 +73,10 @@ bool CLiner8TreeManager::Init(unsigned int Level, float left, float top, float r
 	m_fUnit_D = m_fD / (1 << Level);
 
 	m_level = Level;
+
+
+	// 当たり判定マトリクスの初期化
+	InitCollisionMatrix();
 
 	return true;
 }
@@ -215,6 +217,11 @@ void CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_
 		// スタック内のオブジェクトと当たり判定を取る
 		for (auto ite = cStack.begin(); ite != cStack.end(); ite++)
 		{
+			// 当たり判定マトリクスの確認
+			if (!GetCollisionMatrix(pOFT->GetObj()->GetTag(), (*ite)->GetObj()->GetTag()))
+			{
+				continue;
+			}
 			if (Collision::HitCheck(pOFT->GetObj() , (*ite)->GetObj(), &data, &data2))
 			{
 				pOFT->GetObj()->OnCollideComponent(*(*ite)->GetObj(), &data);
@@ -226,6 +233,12 @@ void CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_
 
 		while (pNextOFT)
 		{
+			// 当たり判定マトリクスの確認
+			if (!GetCollisionMatrix(pOFT->GetObj()->GetTag(), pNextOFT->GetObj()->GetTag()))
+			{
+				pNextOFT = pNextOFT->GetNext();
+				continue;
+			}
 			if (Collision::HitCheck(pOFT->GetObj(), pNextOFT->GetObj(), &data, &data2))
 			{
 				pOFT->GetObj()->OnCollideComponent(*pNextOFT->GetObj(), &data);
@@ -269,6 +282,46 @@ void CLiner8TreeManager::HitCheckRoom(CCell* room, int elem, std::vector<OBJECT_
 		cStack.pop_back();
 	}
 
+	return;
+}
+
+void CLiner8TreeManager::InitCollisionMatrix()
+{
+	m_collisionMatrix.resize(Tag::Max);
+	for (int i = 0; i < Tag::Max; i++)
+	{
+		m_collisionMatrix[i].resize(Tag::Max - i, true);
+	}
+
+	SetCollisionMatrix(Tag::Player1, Tag::Player1, false);
+	SetCollisionMatrix(Tag::Player2, Tag::Player2, false);
+}
+
+bool CLiner8TreeManager::GetCollisionMatrix(Tag tag1, Tag tag2)
+{
+	if ((tag1 == tag2) || (tag1 < tag2))
+	{
+		return m_collisionMatrix[tag1][Tag::Max - 1 - tag2];
+	}
+	else
+	{
+		return m_collisionMatrix[tag2][Tag::Max - 1 - tag1];
+	}
+	return false;
+}
+
+void CLiner8TreeManager::SetCollisionMatrix(Tag tag1, Tag tag2, bool flag)
+{
+	if ((tag1 == tag2) || (tag1 < tag2))
+	{
+		m_collisionMatrix[tag1][Tag::Max - 1 - tag2] = flag;
+		return;
+	}
+	else
+	{
+		m_collisionMatrix[tag2][Tag::Max - 1 - tag1] = flag;
+		return;
+	}
 	return;
 }
 

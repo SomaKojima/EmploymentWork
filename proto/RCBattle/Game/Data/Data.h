@@ -1,12 +1,10 @@
 #pragma once
 
-enum WallType
+enum Tag
 {
-	Bottom,
-	Right,
-	Front,
-	Left,
-	Back,
+	Default,
+	Player1,
+	Player2,
 
-	Type_Max
+	Max
 };

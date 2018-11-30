@@ -29,7 +29,6 @@ public:
 	EntityVector();
 	~EntityVector();
 
-	void Initialize();
 	void Update(DX::StepTimer const& timer);
 	void Render(Game* game);
 	void Finalize();
@@ -41,9 +40,13 @@ public:
 	Entity* CheckChildList(std::list<Entity*>* childList, char* name);
 
 private:
+	void FinalizeList(EntityList* list);
+private:
 	
 	// 実体のコンテナ
 	EntityList* m_vector;
+	// 実体のコンテナ
+	EntityList* m_add;
 	// 実体のコンテナ
 	EntityList* m_destroy;
 };

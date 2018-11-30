@@ -80,5 +80,4 @@ void SceneManager::ChangeScene()
 
 	// ƒV[ƒ“‚Ì‰Šú‰» 
 	m_currentScene->Initialize(m_game);
-	entityVector->Initialize();
 }

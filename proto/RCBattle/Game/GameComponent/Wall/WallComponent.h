@@ -12,7 +12,7 @@
 class WallComponent : public Component
 {
 public:
-	WallComponent(WallType wallType);
+	WallComponent();
 	~WallComponent();
 
 	// ‰Šú‰»

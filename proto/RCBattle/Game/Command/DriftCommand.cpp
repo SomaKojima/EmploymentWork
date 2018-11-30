@@ -14,8 +14,11 @@ DriftCommand::~DriftCommand()
 
 void DriftCommand::Excute(Entity & entity)
 {
-	Vector3 vel = entity.GetTrans().GetVel();
-	entity.GetTrans().SetVel(vel);
-	vel.y = 0.055f;
-	entity.GetTrans().SetVel(vel);
+	const float accelerator = 1.0f;
+	const float InitialVelocity = 1.0f;
+	Vector3 accel = entity.GetTrans().GetAccel();
+
+	accel.z = 0.0f;
+
+	entity.GetTrans().SetAccel(accel);
 }
