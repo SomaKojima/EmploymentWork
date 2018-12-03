@@ -4,11 +4,13 @@
 #include "../Object/SpriteData.h"
 #include "../Object/EntityVector.h"
 #include "../Object/Entity.h"
+#include "../Data/Data.h"
 
 #include "../GameComponent/Button/StartButton.h"
 #include "../GameComponent/Button/ButtonComponent.h"
 
 #include "../GameComponent/Title/LineOfSightComponent.h"
+#include "../GameComponent/Title/ShotComponent.h"
 
 using namespace std;
 using namespace DirectX;
@@ -36,14 +38,16 @@ void SceneTitle::Initialize(Game * game)
 
 	// 車
 	entity = new Entity();
-	entity->AddComponent(new UIRenderer(spriteData->GetTitleCar(), RECT{ 0,0,300,300 }, 1.0f));
-	entity->AddComponent(new LineOfSightComponent(Vector3(400.0f, 50.0f, 0.0f), 60));
+	entity->AddComponent(new UIRenderer(spriteData->GetTitleCar(), RECT{ 0,0,300,300 }, 0.1f));
+	int time = 60;
+	entity->AddComponent(new LineOfSightComponent(Vector3(400.0f, 50.0f, 0.0f), time));
+	entity->AddComponent(new ShotComponent(time));
 	entity->GetTrans().SetPos(Vector3(600.0f, 20.0f, 0.0f));
 	entityVector->Add(entity);
 
 	// スタートボタン
 	entity = new Entity();
-	entity->AddComponent(new UIRenderer(spriteData->GetButton(), RECT{ 0, 0, 300, 100 }, 1.0f));
+	entity->AddComponent(new UIRenderer(spriteData->GetButton(), RECT{ 0, 0, 300, 100 }, 0.1f));
 	ButtonComponent* button = new ButtonComponent();
 	StartButton* start = new StartButton();
 	button->AddFunc(start);

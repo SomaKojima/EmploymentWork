@@ -290,5 +290,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 // Exit helper
 void ExitGame()
 {
+	g_game->OnDeviceLost();
     PostQuitMessage(0);
 }

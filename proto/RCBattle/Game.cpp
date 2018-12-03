@@ -360,10 +360,12 @@ void Game::CreateDeviceDependentResources()
 	SpriteData* spriteData = SpriteData::GetInstance();
 	spriteData->Create(device);
 
+	// シーン管理の初期化
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->SetGame(this);
 
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+	// シーンの設定と初期化
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
 	sceneManager->Initialize();
 }
 

@@ -29,18 +29,7 @@ void AdvanceCommand::Excute(Entity & entity)
 	const float InitialVelocity = 1.0f;
 	Vector3 accel = entity.GetTrans().GetAccel();
 	
-	//// ‰‘¬“x
-	//float firstVec = 0.01f;
-	//// ‰Á‘¬“x
-	//float accel = (vel.z * vel.z) - (firstVec * firstVec);
-	//// ‹——£
-	//float distance = firstVec + 
 	accel.z = 0.03f;
-
-	/*if (vel.z >= 0.2f)
-	{
-		vel.z = 0.2f;
-	}*/
 
 	entity.GetTrans().SetAccel(accel);
 }

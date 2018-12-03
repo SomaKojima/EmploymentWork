@@ -45,7 +45,8 @@ bool Entity::Update(DX::StepTimer const & timer)
 	// マトリクス/座標の更新
 	m_transform.m_vel += m_transform.m_accel;
 	m_transform.m_accel = Vector3::Zero;
-	m_transform.m_pos += Vector3::Transform(m_transform.m_vel, m_transform.m_dir);
+
+	m_transform.m_pos += m_transform.m_vel;
 	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
 
 	UpdateMatrix();

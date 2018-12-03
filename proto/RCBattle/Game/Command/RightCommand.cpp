@@ -44,21 +44,5 @@ void RightCommand::Excute(Entity & entity)
 
 	dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
 
-	/*Vector3 forward = Vector3::Forward;
-	Vector3 entityForward = Vector3::Transform(forward, entity.GetTrans().GetDir());
-	float cos_ = forward.Dot(entityForward);
-	float currentRot = acos(cos_);
-
-	Vector3 right = Vector3::Right;
-	float rightFlag = right.Dot(entityForward);
-	if (rightFlag <= 0)
-	{
-		dir = Quaternion::CreateFromAxisAngle(upDir, currentRot - XMConvertToRadians(degree));
-	}
-	else
-	{
-		dir = Quaternion::CreateFromAxisAngle(upDir, -currentRot - XMConvertToRadians(degree));
-	}*/
-
 	entity.GetTrans().SetDir(entity.GetTrans().GetDir() * dir);
 }

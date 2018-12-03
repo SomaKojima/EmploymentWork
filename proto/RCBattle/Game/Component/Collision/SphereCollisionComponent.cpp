@@ -81,12 +81,12 @@ void SphereCollisionComponent::Finalize()
 void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, DirectX::SimpleMath::Vector3 & hitPos)
 {
 	// 速度を取得
-	Vector3 vec = m_me->GetTrans().GetVel();
+	Vector3 vec = m_me->GetTrans().GetLocalVel();
 
 	// 面の法線
 	Vector3 normal(triangle->plane.a, triangle->plane.b, triangle->plane.c);
 
-	// 法線の向きのベクトルをなくす
+	// 法線の向きのベクトルをなくす(プレイヤーの向きに合わせる・ローカル座標にする)
 	Quaternion q;
 	m_me->GetTrans().GetDir().Conjugate(q);
 
@@ -110,6 +110,6 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 
 	//m_me->GetTrans().SetPos(pos);
 
-	m_me->GetTrans().SetVel(w_vec);
+	m_me->GetTrans().SetLocalVel(w_vec);
 }
 

@@ -238,6 +238,12 @@
     <ClInclude Include="Game\GameComponent\Title\LineOfSightComponent.h">
       <Filter>Game\GameComponent\Title</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameComponent\Title\ShotComponent.h">
+      <Filter>Game\GameComponent\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Title\AppearTitleComponent.h">
+      <Filter>Game\GameComponent\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -377,6 +383,12 @@
       <Filter>Game\Command</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameComponent\Title\LineOfSightComponent.cpp">
+      <Filter>Game\GameComponent\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Title\ShotComponent.cpp">
+      <Filter>Game\GameComponent\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Title\AppearTitleComponent.cpp">
       <Filter>Game\GameComponent\Title</Filter>
     </ClCompile>
   </ItemGroup>

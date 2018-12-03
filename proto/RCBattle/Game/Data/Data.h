@@ -8,3 +8,20 @@ enum Tag
 
 	Max
 };
+
+enum SpriteDepth
+{
+	ZERO,
+	ONE,
+	TOW,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN,
+	EIGHT,
+	NINE,
+	TEN,
+
+	SPRITE_DEPTH_MAX
+};

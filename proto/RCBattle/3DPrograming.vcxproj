@@ -199,7 +199,9 @@
     <ClInclude Include="Game\GameComponent\Button\StartButton.h" />
     <ClInclude Include="Game\GameComponent\EnemyComponent.h" />
     <ClInclude Include="Game\GameComponent\GameComponentLib.h" />
+    <ClInclude Include="Game\GameComponent\Title\AppearTitleComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\LineOfSightComponent.h" />
+    <ClInclude Include="Game\GameComponent\Title\ShotComponent.h" />
     <ClInclude Include="Game\GameComponent\Wall\WallComponent.h" />
     <ClInclude Include="Game\Object\Entity.h" />
     <ClInclude Include="Game\Object\EntityVector.h" />
@@ -255,7 +257,9 @@
     <ClCompile Include="Game\GameComponent\Button\ButtonComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Button\StartButton.cpp" />
     <ClCompile Include="Game\GameComponent\EnemyComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Title\AppearTitleComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\LineOfSightComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Title\ShotComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Wall\WallComponent.cpp" />
     <ClCompile Include="Game\Object\Entity.cpp" />
     <ClCompile Include="Game\Object\EntityVector.cpp" />

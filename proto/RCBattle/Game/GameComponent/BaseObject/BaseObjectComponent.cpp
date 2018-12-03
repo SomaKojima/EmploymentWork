@@ -59,7 +59,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	}
 
 	// ‘¬“x‚ðŽæ“¾
-	Vector3 vel = m_me->GetTrans().GetVel();
+	Vector3 vel = m_me->GetTrans().GetLocalVel();
 
 	// –€ŽC‚ÌŒvŽZ
 	float s = 0.9f;
@@ -87,7 +87,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	}*/
 
 	//m_me->GetTrans().SetAccel(accel);
-	m_me->GetTrans().SetVel(vel);
+	m_me->GetTrans().SetLocalVel(vel);
 
 	m_current.clear();
 }

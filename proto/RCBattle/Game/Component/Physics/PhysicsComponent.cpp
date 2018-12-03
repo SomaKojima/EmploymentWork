@@ -60,7 +60,7 @@ void PhysicsComponent::Initialize()
 /// <param name="timer">ŽžŠÔ</param>
 void PhysicsComponent::Update(DX::StepTimer const& timer)
 {
-	Vector3 vel = m_me->GetTrans().GetVel();
+	Vector3 vel = m_me->GetTrans().GetLocalVel();
 	//Vector3 accel = m_me->GetTrans().GetAccel();
 
 	if(m_isFriction)
@@ -81,7 +81,7 @@ void PhysicsComponent::Update(DX::StepTimer const& timer)
 		vel += gravity;
 	}
 
-	m_me->GetTrans().SetVel(vel);
+	m_me->GetTrans().SetLocalVel(vel);
 	//_me->GetTrans().SetAccel(accel);
 }
 

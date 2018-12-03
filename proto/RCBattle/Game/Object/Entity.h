@@ -52,7 +52,10 @@ public:
 	{ 
 		m_dir = DirectX::SimpleMath::Quaternion::CreateFromYawPitchRoll(angle.y, angle.x, angle.z); 
 	}
-	void SetVel(DirectX::SimpleMath::Vector3 &vel) { m_vel = vel; }
+	//void SetVel(DirectX::SimpleMath::Vector3 &vel) { m_vel = vel; }
+	void SetLocalVel(DirectX::SimpleMath::Vector3 &vel) { 
+		m_vel = DirectX::SimpleMath::Vector3::Transform(vel, m_dir); 
+	}
 	void SetAccel(DirectX::SimpleMath::Vector3 &accel) { m_accel = accel; }
 	void SetPos(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
 	void SetRadius(float radius) { m_radius = radius; }
@@ -64,7 +67,12 @@ public:
 
 	// getter
 	DirectX::SimpleMath::Quaternion& GetDir() { return m_dir; }
-	DirectX::SimpleMath::Vector3& GetVel() { return m_vel; }
+	//DirectX::SimpleMath::Vector3& GetVel() { return m_vel; }
+	DirectX::SimpleMath::Vector3& GetLocalVel() { 
+		DirectX::SimpleMath::Quaternion q;
+		m_dir.Conjugate(q);
+		return DirectX::SimpleMath::Vector3::Transform(m_vel, q); 
+	}
 	DirectX::SimpleMath::Vector3& GetAccel() { return m_accel; }
 	DirectX::SimpleMath::Vector3& GetPos() { return m_pos; }
 	float& GetRadius() { return m_radius; }

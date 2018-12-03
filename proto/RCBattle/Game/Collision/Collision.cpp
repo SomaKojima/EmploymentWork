@@ -32,7 +32,7 @@ bool Collision::HitCheck_Sphere_Sphere(const Sphere& sphere, const Sphere& spher
 {
 	if (!&sphere || !&sphere2) return false;
 
-	// 中心間の距離の平方を計算
+	// 中心間の距離の平方を計算f
 	DirectX::SimpleMath::Vector3 d = sphere.center - sphere2.center;
 	float dist2 = d.Dot(d);
 

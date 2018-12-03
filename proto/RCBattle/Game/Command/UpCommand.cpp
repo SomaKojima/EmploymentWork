@@ -14,8 +14,8 @@ UpCommand::~UpCommand()
 
 void UpCommand::Excute(Entity & entity)
 {
-	Vector3 vel = entity.GetTrans().GetVel();
-	entity.GetTrans().SetVel(vel);
+	Vector3 vel = entity.GetTrans().GetLocalVel();
+	entity.GetTrans().SetLocalVel(vel);
   	vel.y = 0.05f;
-	entity.GetTrans().SetVel(vel);
+	entity.GetTrans().SetLocalVel(vel);
 }
