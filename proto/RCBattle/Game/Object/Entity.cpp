@@ -31,9 +31,10 @@ Entity::~Entity()
 void Entity::Initialize()
 {
 	// 初期移動
-	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
+	Matrix local = Matrix::CreateFromQuaternion(m_transform.dir.Get()) * Matrix::CreateTranslation(m_transform.pos.Get());
+	m_transform.local.Set(local);
 
-	UpdateMatrix();
+	//UpdateMatrix();
 
 	// 初期空間登録
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
@@ -43,13 +44,19 @@ void Entity::Initialize()
 bool Entity::Update(DX::StepTimer const & timer)
 {
 	// マトリクス/座標の更新
-	m_transform.m_vel += m_transform.m_accel;
-	m_transform.m_accel = Vector3::Zero;
+	Vector3 vel = m_transform.vel.Get() + m_transform.accel.Get();
+	m_transform.vel.Set(vel);
 
-	m_transform.m_pos += m_transform.m_vel;
-	m_transform.m_local = Matrix::CreateFromQuaternion(m_transform.m_dir) * Matrix::CreateTranslation(m_transform.m_pos);
+	Vector3 accel = Vector3::Zero;
+	m_transform.accel.Set(accel);
 
-	UpdateMatrix();
+	Vector3 pos = m_transform.pos.Get() + m_transform.vel.Get();
+	m_transform.pos.Set(pos);
+
+	Matrix local = Matrix::CreateFromQuaternion(m_transform.dir.Get()) * Matrix::CreateTranslation(m_transform.pos.Get());
+	m_transform.local.Set(local);
+
+	//UpdateMatrix();
 
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->Register(this);
@@ -80,9 +87,9 @@ void Entity::DeleteChild()
 
 void Entity::UpdateMatrix()
 {
-	if (m_parent)
+	/*if (m_parent)
 	{
-		m_transform.m_world = m_transform.m_local * m_parent->GetTrans().GetWorld();
+		m_transform.world.Set(m_parent->GetTrans().world.Get() * m_transform.world.Get());
 	}
 	else
 	{
@@ -91,6 +98,6 @@ void Entity::UpdateMatrix()
 	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
 	{
 		(*ite)->UpdateMatrix();
-	}
+	}*/
 }
 

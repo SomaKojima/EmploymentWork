@@ -244,6 +244,9 @@
     <ClInclude Include="Game\GameComponent\Title\AppearTitleComponent.h">
       <Filter>Game\GameComponent\Title</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Object\Transform.h">
+      <Filter>Game\Obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

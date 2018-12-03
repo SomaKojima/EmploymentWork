@@ -210,6 +210,7 @@
     <ClInclude Include="Game\Object\Function\FunctionComponent.h" />
     <ClInclude Include="Game\Object\ModelData.h" />
     <ClInclude Include="Game\Object\SpriteData.h" />
+    <ClInclude Include="Game\Object\Transform.h" />
     <ClInclude Include="Game\Scene\SceneManager.h" />
     <ClInclude Include="Game\Scene\ScenePlay.h" />
     <ClInclude Include="Game\Scene\SceneTitle.h" />
