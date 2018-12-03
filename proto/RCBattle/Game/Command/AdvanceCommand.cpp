@@ -27,9 +27,9 @@ void AdvanceCommand::Excute(Entity & entity)
 {
 	const float accelerator = 1.0f;
 	const float InitialVelocity = 1.0f;
-	Vector3 accel = entity.GetTrans().GetAccel();
+	Vector3 accel = entity.GetTrans().accel.GetLocal();
 	
 	accel.z = 0.03f;
 
-	entity.GetTrans().SetAccel(accel);
+	entity.GetTrans().accel.SetLocal(accel);
 }

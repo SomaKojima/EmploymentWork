@@ -51,7 +51,7 @@ Entity* CarFactory::CreateCar()
 	// 球の当たり判定コンポーネントの追加
 	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 1.5f));
 
-	entity->GetTrans().SetRadius(1.5f);
+	entity->GetTrans().radius.Set(1.5f);
 
 	return entity;
 }

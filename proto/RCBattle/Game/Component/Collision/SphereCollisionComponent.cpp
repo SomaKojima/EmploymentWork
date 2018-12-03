@@ -47,7 +47,7 @@ void SphereCollisionComponent::Update(DX::StepTimer const & timer)
 
 void SphereCollisionComponent::LateUpdate(DX::StepTimer const & timer)
 {
-	m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().GetWorld()));
+	m_sphere.center = Vector3::Transform(m_center, (m_me->GetTrans().world.Get()));
 }
 
 /// <summary>
@@ -57,7 +57,7 @@ void SphereCollisionComponent::LateUpdate(DX::StepTimer const & timer)
 /// <param name="game">ゲーム</param>
 void SphereCollisionComponent::Draw(Game * game)
 {
-	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	Matrix world = m_me->GetTrans().world.Get() * Matrix::CreateTranslation(m_center);
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成
@@ -81,14 +81,14 @@ void SphereCollisionComponent::Finalize()
 void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, DirectX::SimpleMath::Vector3 & hitPos)
 {
 	// 速度を取得
-	Vector3 vec = m_me->GetTrans().GetLocalVel();
+	Vector3 vec = m_me->GetTrans().vel.GetLocal();
 
 	// 面の法線
 	Vector3 normal(triangle->plane.a, triangle->plane.b, triangle->plane.c);
 
 	// 法線の向きのベクトルをなくす(プレイヤーの向きに合わせる・ローカル座標にする)
 	Quaternion q;
-	m_me->GetTrans().GetDir().Conjugate(q);
+	m_me->GetTrans().dir.Get().Conjugate(q);
 
 	// 壁ずり
 	Vector3 normal2 = Vector3::Transform(normal, q);
@@ -105,11 +105,11 @@ void SphereCollisionComponent::HitBack(const Collision::Triangle * triangle, Dir
 	}
 
 	// 座標の更新
-	Vector3 pos = m_me->GetTrans().GetPos();
-	pos += Vector3::Transform(w_vec, m_me->GetTrans().GetDir());
+	Vector3 pos = m_me->GetTrans().pos.Get();
+	pos += Vector3::Transform(w_vec, m_me->GetTrans().dir.Get());
 
 	//m_me->GetTrans().SetPos(pos);
 
-	m_me->GetTrans().SetLocalVel(w_vec);
+	m_me->GetTrans().vel.SetLocal(w_vec);
 }
 

@@ -29,7 +29,7 @@ void AppearTitleComponent::Update(DX::StepTimer const & timer)
 		// ƒ^ƒCƒgƒ‹ƒƒS
 		Entity* entity = new Entity();
 		entity->AddComponent(new UIRenderer(SpriteData::GetInstance()->GetTitleLogo(), RECT{ 0, 0, 500, 300 }, 0.3f));
-		entity->GetTrans().SetPos(Vector3(150.0f, 50.0f, 0.0f));
+		entity->GetTrans().pos.Set(Vector3(150.0f, 50.0f, 0.0f));
 		EntityVector::GetInstance()->Add(entity);
 	}
 

@@ -45,7 +45,7 @@ BoxCollisionComponent::~BoxCollisionComponent()
 /// <param name="game">ゲーム</param>
 void BoxCollisionComponent::Draw(Game * game)
 {
-	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	Matrix world = m_me->GetTrans().world.Get() * Matrix::CreateTranslation(m_center);
 	if (m_obj == nullptr)
 	{
 		// デバッグ用当たり判定モデルの作成

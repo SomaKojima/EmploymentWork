@@ -38,10 +38,10 @@ void MyCamera::TitleCamera()
 
 void MyCamera::GameCamera()
 {
-	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().GetDir());
-	Vector3 eyePos =  m_target->GetTrans().GetWorld().Translation() + eyeVec;
+	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().dir.Get());
+	Vector3 eyePos =  m_target->GetTrans().world.Get().Translation() + eyeVec;
 
-	SetPositionTarget(eyePos, m_target->GetTrans().GetWorld().Translation());
+	SetPositionTarget(eyePos, m_target->GetTrans().world.Get().Translation());
 }
 
 DirectX::SimpleMath::Vector3 MyCamera::GetUp()
@@ -53,7 +53,7 @@ DirectX::SimpleMath::Vector3 MyCamera::GetUp()
 		up = Vector3::Up;
 		break;
 	case MyCamera::GAME:
-		up = Vector3::Transform(Vector3::Up, m_target->GetTrans().GetDir());
+		up = Vector3::Transform(Vector3::Up, m_target->GetTrans().dir.Get());
 		break;
 	}
 

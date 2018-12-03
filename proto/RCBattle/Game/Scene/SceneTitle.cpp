@@ -42,7 +42,7 @@ void SceneTitle::Initialize(Game * game)
 	int time = 60;
 	entity->AddComponent(new LineOfSightComponent(Vector3(400.0f, 50.0f, 0.0f), time));
 	entity->AddComponent(new ShotComponent(time));
-	entity->GetTrans().SetPos(Vector3(600.0f, 20.0f, 0.0f));
+	entity->GetTrans().pos.Set(Vector3(600.0f, 20.0f, 0.0f));
 	entityVector->Add(entity);
 
 	// スタートボタン
@@ -52,7 +52,7 @@ void SceneTitle::Initialize(Game * game)
 	StartButton* start = new StartButton();
 	button->AddFunc(start);
 	entity->AddComponent(button);
-	entity->GetTrans().SetPos(Vector3(250.0f, 400.0f, 0.0f));
+	entity->GetTrans().pos.Set(Vector3(250.0f, 400.0f, 0.0f));
 	entityVector->Add(entity);
 
 	// 背景

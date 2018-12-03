@@ -269,6 +269,7 @@
     <ClCompile Include="Game\Object\Function\FunctionComponent.cpp" />
     <ClCompile Include="Game\Object\ModelData.cpp" />
     <ClCompile Include="Game\Object\SpriteData.cpp" />
+    <ClCompile Include="Game\Object\Transform.cpp" />
     <ClCompile Include="Game\Scene\SceneManager.cpp" />
     <ClCompile Include="Game\Scene\ScenePlay.cpp" />
     <ClCompile Include="Game\Scene\SceneTitle.cpp" />

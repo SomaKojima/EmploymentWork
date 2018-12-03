@@ -40,7 +40,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	}
 
 	// Žp¨‚ð‡‚í‚¹
-	Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().GetDir());
+	Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
 	// ‰ñ“]Ž²ŒvŽZ
 	Vector3 axis = upDir.Cross(-m_normal);
 	if (axis != Vector3::Zero)
@@ -53,13 +53,13 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 		}
 		float rot = acos(cosine);
 		Quaternion  Q1 = Quaternion::CreateFromAxisAngle(axis, rot);
-		Quaternion r = Quaternion::Slerp(m_me->GetTrans().GetDir(), m_me->GetTrans().GetDir() * Q1, 0.1f);
+		Quaternion r = Quaternion::Slerp(m_me->GetTrans().dir.Get(), m_me->GetTrans().dir.Get() * Q1, 0.1f);
 
-		m_me->GetTrans().SetDir(r);//m_me->GetTrans().GetDir() * Q1);
+		m_me->GetTrans().dir.Set(r);//m_me->GetTrans().GetDir() * Q1);
 	}
 
 	// ‘¬“x‚ðŽæ“¾
-	Vector3 vel = m_me->GetTrans().GetLocalVel();
+	Vector3 vel = m_me->GetTrans().vel.GetLocal();
 
 	// –€ŽC‚ÌŒvŽZ
 	float s = 0.9f;
@@ -74,7 +74,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	Vector3 gravity = (m_normal * (9.8f / (60 * 60)));
 	// d—Í‚ðƒvƒŒƒCƒ„[‚ÌŒü‚«‚É‡‚í‚¹‚é
 	Quaternion q;
-	m_me->GetTrans().GetDir().Conjugate(q);
+	m_me->GetTrans().dir.Get().Conjugate(q);
 	gravity = Vector3::Transform(gravity, q);
 	// d—Í‚ð‰ÁŽZ
 	vel += gravity;
@@ -87,7 +87,7 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	}*/
 
 	//m_me->GetTrans().SetAccel(accel);
-	m_me->GetTrans().SetLocalVel(vel);
+	m_me->GetTrans().vel.SetLocal(vel);
 
 	m_current.clear();
 }

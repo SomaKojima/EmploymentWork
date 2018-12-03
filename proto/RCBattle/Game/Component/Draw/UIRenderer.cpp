@@ -20,7 +20,7 @@ UIRenderer::~UIRenderer()
 
 void UIRenderer::Draw(Game * game)
 {
-	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().GetLocal());
+	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().local.Get());
 
 	game->GetSpriteBatch()->Draw(m_texture.Get(), Vector2(pos.x, pos.y), &m_rect, m_color,
 		0.0f, Vector2::Zero, 1.0f, DirectX::SpriteEffects_None, m_depth);

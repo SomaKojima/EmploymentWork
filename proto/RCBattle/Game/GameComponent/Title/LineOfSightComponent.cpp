@@ -23,7 +23,7 @@ LineOfSightComponent::~LineOfSightComponent()
 
 void LineOfSightComponent::Initialize()
 {
-	Vector3 pos = m_me->GetTrans().GetPos();
+	Vector3 pos = m_me->GetTrans().pos.Get();
 	Vector3 vec = m_end - pos;
 	float length = vec.Length();
 	m_speed = length / m_time;
@@ -31,7 +31,7 @@ void LineOfSightComponent::Initialize()
 	m_dir = vec;
 
 	// ‘¬“x‚ðÝ’è‚·‚é
-	m_me->GetTrans().SetLocalVel(m_dir * m_speed);
+	m_me->GetTrans().vel.SetLocal(m_dir * m_speed);
 }
 
 void LineOfSightComponent::Update(DX::StepTimer const & timer)
@@ -40,7 +40,7 @@ void LineOfSightComponent::Update(DX::StepTimer const & timer)
 	if (m_time == 0)
 	{
 		Vector3 vel = Vector3::Zero;
-		m_me->GetTrans().SetLocalVel(vel);
+		m_me->GetTrans().vel.SetLocal(vel);
 	}
 
 	if(m_time >= 0)

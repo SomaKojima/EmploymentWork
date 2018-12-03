@@ -31,7 +31,7 @@ void ShotComponent::Update(DX::StepTimer const & timer)
 		entity->AddComponent(UICom);
 		entity->AddComponent(new LineOfSightComponent(Vector3(300.0f, 100.0f, 0.0f), 60));
 		entity->AddComponent(new AppearTitleComponent(60));
-		entity->GetTrans().SetPos(m_me->GetTrans().GetPos() + Vector3(0.0f, 80.0f, 0.0f));
+		entity->GetTrans().pos.Set(m_me->GetTrans().pos.Get() + Vector3(0.0f, 80.0f, 0.0f));
 		EntityVector::GetInstance()->Add(entity);
 	}
 

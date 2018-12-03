@@ -14,8 +14,8 @@ DownCommand::~DownCommand()
 
 void DownCommand::Excute(Entity & entity)
 {
-	Vector3 vel = entity.GetTrans().GetLocalVel();
-	entity.GetTrans().SetLocalVel(vel);
+	Vector3 vel = entity.GetTrans().vel.GetLocal();
+	entity.GetTrans().vel.SetLocal(vel);
 	vel.y = -0.05f;
-	entity.GetTrans().SetLocalVel(vel);
+	entity.GetTrans().vel.SetLocal(vel);
 }

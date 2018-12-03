@@ -34,7 +34,7 @@ void ScenePlay::Initialize(Game * game)
 	entity = carFactory->CreateCar(); 
 	entity->SetName("Player");
 	entity->SetTag(Tag::Player1);
-	entity->GetTrans().SetPos(Vector3(0.0f, 3.0f, -5.0f));
+	entity->GetTrans().pos.Set(Vector3(0.0f, 3.0f, -5.0f));
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
 	entity->AddComponent(new BaseObjectComponent());
@@ -48,7 +48,7 @@ void ScenePlay::Initialize(Game * game)
 	// 敵
 	// 車の作成
 	entity = carFactory->CreateCar();
-	entity->GetTrans().SetPos(Vector3(0.0f, 1.5f, 10.0f));
+	entity->GetTrans().pos.Set(Vector3(0.0f, 1.5f, 10.0f));
 	entity->SetTag(Tag::Player2);
 	entity->AddComponent(new BaseObjectComponent());
 	entity->AddComponent(new EnemeyComponent());
@@ -58,7 +58,7 @@ void ScenePlay::Initialize(Game * game)
 	// 部屋の作成
 	entity = new Entity();
 	entity->SetName("Wall");
-	entity->GetTrans().SetRadius(200);
+	entity->GetTrans().radius.Set(200);
 	// モデルコンポーネントの追加
 	entity->AddComponent(new ModelComponent(modelData->GetRoom(), ModelComponent::Type::Sky));
 	// メッシュの当たり判定の追加

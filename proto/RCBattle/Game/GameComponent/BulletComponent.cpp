@@ -20,7 +20,7 @@ void BulletComponent::Initialize()
 void BulletComponent::Update(DX::StepTimer const & timer)
 {
 	// ‰æ–ÊŠOo‚½ê‡Á‚·
-	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().GetWorld());
+	Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().world.Get());
 	if(pos.x > 25.0f ||
 		pos.x < -25.0f ||
 		pos.z > 25.0f ||

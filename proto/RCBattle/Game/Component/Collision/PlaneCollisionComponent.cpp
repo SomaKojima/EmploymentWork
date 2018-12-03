@@ -57,8 +57,8 @@ void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 	CollisionComponent::Update(timer);
 	Quaternion dir = Quaternion::CreateFromYawPitchRoll(m_angle.y, m_angle.x, m_angle.z);
 
-	dir *= m_me->GetTrans().GetDir();
-	Vector3 pos = m_me->GetTrans().GetPos() + m_center;
+	dir *= m_me->GetTrans().dir.Get();
+	Vector3 pos = m_me->GetTrans().pos.Get() + m_center;
 
 	Matrix world = Matrix::CreateFromQuaternion(dir) * Matrix::CreateTranslation(pos);
 
@@ -74,7 +74,7 @@ void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)
 
 void PlaneCollisionComponent::Draw(Game * game)
 {
-	Matrix world = m_me->GetTrans().GetWorld() * Matrix::CreateTranslation(m_center);
+	Matrix world = m_me->GetTrans().world.Get() * Matrix::CreateTranslation(m_center);
 
 	if (m_obj == nullptr)
 	{

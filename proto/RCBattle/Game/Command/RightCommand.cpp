@@ -40,9 +40,9 @@ void RightCommand::Excute(Entity & entity)
 	Quaternion dir = Quaternion::Identity;
 	float degree = 1.0f;
 
-	Vector3 upDir = Vector3::Transform(Vector3::Up, entity.GetTrans().GetDir());
+	Vector3 upDir = Vector3::Transform(Vector3::Up, entity.GetTrans().dir.Get());
 
 	dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
 
-	entity.GetTrans().SetDir(entity.GetTrans().GetDir() * dir);
+	entity.GetTrans().dir.Set(entity.GetTrans().dir.Get() * dir);
 }

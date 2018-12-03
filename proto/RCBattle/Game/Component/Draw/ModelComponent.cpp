@@ -62,7 +62,7 @@ void ModelComponent::Draw(Game * game)
 
 	if (game)
 	{
-		m_model->Draw(game->GetContext(), *game->GetStates(), m_me->GetTrans().GetWorld(), game->GetView(), game->GetProjection());
+		m_model->Draw(game->GetContext(), *game->GetStates(), m_me->GetTrans().world.Get(), game->GetView(), game->GetProjection());
 	}
 }
 

@@ -394,6 +394,9 @@
     <ClCompile Include="Game\GameComponent\Title\AppearTitleComponent.cpp">
       <Filter>Game\GameComponent\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Object\Transform.cpp">
+      <Filter>Game\Obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

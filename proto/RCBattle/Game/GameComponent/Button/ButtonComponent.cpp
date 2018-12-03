@@ -26,7 +26,7 @@ void ButtonComponent::Update(DX::StepTimer const & timer)
 		auto state = Mouse::Get().GetState();
 
 		m_tracker.Update(state);
-		Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().GetWorld());
+		Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().world.Get());
 		RECT rect = RECT{
 			static_cast<LONG>(pos.x),
 			static_cast<LONG>(pos.y),

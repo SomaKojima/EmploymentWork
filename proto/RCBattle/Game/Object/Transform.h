@@ -1,21 +1,17 @@
 #pragma once
 
 class Entity;
+
 // 変形の情報
 class Transform
 {
 	friend Entity;
 public:
-	Transform() :
-		dir(*this),
-		vel(*this),
-		accel(*this),
-		pos(*this),
-		radius(*this),
-		world(*this)
-	{};
+	Transform(Entity* _entity);
+		
+	Transform();
 
-	~Transform() {};
+	~Transform();
 
 private:
 	/// <summary>
@@ -37,13 +33,13 @@ private:
 	{
 		friend Transform;
 		DirectX::SimpleMath::Quaternion direction;		// 方向		
-		// コンストラクタ
+														// コンストラクタ
 		Direction(Transform& trans) :direction(DirectX::SimpleMath::Quaternion::Identity), TransBaseData(trans) {}
 	public:
 
 		// アクセサリ
 		void Set(DirectX::SimpleMath::Quaternion dir) { direction = dir; }
-		void Set(DirectX::SimpleMath::Vector3 &angle) { direction = DirectX::SimpleMath::Quaternion::CreateFromYawPitchRoll(angle.y, angle.x, angle.z); }
+		void Set(DirectX::SimpleMath::Vector3 angle) { direction = DirectX::SimpleMath::Quaternion::CreateFromYawPitchRoll(angle.y, angle.x, angle.z); }
 		DirectX::SimpleMath::Quaternion& Get() { return direction; }
 	};
 
@@ -55,7 +51,7 @@ private:
 	{
 		friend Transform;
 		DirectX::SimpleMath::Vector3 m_vel;			// 速度
-		// コンストラクタ
+													// コンストラクタ
 		Velocity(Transform& trans) :m_vel(DirectX::SimpleMath::Vector3::Zero), TransBaseData(trans) {}
 	public:
 		DirectX::SimpleMath::Vector3& Get() { return m_vel; }
@@ -65,8 +61,8 @@ private:
 			return DirectX::SimpleMath::Vector3::Transform(m_vel, q);
 		}
 
-		void Set(DirectX::SimpleMath::Vector3 &vel) { m_vel = vel; }
-		void SetLocal(DirectX::SimpleMath::Vector3 &vel) {
+		void Set(DirectX::SimpleMath::Vector3 vel) { m_vel = vel; }
+		void SetLocal(DirectX::SimpleMath::Vector3 vel) {
 			m_vel = DirectX::SimpleMath::Vector3::Transform(vel, trans.dir.Get());
 		}
 	};
@@ -78,15 +74,15 @@ private:
 	{
 		friend Transform;
 		DirectX::SimpleMath::Vector3 m_pos;			// 座標
-		// コンストラクタ
+													// コンストラクタ
 		Position(Transform& trans) : m_pos(DirectX::SimpleMath::Vector3::Zero), TransBaseData(trans) {}
 	public:
 
 		DirectX::SimpleMath::Vector3& Get() { return m_pos; }
 
-		void Set(DirectX::SimpleMath::Vector3& pos) { m_pos = pos; }
+		void Set(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
 	};
-	
+
 	/// <summary>
 	/// 半径のクラス
 	/// </summary>
@@ -99,7 +95,7 @@ private:
 	public:
 
 		float Get() { return m_radius; }
-		void Set(float& radius) { m_radius = radius; }
+		void Set(float radius) { m_radius = radius; }
 	};
 
 	/// <summary>
@@ -108,14 +104,9 @@ private:
 	class World : public TransBaseData
 	{
 		friend Transform;
-		DirectX::SimpleMath::Matrix m_world;		// ワールド座標
-		World(Transform& trans) : m_world(DirectX::SimpleMath::Matrix::Identity), TransBaseData(trans) {}
+		World(Transform& trans) : TransBaseData(trans) {}
 	public:
-		DirectX::SimpleMath::Matrix& Get() { return m_world; }
-		void Set(DirectX::SimpleMath::Matrix& world) {
-			m_world = world;
-			trans.pos.Set(m_world.Translation());
-		}
+		DirectX::SimpleMath::Matrix& Get();
 	};
 
 	/// <summary>
@@ -128,18 +119,23 @@ private:
 		Local(Transform& trans) : m_local(DirectX::SimpleMath::Matrix::Identity), TransBaseData(trans) {}
 	public:
 		DirectX::SimpleMath::Matrix& Get() { return m_local; }
-		void Set(DirectX::SimpleMath::Matrix& local) { 
+		void Set(DirectX::SimpleMath::Matrix local) {
 			m_local = local;
 			trans.pos.Set(m_local.Translation());
 		}
 	};
 
-public:	
+public:
+	Entity* entity;
+
 	Direction dir;
 	Velocity vel;
 	Velocity accel;		// 加速度
 	Position pos;
 	Radius radius;
 
-	World world;		// ワールド座標
+	World world;
+	Local local;
 };
+
+
