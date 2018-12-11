@@ -65,7 +65,7 @@ void PlaneCollisionComponent::Update(DX::StepTimer const & timer)
 	for (auto ite = m_triangle.begin(); ite != m_triangle.end(); ite++)
 	{
 		(*ite).Set_Triangle(world, dir);
-	}
+	}	
 }
 
 void PlaneCollisionComponent::LateUpdate(DX::StepTimer const & timer)

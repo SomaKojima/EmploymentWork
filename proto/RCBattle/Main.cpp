@@ -281,6 +281,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         // A menu is active and the user presses a key that does not correspond
         // to any mnemonic or accelerator key. Ignore so we don't produce an error beep.
         return MAKELRESULT(0, MNC_CLOSE);
+	case WM_CREATE:
+		ShowCursor(FALSE);
+		break;
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

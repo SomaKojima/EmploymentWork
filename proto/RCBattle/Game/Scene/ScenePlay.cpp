@@ -65,4 +65,6 @@ void ScenePlay::Initialize(Game * game)
 	entity->AddComponent(new MeshCollisionComponent(L"Resources\\Obj\\room.obj"));
 	// ƒRƒ“ƒeƒi‚É’Ç‰Á
 	entityVector->Add(entity);
+
+	game->GetCamera()->Initialize();
 }

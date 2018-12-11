@@ -7,8 +7,26 @@ using namespace DirectX::SimpleMath;
 MyCamera::MyCamera()
 	:
 	m_angle(0.0f),
+	m_dir(Quaternion::Identity),
+	m_distance(Vector2::Zero),
+	m_mousePos(Vector2::Zero),
 	m_mode(GAME)
 {
+}
+
+void MyCamera::Initialize()
+{
+	switch (m_mode)
+	{
+	case MyCamera::TITLE:
+		TitleInitialize();
+		break;
+	case MyCamera::GAME:
+		GameInitialize();
+		break;
+	default:
+		break;
+	}
 }
 
 void MyCamera::Update()
@@ -26,6 +44,10 @@ void MyCamera::Update()
 	}
 }
 
+void MyCamera::TitleInitialize()
+{
+}
+
 void MyCamera::TitleCamera()
 {
 	Vector3 eye = Vector3(8.0f, 4.0f, 0.0f);
@@ -36,10 +58,43 @@ void MyCamera::TitleCamera()
 	SetPositionTarget(eye, Vector3(0.0f, 0.0f, 0.0f));
 }
 
+void MyCamera::GameInitialize()
+{
+	m_dir = m_target->GetTrans().dir.Get();
+
+	// マウスの取得
+	Mouse::State mouse = Mouse::Get().GetState();
+
+	// マウスの位置を更新
+	SetCursorPos(0, 0);
+	Vector2 mousePos((float)mouse.x, (float)mouse.y);
+
+	m_mousePos = mousePos;
+}
+
 void MyCamera::GameCamera()
 {
-	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().dir.Get());
-	Vector3 eyePos =  m_target->GetTrans().world.Get().Translation() + eyeVec;
+	/*Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().dir.Get());
+	Vector3 eyePos =  m_target->GetTrans().world.Get().Translation() + eyeVec;*/
+
+	// マウスの取得
+	Mouse::State mouse = Mouse::Get().GetState();
+
+	// マウスの座標を取得
+	Vector2 mousePos((float)mouse.x, (float)mouse.y);
+	m_distance += (mousePos - m_mousePos) * 0.001f;
+
+	Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_distance.x, m_distance.y, m_dir.z);
+	m_dir = q;
+
+	// マウスの位置を更新
+
+	//SetCursorPos(0, 0);
+	
+
+
+	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_dir);
+	Vector3 eyePos = m_target->GetTrans().world.Get().Translation() + eyeVec;
 
 	SetPositionTarget(eyePos, m_target->GetTrans().world.Get().Translation());
 }

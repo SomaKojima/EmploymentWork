@@ -18,6 +18,8 @@ void DriftCommand::Excute(Entity & entity)
 	const float InitialVelocity = 1.0f;
 	Vector3 accel = entity.GetTrans().accel.Get();
 
+	
+
 	accel.z = 0.0f;
 
 	entity.GetTrans().accel.Set(accel);
