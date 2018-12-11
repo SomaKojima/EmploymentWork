@@ -71,6 +71,9 @@
     <Filter Include="Game\GameComponent\Title">
       <UniqueIdentifier>{17d2ccb8-2a30-4f09-8045-b5f25a800466}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Component\Camera">
+      <UniqueIdentifier>{550176fe-be20-4fb6-8cfa-10707827117a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -247,6 +250,9 @@
     <ClInclude Include="Game\Object\Transform.h">
       <Filter>Game\Obj</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Component\Camera\CameraComponent.h">
+      <Filter>Game\Component\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -396,6 +402,9 @@
     </ClCompile>
     <ClCompile Include="Game\Object\Transform.cpp">
       <Filter>Game\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component\Camera\CameraComponent.cpp">
+      <Filter>Game\Component\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

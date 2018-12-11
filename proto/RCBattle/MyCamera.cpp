@@ -77,15 +77,15 @@ void MyCamera::GameCamera()
 	/*Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().dir.Get());
 	Vector3 eyePos =  m_target->GetTrans().world.Get().Translation() + eyeVec;*/
 
-	// マウスの取得
-	Mouse::State mouse = Mouse::Get().GetState();
+	//// マウスの取得
+	//Mouse::State mouse = Mouse::Get().GetState();
 
-	// マウスの座標を取得
-	Vector2 mousePos((float)mouse.x, (float)mouse.y);
-	m_distance += (mousePos - m_mousePos) * 0.001f;
+	//// マウスの座標を取得
+	//Vector2 mousePos((float)mouse.x, (float)mouse.y);
+	//m_distance += (mousePos - m_mousePos) * 0.001f;
 
-	Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_distance.x, m_distance.y, m_dir.z);
-	m_dir = q;
+	//Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_distance.x, m_distance.y, m_dir.z);
+	//m_dir = q;
 
 	// マウスの位置を更新
 

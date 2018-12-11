@@ -175,6 +175,7 @@
     <ClInclude Include="Game\Command\RightCommand.h" />
     <ClInclude Include="Game\Command\ShotCommand.h" />
     <ClInclude Include="Game\Command\UpCommand.h" />
+    <ClInclude Include="Game\Component\Camera\CameraComponent.h" />
     <ClInclude Include="Game\Component\Collision\BoxCollisionComponent.h" />
     <ClInclude Include="Game\Component\Collision\CollisionComponent.h" />
     <ClInclude Include="Game\Component\Collision\MeshCollisionComponent.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Game\Command\RightCommand.cpp" />
     <ClCompile Include="Game\Command\ShotCommand.cpp" />
     <ClCompile Include="Game\Command\UpCommand.cpp" />
+    <ClCompile Include="Game\Component\Camera\CameraComponent.cpp" />
     <ClCompile Include="Game\Component\Collision\BoxCollisionComponent.cpp" />
     <ClCompile Include="Game\Component\Collision\CollisionComponent.cpp" />
     <ClCompile Include="Game\Component\Collision\MeshCollisionComponent.cpp" />

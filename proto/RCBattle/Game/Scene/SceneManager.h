@@ -29,7 +29,6 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void Initialize();
 	void Update(DX::StepTimer const& timer);
 	void Render();
 	void Finalize();
@@ -38,8 +37,9 @@ public:
 
 	void SetGame(Game* game) { m_game = game; }
 
-private:
 	void ChangeScene();
+private:
+	void Initialize();
 
 private:
 	SceneID m_currentSceneID;

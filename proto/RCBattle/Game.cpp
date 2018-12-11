@@ -367,7 +367,7 @@ void Game::CreateDeviceDependentResources()
 
 	// シーンの設定と初期化
 	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
-	sceneManager->Initialize();
+	sceneManager->ChangeScene();
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.

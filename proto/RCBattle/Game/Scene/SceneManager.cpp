@@ -20,7 +20,8 @@ SceneManager::~SceneManager()
 
 void SceneManager::Initialize()
 {
-	ChangeScene();
+	// ƒJƒƒ‰‚ðŽæ“¾‚·‚é
+
 }
 
 void SceneManager::Update(DX::StepTimer const& timer)
@@ -77,6 +78,8 @@ void SceneManager::ChangeScene()
 		break;
 	}
 	m_currentSceneID = m_changeSceneID;
+
+	Initialize();
 
 	// ƒV[ƒ“‚Ì‰Šú‰» 
 	m_currentScene->Initialize(m_game);
