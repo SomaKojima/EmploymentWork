@@ -8,7 +8,6 @@
 //--------------------------------------------------------------------------------------
 #include "pch.h"
 #include "Camera.h"
-#include "Game\Component\Camera\Camera.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;

@@ -2,7 +2,9 @@
 
 enum Tag
 {
-	Default,
+	Camera = -1,
+
+	Default = 0,
 	Player1,
 	Player2,
 

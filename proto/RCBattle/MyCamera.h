@@ -19,10 +19,11 @@ private:
 
 	DirectX::SimpleMath::Quaternion m_dir;
 
-	DirectX::SimpleMath::Vector2 m_mousePos;
-	DirectX::SimpleMath::Vector2 m_distance;
+	float m_x;
+	float m_y;
 
 	Entity* m_target;
+
 public:
 	MyCamera();
 
@@ -43,4 +44,14 @@ public:
 	void GameCamera();
 
 	DirectX::SimpleMath::Vector3 GetUp();
+
+	DirectX::SimpleMath::Quaternion GetDir() { return m_dir; }
+	void SetDir(DirectX::SimpleMath::Quaternion dir) { m_dir = dir; }
+
+	float GetRotateX() { return m_x; }
+	float GetRotateY() { return m_y; }
+	void SetRotateX(float x) { m_x = x; }
+	void SetRotateY(float y) { m_y = y; }
+
+
 };

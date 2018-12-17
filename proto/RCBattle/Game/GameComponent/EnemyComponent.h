@@ -22,4 +22,5 @@ public:
 
 private:
 	int m_count;
+	Entity* m_target;
 };

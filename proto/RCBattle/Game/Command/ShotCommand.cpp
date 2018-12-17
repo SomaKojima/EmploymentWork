@@ -45,10 +45,10 @@ void ShotCommand::Excute(Entity & entity)
 	Entity* _entity = bulletFactory->CreateBullet();
 
 	_entity->GetTrans().dir.Set(entity.GetTrans().dir.Get());
-	_entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.2f));
+	_entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.5f));
 
 	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().world.Get());
-	pos += Vector3::Transform(Vector3(0.0f, -1.0f, 3.0f), entity.GetTrans().dir.Get());
+	pos += Vector3::Transform(Vector3(0.0f, -0.1f, 2.0f), entity.GetTrans().dir.Get());
 	_entity->GetTrans().pos.Set(pos);
 
 	_entity->SetName("Bullet");

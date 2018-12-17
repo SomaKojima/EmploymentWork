@@ -69,7 +69,6 @@ void Game::Initialize(HWND window, int width, int height)
     m_deviceResources->SetWindow(window, width, height);
 
     m_deviceResources->CreateDeviceResources();
-  
 	CreateDeviceDependentResources();
 
     m_deviceResources->CreateWindowSizeDependentResources();
@@ -81,6 +80,7 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+
 }
 
 #pragma region Frame Update
@@ -196,24 +196,24 @@ void Game::Render()
 	/*EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Render(this);*/
 
-	Vector2 pos = Vector2::Zero;
-	// デバッグテキストの描画
-	for (int i = 0; i < 18; i++)
-	{
-		if (m_debugText[i] == nullptr)
-		{
-			break;
-		}
-		m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
-		pos.y += 32;
-	}
-	//	FPSの描画
-	wchar_t name[30] = L"fps : ";
-	wchar_t fpsBuf[30] = L"";
-	int a = m_timer.GetFramesPerSecond();
-	_itow( a , fpsBuf, 10);
-	wcscat(name, fpsBuf);
-	m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
+	//Vector2 pos = Vector2::Zero;
+	//// デバッグテキストの描画
+	//for (int i = 0; i < 18; i++)
+	//{
+	//	if (m_debugText[i] == nullptr)
+	//	{
+	//		break;
+	//	}
+	//	m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
+	//	pos.y += 32;
+	//}
+	////	FPSの描画
+	//wchar_t name[30] = L"fps : ";
+	//wchar_t fpsBuf[30] = L"";
+	//int a = m_timer.GetFramesPerSecond();
+	//_itow( a , fpsBuf, 10);
+	//wcscat(name, fpsBuf);
+	//m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
 
 
 	//wchar_t name2[30] = L"num : ";

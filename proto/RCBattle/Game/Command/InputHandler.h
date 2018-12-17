@@ -42,6 +42,16 @@ private:
 	Command* m_keyLeftArrow;
 	// 右キーのコマンド
 	Command* m_keyRightArrow;
+
+	// Wキーのコマンド
+	Command* m_keyW;
+	// Aキーのコマンド
+	Command* m_keyA;
+	// Sキーのコマンド
+	Command* m_keyS;
+	// Dキーのコマンド
+	Command* m_keyD;
+
 	// スペースキーのコマンド
 	Command* m_keySpace;
 	// Cキーのコマンド
@@ -49,12 +59,17 @@ private:
 	// Zキーのコマンド
 	Command* m_keyZ;
 
-
 	// Zトリガーキーのコマンド
 	Command* m_tKeyZ;
 
+	// マウスのクリック
+	Command* m_clickLeft;
+
 	// キーボードのトリガー
 	DirectX::Keyboard::KeyboardStateTracker tracker;
+
+	// マウスのトリガー
+	DirectX::Mouse::ButtonStateTracker mouseTracker;
 
 	// コマンドのコンテナ
 	std::vector<Command*> m_commandVector;

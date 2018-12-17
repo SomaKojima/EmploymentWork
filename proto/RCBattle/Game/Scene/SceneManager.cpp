@@ -21,7 +21,6 @@ SceneManager::~SceneManager()
 void SceneManager::Initialize()
 {
 	// ƒJƒƒ‰‚ğæ“¾‚·‚é
-
 }
 
 void SceneManager::Update(DX::StepTimer const& timer)

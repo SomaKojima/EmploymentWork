@@ -32,6 +32,8 @@ public:
 	void SetRECT(RECT rect) { m_rect = rect; }
 	void SetDepth(float depth) { m_depth = depth; }
 
+	void SetTexture(ID3D11ShaderResourceView* texture) { m_texture = texture; }
+
 	RECT GetRECT() { return m_rect; }
 	float GetDepth() { return m_depth; }
 

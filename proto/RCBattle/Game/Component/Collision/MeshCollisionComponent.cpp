@@ -97,7 +97,7 @@ void MeshCollisionComponent::Draw(Game * game)
 	}
 	else
 	{
-		m_obj->DrawCollision(game->GetContext(), game->GetView(), game->GetProjection());
+		//m_obj->DrawCollision(game->GetContext(), game->GetView(), game->GetProjection());
 	}
 }
 

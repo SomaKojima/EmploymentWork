@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MyCamera.h"
+#include "Mouse.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -8,8 +9,8 @@ MyCamera::MyCamera()
 	:
 	m_angle(0.0f),
 	m_dir(Quaternion::Identity),
-	m_distance(Vector2::Zero),
-	m_mousePos(Vector2::Zero),
+	m_x(0.0f),
+	m_y(0.0f),
 	m_mode(GAME)
 {
 }
@@ -61,42 +62,61 @@ void MyCamera::TitleCamera()
 void MyCamera::GameInitialize()
 {
 	m_dir = m_target->GetTrans().dir.Get();
-
-	// マウスの取得
-	Mouse::State mouse = Mouse::Get().GetState();
-
-	// マウスの位置を更新
-	SetCursorPos(0, 0);
-	Vector2 mousePos((float)mouse.x, (float)mouse.y);
-
-	m_mousePos = mousePos;
 }
 
 void MyCamera::GameCamera()
 {
-	/*Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_target->GetTrans().dir.Get());
-	Vector3 eyePos =  m_target->GetTrans().world.Get().Translation() + eyeVec;*/
+	//// ----- ウィンドウの情報が取得できない場合 -----
+	//if (!GetActiveWindow())
+	//{
+	//	return;
+	//}
 
-	//// マウスの取得
-	//Mouse::State mouse = Mouse::Get().GetState();
+	//// ----- ウィンドウの長方形(Rectangle)の情報を取得する
+	//RECT wRect;
+	//GetWindowRect(GetActiveWindow(), &wRect);
+	//int width = (wRect.right - wRect.left) / 2;
+	//int height = (wRect.bottom - wRect.top) / 2;
 
-	//// マウスの座標を取得
-	//Vector2 mousePos((float)mouse.x, (float)mouse.y);
-	//m_distance += (mousePos - m_mousePos) * 0.001f;
+	//// ----- ウィンドウの中心座標を取得する -----
+	//int centralX = wRect.left + width;
+	//int centralY = wRect.top + height;
 
-	//Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_distance.x, m_distance.y, m_dir.z);
-	//m_dir = q;
+	//// ----- マウスの座標を取得する -----
+	//POINT p;
+	//GetCursorPos(&p);
 
-	// マウスの位置を更新
+	//// ----- マウスの移動量を取得する -----
+	//Vector2 mouseVec = Vector2(p.x - centralX, p.y - centralY);
+	//mouseVec *= 0.1f;
 
-	//SetCursorPos(0, 0);
-	
+
+	//// ----- 回転を更新 -----
+	//m_x += XMConvertToRadians(mouseVec.x);
+	//m_y += XMConvertToRadians(mouseVec.y);
+
+	//if (m_y > XMConvertToRadians(90.0f))
+	//{
+	//	m_y = XMConvertToRadians(90.0f);
+	//}
+	//else if (m_y < -XMConvertToRadians(90.0f))
+	//{
+	//	m_y = -XMConvertToRadians(90.0f);
+	//}
+
+	//Quaternion q = Quaternion::CreateFromYawPitchRoll(0.0f, m_y, 0.0f);
+
+	//m_dir = q * m_target->GetTrans().dir.Get();
+
+	//// ----- マウスの座標をウィンドウの中央に固定する -----
+	//SetCursorPos(centralX, centralY);
 
 
-	Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 2.0f, -5.0f), m_dir);
-	Vector3 eyePos = m_target->GetTrans().world.Get().Translation() + eyeVec;
+	//// ----- カメラの座標を求める -----
+	//Vector3 eyeVec = Vector3::Transform(Vector3::Forward * 5.0f, m_dir);
+	//Vector3 eyePos = m_target->GetTrans().world.Get().Translation() + eyeVec;
 
-	SetPositionTarget(eyePos, m_target->GetTrans().world.Get().Translation());
+	//SetPositionTarget(eyePos, m_target->GetTrans().world.Get().Translation());
 }
 
 DirectX::SimpleMath::Vector3 MyCamera::GetUp()
@@ -108,7 +128,7 @@ DirectX::SimpleMath::Vector3 MyCamera::GetUp()
 		up = Vector3::Up;
 		break;
 	case MyCamera::GAME:
-		up = Vector3::Transform(Vector3::Up, m_target->GetTrans().dir.Get());
+		up = Vector3::Transform(Vector3::Up, m_dir);
 		break;
 	}
 

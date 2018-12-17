@@ -7,6 +7,7 @@
 #include "../Component/TestComponent.h"
 #include "../GameComponent/GameComponentLib.h"
 #include "../Data/Data.h"
+#include "../GameComponent/Player/CameraRotateComponent.h"
 
 using namespace std;
 using namespace DirectX;
@@ -14,6 +15,7 @@ using namespace DirectX::SimpleMath;
 
 void ScenePlay::Initialize(Game * game)
 {
+	ShowCursor(FALSE);
 	game->GetCamera()->SetCameraModel(MyCamera::CAMERA_MODE::GAME);
 	// モデルを読み込む
 	ModelData* modelData = ModelData::GetInstance();
@@ -38,6 +40,7 @@ void ScenePlay::Initialize(Game * game)
 	// 入力コンポーネントを追加
 	entity->AddComponent(new InputComponent());
 	entity->AddComponent(new BaseObjectComponent());
+	entity->AddComponent(new CameraRotateComponent(game->GetCamera()));
 
 	// コンテナに追加
 	entityVector->Add(entity);

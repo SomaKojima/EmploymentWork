@@ -18,6 +18,7 @@ using namespace DirectX::SimpleMath;
 
 void SceneTitle::Initialize(Game * game)
 {
+	ShowCursor(TRUE);
 	game->GetCamera()->SetCameraModel(MyCamera::CAMERA_MODE::TITLE);
 	// モデルを読み込む
 	ModelData* modelData = ModelData::GetInstance();
@@ -59,4 +60,21 @@ void SceneTitle::Initialize(Game * game)
 	entity = new Entity();
 	entity->AddComponent(new UIRenderer(spriteData->GetTitleBG(), RECT{ 0, 0, 800, 600 }));
 	entityVector->Add(entity);
+
+
+	//// 選択１
+	//Entity* select = new Entity();
+	//entity->AddComponent(new UIRenderer(spriteData->GetButton(), RECT{ 0, 0, 300, 100 }, 0.1f));
+	//entityVector->Add(entity);
+
+	//// 選択２
+	//Entity* entity2 = new Entity();
+	//entity->AddComponent(new UIRenderer(spriteData->GetButton(), RECT{ 0, 0, 300, 100 }, 0.1f));
+	//entityVector->Add(entity);
+	//
+
+	//// 選択マネージャー
+	//entity = new Entity();
+	//entity->AddComponent(new SelectManager(entity, entity2));
+	//entityVector->Add(entity);
 }
