@@ -9,6 +9,9 @@
 #include "ShotCommand.h"
 #include "DriftCommand.h"
 
+#include "RightMoveCommand.h"
+#include "LeftMoveCommand.h"
+
 #include "../Object/Factory/BulletFactory.h"
 
 using namespace std;
@@ -26,8 +29,10 @@ InputHandler::InputHandler()
 
 	m_keyW = new AdvanceCommand();
 	m_keyS = new RecessionCommand();
-	m_keyA = new LeftCommand();
-	m_keyD = new RightCommand();
+	/*m_keyA = new LeftCommand();
+	m_keyD = new RightCommand();*/
+	m_keyA = new LeftMoveCommand();
+	m_keyD = new RightMoveCommand();
 
 	m_keySpace = new UpCommand();
 	m_keyC = new DownCommand();
@@ -94,7 +99,7 @@ vector<Command*>& InputHandler::GetInputHnadle()
 	if (kb.D) m_commandVector.push_back(m_keyD);
 
 	// ----- ƒWƒƒƒ“ƒv -----
-	if (kb.Space) m_commandVector.push_back(m_keySpace);
+	if (tracker.pressed.Space) m_commandVector.push_back(m_keySpace);
 
 	// ----- ‚µ‚á‚ª‚Þ -----
 	if (kb.C) m_commandVector.push_back(m_keyC);

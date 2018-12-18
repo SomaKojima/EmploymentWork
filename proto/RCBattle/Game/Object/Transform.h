@@ -40,7 +40,8 @@ private:
 		// アクセサリ
 		void Set(DirectX::SimpleMath::Quaternion dir) { direction = dir; }
 		void Set(DirectX::SimpleMath::Vector3 angle) { direction = DirectX::SimpleMath::Quaternion::CreateFromYawPitchRoll(angle.y, angle.x, angle.z); }
-		DirectX::SimpleMath::Quaternion& Get() { return direction; }
+		DirectX::SimpleMath::Quaternion Get() { return direction; }
+		DirectX::SimpleMath::Quaternion GetWorld();
 	};
 
 
@@ -54,8 +55,8 @@ private:
 													// コンストラクタ
 		Velocity(Transform& trans) :m_vel(DirectX::SimpleMath::Vector3::Zero), TransBaseData(trans) {}
 	public:
-		DirectX::SimpleMath::Vector3& Get() { return m_vel; }
-		DirectX::SimpleMath::Vector3& GetLocal() {
+		DirectX::SimpleMath::Vector3 Get() { return m_vel; }
+		DirectX::SimpleMath::Vector3 GetLocal() {
 			DirectX::SimpleMath::Quaternion q;
 			trans.dir.Get().Conjugate(q);
 			return DirectX::SimpleMath::Vector3::Transform(m_vel, q);
@@ -78,7 +79,7 @@ private:
 		Position(Transform& trans) : m_pos(DirectX::SimpleMath::Vector3::Zero), TransBaseData(trans) {}
 	public:
 
-		DirectX::SimpleMath::Vector3& Get() { return m_pos; }
+		DirectX::SimpleMath::Vector3 Get() { return m_pos; }
 
 		void Set(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
 	};
@@ -106,7 +107,7 @@ private:
 		friend Transform;
 		World(Transform& trans) : TransBaseData(trans) {}
 	public:
-		DirectX::SimpleMath::Matrix& Get();
+		DirectX::SimpleMath::Matrix Get();
 	};
 
 	/// <summary>
@@ -118,7 +119,7 @@ private:
 		DirectX::SimpleMath::Matrix m_local;		// ワールド座標
 		Local(Transform& trans) : m_local(DirectX::SimpleMath::Matrix::Identity), TransBaseData(trans) {}
 	public:
-		DirectX::SimpleMath::Matrix& Get() { return m_local; }
+		DirectX::SimpleMath::Matrix Get() { return m_local; }
 		void Set(DirectX::SimpleMath::Matrix local) {
 			m_local = local;
 			trans.pos.Set(m_local.Translation());

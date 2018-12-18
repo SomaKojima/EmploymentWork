@@ -71,7 +71,9 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	vel *= Vector3(s, 1.0f, s);
 
 	// 重力の計算
-	Vector3 gravity = (m_normal * (9.8f / (60 * 60)));
+	float grav = 9.8f;
+	grav = 10.0f;
+	Vector3 gravity = (m_normal * (grav / (60 * 60)));
 	// 重力をプレイヤーの向きに合わせる
 	Quaternion q;
 	m_me->GetTrans().dir.Get().Conjugate(q);
@@ -102,6 +104,15 @@ void BaseObjectComponent::Finalize()
 
 void BaseObjectComponent::OnCollide(Entity & collide, Collision::CollisionData * data)
 {
+	/*if (collide.GetName() == "Bullet")
+	{
+		m_count--;
+		if (m_count < 0)
+		{
+			SceneManager* sceneManager = SceneManager::GetInstance();
+			sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+		}
+	}*/
 	if (collide.GetName() == "Wall")
 	{
 		for (auto ite = data->triangleList.begin(); ite != data->triangleList.end(); ite++)

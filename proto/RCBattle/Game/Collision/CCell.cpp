@@ -295,6 +295,7 @@ void CLiner8TreeManager::InitCollisionMatrix()
 
 	SetCollisionMatrix(Tag::Player1, Tag::Player1, false);
 	SetCollisionMatrix(Tag::Player2, Tag::Player2, false);
+	SetCollisionMatrix(Tag::Room, Tag::Room, false);
 }
 
 bool CLiner8TreeManager::GetCollisionMatrix(Tag tag1, Tag tag2)

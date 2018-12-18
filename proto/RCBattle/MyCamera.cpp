@@ -9,8 +9,6 @@ MyCamera::MyCamera()
 	:
 	m_angle(0.0f),
 	m_dir(Quaternion::Identity),
-	m_x(0.0f),
-	m_y(0.0f),
 	m_mode(GAME)
 {
 }

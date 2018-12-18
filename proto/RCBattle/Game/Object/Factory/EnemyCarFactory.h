@@ -16,7 +16,6 @@
 /// 前方宣言
 /// </summary>
 class Entity;
-class MyCamera;
 
 /// <summary>
 /// 車ファクトリクラス
@@ -28,9 +27,9 @@ public:
 	CarFactory();
 	// デストラクタ
 	~CarFactory();
-	
+
 	// 車の生成
-	Entity* CreateCar(MyCamera* camera);
+	Entity* CreateCar();
 
 private:
 	DirectX::Model* m_carBodyModel;	// 車のモデル

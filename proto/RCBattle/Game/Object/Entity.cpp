@@ -12,7 +12,7 @@ Entity::Entity()
 	:
 	m_name(""),
 	m_tag(Tag::Default),
-	m_transform(Transform()),
+	m_transform(Transform(this)),
 	m_parent(nullptr),
 	m_pOFT(new OBJECT_FOR_TREE(this)),
 	m_pEOF(new EntityOfTree(this)),
@@ -56,15 +56,18 @@ bool Entity::Update(DX::StepTimer const & timer)
 	Matrix local = Matrix::CreateFromQuaternion(m_transform.dir.Get()) * Matrix::CreateTranslation(m_transform.pos.Get());
 	m_transform.local.Set(local);
 
-	//UpdateMatrix();
-
 	CLiner8TreeManager* cLiner8TreeManager = CLiner8TreeManager::GetInstance();
 	cLiner8TreeManager->Register(this);
+
 	return false;
 }
 
 void Entity::Finalize()
 {
+	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
+	{
+		(*ite)->Destroy();
+	}
 }
 
 void Entity::Destroy()
@@ -85,19 +88,15 @@ void Entity::DeleteChild()
 {
 }
 
-void Entity::UpdateMatrix()
+Entity * Entity::GetChild(char * name)
 {
-	/*if (m_parent)
-	{
-		m_transform.world.Set(m_parent->GetTrans().world.Get() * m_transform.world.Get());
-	}
-	else
-	{
-		m_transform.m_world = m_transform.m_local;
-	}
 	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
 	{
-		(*ite)->UpdateMatrix();
-	}*/
-}
+		if ((*ite)->GetName() == name) return (*ite);
 
+		Entity* entity = (*ite)->GetChild(name);
+		if (entity) return entity;
+	}
+
+	return nullptr;
+}

@@ -8,6 +8,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
+#include <list>
 #include "../../pch.h"
 #include "ShotCommand.h"
 #include "../Object/Factory/BulletFactory.h"
@@ -37,24 +38,29 @@ ShotCommand::~ShotCommand()
 /// <param name="entity">実体</param>
 void ShotCommand::Excute(Entity & entity)
 {
-	// 実体のコンテナ
-	EntityVector* entityVector = EntityVector::GetInstance();
+	// ----- 武器を取得 -----
+	Entity* cannon = entity.GetChild("cannon");
+	if (cannon)
+	{
+		// 実体のコンテナ
+		EntityVector* entityVector = EntityVector::GetInstance();
 
-	// 弾の作成
-	BulletFactory* bulletFactory = BulletFactory::GetInstance();
-	Entity* _entity = bulletFactory->CreateBullet();
+		// 弾の作成
+		BulletFactory* bulletFactory = BulletFactory::GetInstance();
+		Entity* _entity = bulletFactory->CreateBullet();
 
-	_entity->GetTrans().dir.Set(entity.GetTrans().dir.Get());
-	_entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.5f));
+		_entity->GetTrans().dir.Set(cannon->GetTrans().dir.GetWorld());
+		_entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.5f));
 
-	Vector3 pos = Vector3::Transform(Vector3::Zero, entity.GetTrans().world.Get());
-	pos += Vector3::Transform(Vector3(0.0f, -0.1f, 2.0f), entity.GetTrans().dir.Get());
-	_entity->GetTrans().pos.Set(pos);
+		Vector3 pos = Vector3::Transform(Vector3::Zero, cannon->GetTrans().world.Get());
+		pos += Vector3::Transform(Vector3(0.0f, -0.1f, 2.0f), cannon->GetTrans().dir.GetWorld());
+		_entity->GetTrans().pos.Set(pos);
 
-	_entity->SetName("Bullet");
+		_entity->SetName("Bullet");
 
-	// プレイヤーの弾の設定
-	_entity->SetTag(Tag::Player1);
-	
-	entityVector->Add(_entity);
+		// プレイヤーの弾の設定
+		_entity->SetTag(Tag::Player1);
+		
+		entityVector->Add(_entity);
+	}
 }

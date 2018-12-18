@@ -171,8 +171,10 @@
     <ClInclude Include="Game\Command\DriftCommand.h" />
     <ClInclude Include="Game\Command\InputHandler.h" />
     <ClInclude Include="Game\Command\LeftCommand.h" />
+    <ClInclude Include="Game\Command\LeftMoveCommand.h" />
     <ClInclude Include="Game\Command\RecessionCommand.h" />
     <ClInclude Include="Game\Command\RightCommand.h" />
+    <ClInclude Include="Game\Command\RightMoveCommand.h" />
     <ClInclude Include="Game\Command\ShotCommand.h" />
     <ClInclude Include="Game\Command\UpCommand.h" />
     <ClInclude Include="Game\Component\Collision\BoxCollisionComponent.h" />
@@ -194,12 +196,15 @@
     <ClInclude Include="Game\DebugCollision\DebugPlane.h" />
     <ClInclude Include="Game\DebugCollision\DebugSphere.h" />
     <ClInclude Include="Game\GameComponent\BaseObject\BaseObjectComponent.h" />
+    <ClInclude Include="Game\GameComponent\BaseObject\EnemyCannonComponent.h" />
+    <ClInclude Include="Game\GameComponent\BaseObject\flowComponent.h" />
     <ClInclude Include="Game\GameComponent\BulletComponent.h" />
     <ClInclude Include="Game\GameComponent\Button\ButtonComponent.h" />
     <ClInclude Include="Game\GameComponent\Button\StartButton.h" />
     <ClInclude Include="Game\GameComponent\EnemyComponent.h" />
     <ClInclude Include="Game\GameComponent\GameComponentLib.h" />
     <ClInclude Include="Game\GameComponent\Player\CameraRotateComponent.h" />
+    <ClInclude Include="Game\GameComponent\Player\PlayerCannonComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\AppearTitleComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\LineOfSightComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\ShotComponent.h" />
@@ -208,6 +213,7 @@
     <ClInclude Include="Game\Object\EntityVector.h" />
     <ClInclude Include="Game\Object\Factory\BulletFactory.h" />
     <ClInclude Include="Game\Object\Factory\CarFactory.h" />
+    <ClInclude Include="Game\Object\Factory\EnemyCarFactory.h" />
     <ClInclude Include="Game\Object\Function\FunctionComponent.h" />
     <ClInclude Include="Game\Object\ModelData.h" />
     <ClInclude Include="Game\Object\SpriteData.h" />
@@ -235,8 +241,10 @@
     <ClCompile Include="Game\Command\DriftCommand.cpp" />
     <ClCompile Include="Game\Command\InputHandler.cpp" />
     <ClCompile Include="Game\Command\LeftCommand.cpp" />
+    <ClCompile Include="Game\Command\LeftMoveCommand.cpp" />
     <ClCompile Include="Game\Command\RecessionCommand.cpp" />
     <ClCompile Include="Game\Command\RightCommand.cpp" />
+    <ClCompile Include="Game\Command\RightMoveCommand.cpp" />
     <ClCompile Include="Game\Command\ShotCommand.cpp" />
     <ClCompile Include="Game\Command\UpCommand.cpp" />
     <ClCompile Include="Game\Component\Collision\BoxCollisionComponent.cpp" />
@@ -255,11 +263,14 @@
     <ClCompile Include="Game\DebugCollision\DebugPlane.cpp" />
     <ClCompile Include="Game\DebugCollision\DebugSphere.cpp" />
     <ClCompile Include="Game\GameComponent\BaseObject\BaseObjectComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\BaseObject\EnemyCannonComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\BaseObject\flowComponent.cpp" />
     <ClCompile Include="Game\GameComponent\BulletComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Button\ButtonComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Button\StartButton.cpp" />
     <ClCompile Include="Game\GameComponent\EnemyComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Player\CameraRotateComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Player\PlayerCannonComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\AppearTitleComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\LineOfSightComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\ShotComponent.cpp" />
@@ -302,7 +313,16 @@
       <FileType>Document</FileType>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
+    <MeshContentTask Include="FBX\car_body.FBX">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\car_cannon.FBX">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
     <MeshContentTask Include="FBX\room.FBX">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\sphere.FBX">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Models\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
   </ItemGroup>

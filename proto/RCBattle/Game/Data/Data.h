@@ -7,6 +7,7 @@ enum Tag
 	Default = 0,
 	Player1,
 	Player2,
+	Room,
 
 	Max
 };

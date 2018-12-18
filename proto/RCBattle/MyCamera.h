@@ -19,9 +19,6 @@ private:
 
 	DirectX::SimpleMath::Quaternion m_dir;
 
-	float m_x;
-	float m_y;
-
 	Entity* m_target;
 
 public:
@@ -47,11 +44,5 @@ public:
 
 	DirectX::SimpleMath::Quaternion GetDir() { return m_dir; }
 	void SetDir(DirectX::SimpleMath::Quaternion dir) { m_dir = dir; }
-
-	float GetRotateX() { return m_x; }
-	float GetRotateY() { return m_y; }
-	void SetRotateX(float x) { m_x = x; }
-	void SetRotateY(float y) { m_y = y; }
-
 
 };

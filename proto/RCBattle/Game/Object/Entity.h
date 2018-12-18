@@ -55,9 +55,6 @@ public:
 	// 子の削除
 	void DeleteChild();
 
-	// マトリクスの更新
-	void UpdateMatrix();
-
 	//　プロパティ
 	// セッター
 	void SetName(char* name) { m_name = name; }
@@ -70,6 +67,7 @@ public:
 	Transform& GetTrans() { return m_transform; }
 	Entity* GetParent() { return m_parent; }
 	std::list<Entity*>* GetChildList() { return &m_childlist; }
+	Entity* GetChild(char* name);
 	OBJECT_FOR_TREE* GetOFT() { return m_pOFT; }
 	EntityOfTree* GetEOF() { return m_pEOF; }
 

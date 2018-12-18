@@ -77,6 +77,15 @@ MeshCollisionComponent::~MeshCollisionComponent()
 void MeshCollisionComponent::Update(DX::StepTimer const & timer)
 {
 	CollisionComponent::Update(timer);
+	/*for (auto ite = m_triangles.begin(); ite != m_triangles.end(); ite++)
+	{
+		Quaternion dir = m_me->GetTrans().dir.Get() * ;
+		Vector3 pos = m_me->GetTrans().pos.Get();
+
+		Matrix world = Matrix::CreateFromQuaternion(dir) * Matrix::CreateTranslation(pos);
+
+		(*ite).Set_Triangle(world, dir);
+	}*/
 }
 
 void MeshCollisionComponent::LateUpdate(DX::StepTimer const & timer)

@@ -11,7 +11,7 @@
 class EnemeyComponent : public Component
 {
 public:
-	EnemeyComponent();
+	EnemeyComponent(Entity* target);
 	~EnemeyComponent();
 
 	// XV

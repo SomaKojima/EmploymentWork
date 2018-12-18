@@ -13,11 +13,17 @@ public:
 
 	DirectX::Model* GetBullet() { return m_bulletModel.get(); }
 	DirectX::Model* GetCar() { return m_carModel.get(); }
+	DirectX::Model* GetCarBody() { return m_carBodyModel.get(); }
+	DirectX::Model* GetCarCannon() { return m_carCannonModel.get(); }
 	DirectX::Model* GetRoom() { return m_roomModel.get(); }
+	DirectX::Model* GetSphere() { return m_sphere.get(); }
 
 private:
 
 	std::unique_ptr<DirectX::Model> m_bulletModel;
 	std::unique_ptr<DirectX::Model> m_carModel;
+	std::unique_ptr<DirectX::Model> m_carBodyModel;
+	std::unique_ptr<DirectX::Model> m_carCannonModel;
 	std::unique_ptr<DirectX::Model> m_roomModel;
+	std::unique_ptr<DirectX::Model> m_sphere;
 };

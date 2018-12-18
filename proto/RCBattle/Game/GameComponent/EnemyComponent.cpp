@@ -5,10 +5,10 @@ using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-EnemeyComponent::EnemeyComponent()
+EnemeyComponent::EnemeyComponent(Entity* target)
 	:
 	m_count(3),
-	m_target(nullptr)
+	m_target(target)
 {
 }
 
@@ -34,8 +34,27 @@ void EnemeyComponent::OnCollide(Entity & collide, Collision::CollisionData* data
 
 	if (m_target)
 	{
-		Vector3 targetVec = m_target->GetTrans().pos.Get() - m_me->GetTrans().pos.Get();
+		Entity* cannon = m_me->GetChild("cannon");
+		Vector3 targetVec = m_me->GetTrans().pos.Get() - m_target->GetTrans().pos.Get();
+		Vector3 forward = Vector3::Transform(Vector3::Forward, m_me->GetTrans().dir.GetWorld());
+		Vector3 axis = targetVec.Cross(forward);
 
+		targetVec.Normalize();
 
+		float cosine = targetVec.Dot(forward);
+		if (cosine > 1.0f)
+		{
+			cosine = 1.0f;
+		}
+
+		if (axis != Vector3::Zero)
+		{
+			Quaternion Q1 = Quaternion::CreateFromAxisAngle(axis, -acos(cosine));
+
+			if (cannon)
+			{
+				cannon->GetTrans().dir.Set(Q1);
+			}
+		}
 	}
 }

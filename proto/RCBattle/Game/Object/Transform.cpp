@@ -2,6 +2,8 @@
 #include "Transform.h"
 #include "Entity.h"
 
+using namespace DirectX::SimpleMath;
+
 Transform::Transform(Entity * _entity)
 	:
 entity(_entity),
@@ -32,9 +34,10 @@ Transform::~Transform()
 {
 }
 
-DirectX::SimpleMath::Matrix & Transform::World::Get()
+DirectX::SimpleMath::Matrix Transform::World::Get()
 {
 	// TODO: return ステートメントをここに挿入します
+
 	if (trans.entity)
 	{
 		if (trans.entity->GetParent())
@@ -43,4 +46,16 @@ DirectX::SimpleMath::Matrix & Transform::World::Get()
 		}
 	}
 	return trans.local.Get();
+}
+
+DirectX::SimpleMath::Quaternion Transform::Direction::GetWorld()
+{
+	if (trans.entity)
+	{
+		if (trans.entity->GetParent())
+		{
+			return trans.dir.Get() * trans.entity->GetParent()->GetTrans().dir.GetWorld();
+		}
+	}
+	return trans.dir.Get();
 }

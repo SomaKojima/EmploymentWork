@@ -1,14 +1,16 @@
 #include "../../../pch.h"
 #include "CameraRotateComponent.h"
+#include "../../Command/Command.h"
 
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-CameraRotateComponent::CameraRotateComponent(MyCamera* camera)
+CameraRotateComponent::CameraRotateComponent(MyCamera* camera, Type type)
 	:
 	m_x(0.0f),
 	m_y(0.0f),
+	m_type(type),
 	m_camera(camera)
 {
 }
@@ -61,6 +63,35 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 
 		Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_x, m_y, 0.0f);
 
+		switch (m_type)
+		{
+		case CameraRotateComponent::Horizon:
+			q = Quaternion::CreateFromYawPitchRoll(-m_x, 0.0f, 0.0f);
+			break;
+		case CameraRotateComponent::Vertical:
+			q = Quaternion::CreateFromYawPitchRoll(0.0f, m_y, 0.0f);
+			if (mouseVec.x > 0)
+			{
+				Quaternion dir = Quaternion::Identity;
+				float degree = mouseVec.x;
+				Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
+				dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
+				m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
+			}
+			else if (mouseVec.x < 0)
+			{
+				Quaternion dir = Quaternion::Identity;
+				float degree = mouseVec.x;
+				Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
+				dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
+				m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
+			}
+			break;
+		case CameraRotateComponent::NONE:
+			q = Quaternion::CreateFromYawPitchRoll(0.0f, 0.0f, 0.0f);
+			break;
+		}
+
 		Quaternion cameraDir = q * m_me->GetTrans().dir.Get();
 
 		// ----- マウスの座標をウィンドウの中央に固定する -----
@@ -68,7 +99,7 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 
 
 		// ----- カメラの座標を求める -----
-		Vector3 eyeVec = Vector3::Transform(Vector3::Forward * 5.0f, cameraDir);
+		Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 4.0f * cos(m_y), -10.0f), cameraDir);
 		Vector3 eyePos = m_me->GetTrans().world.Get().Translation() + eyeVec;
 
 		m_camera->SetPositionTarget(eyePos, m_me->GetTrans().world.Get().Translation());

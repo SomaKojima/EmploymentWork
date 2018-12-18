@@ -16,6 +16,6 @@ void UpCommand::Excute(Entity & entity)
 {
 	Vector3 vel = entity.GetTrans().vel.GetLocal();
 	entity.GetTrans().vel.SetLocal(vel);
-  	vel.y = 0.05f;
+  	vel.y = 0.1f;
 	entity.GetTrans().vel.SetLocal(vel);
 }

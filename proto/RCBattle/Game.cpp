@@ -196,8 +196,8 @@ void Game::Render()
 	/*EntityVector* entityVector = EntityVector::GetInstance();
 	entityVector->Render(this);*/
 
-	//Vector2 pos = Vector2::Zero;
-	//// デバッグテキストの描画
+	Vector2 pos = Vector2::Zero;
+	// デバッグテキストの描画
 	//for (int i = 0; i < 18; i++)
 	//{
 	//	if (m_debugText[i] == nullptr)
@@ -366,7 +366,7 @@ void Game::CreateDeviceDependentResources()
 	sceneManager->SetGame(this);
 
 	// シーンの設定と初期化
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
 	sceneManager->ChangeScene();
 }
 

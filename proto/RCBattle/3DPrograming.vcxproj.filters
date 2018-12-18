@@ -253,6 +253,24 @@
     <ClInclude Include="Game\GameComponent\Player\CameraRotateComponent.h">
       <Filter>Game\GameComponent\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Object\Factory\EnemyCarFactory.h">
+      <Filter>Game\Obj\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Player\PlayerCannonComponent.h">
+      <Filter>Game\GameComponent\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\LeftMoveCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Command\RightMoveCommand.h">
+      <Filter>Game\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\BaseObject\flowComponent.h">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\BaseObject\EnemyCannonComponent.h">
+      <Filter>Game\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -406,6 +424,21 @@
     <ClCompile Include="Game\GameComponent\Player\CameraRotateComponent.cpp">
       <Filter>Game\GameComponent\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GameComponent\Player\PlayerCannonComponent.cpp">
+      <Filter>Game\GameComponent\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\LeftMoveCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Command\RightMoveCommand.cpp">
+      <Filter>Game\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\BaseObject\flowComponent.cpp">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\BaseObject\EnemyCannonComponent.cpp">
+      <Filter>Game\GameComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -428,6 +461,15 @@
       <Filter>FBX</Filter>
     </MeshContentTask>
     <MeshContentTask Include="FBX\room.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\car_body.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\car_cannon.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="FBX\sphere.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
   </ItemGroup>
