@@ -19,6 +19,7 @@ PlayerCannonComponent::~PlayerCannonComponent()
 
 void PlayerCannonComponent::Update(DX::StepTimer const & timer)
 {
+	ShowCursor(FALSE);
 	if (m_camera)
 	{
 		Quaternion inv = Quaternion::Identity;

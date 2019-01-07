@@ -43,7 +43,7 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="obj"></param>
-	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) {}
+	BidirectionalList(T2* obj) : m_pPre(nullptr), m_pNext(nullptr), m_pRegisterTo(nullptr), m_pObj(obj) { }
 
 	/// <summary>
 	/// デストラクタ

@@ -256,6 +256,14 @@ public:
 	static bool HitCheck(Entity* entity, Entity* entity2, CollisionData* data, CollisionData* data2);
 };
 
+
+/// <summary>
+/// 当たり判定の形を判断して当たり判定を行う関数
+/// </summary>
+/// <param name="shape">当たり判定の形１</param>
+/// <param name="collision2">当たり判定の形２</param>
+/// <param name="data">当たり判定の形２を１のオブジェクトに渡す用のバッファ</param>
+/// <returns>当たり判定</returns>
 template<class T>
 inline bool Collision::CheckTwo(const T * shape, CollisionComponent * collision, CollisionData* data)
 {

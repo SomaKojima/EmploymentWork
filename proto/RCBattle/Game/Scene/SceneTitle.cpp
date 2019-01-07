@@ -18,7 +18,6 @@ using namespace DirectX::SimpleMath;
 
 void SceneTitle::Initialize(Game * game)
 {
-	ShowCursor(TRUE);
 	game->GetCamera()->SetCameraModel(MyCamera::CAMERA_MODE::TITLE);
 	// ƒ‚ƒfƒ‹‚ð“Ç‚Ýž‚Þ
 	ModelData* modelData = ModelData::GetInstance();
@@ -77,4 +76,5 @@ void SceneTitle::Initialize(Game * game)
 	//entity = new Entity();
 	//entity->AddComponent(new SelectManager(entity, entity2));
 	//entityVector->Add(entity);
+	ShowCursor(TRUE);
 }

@@ -21,6 +21,7 @@ void ButtonComponent::Initialize()
 
 void ButtonComponent::Update(DX::StepTimer const & timer)
 {
+	//ShowCursor(TRUE);
 	if (uiRenderer)
 	{
 		auto state = Mouse::Get().GetState();

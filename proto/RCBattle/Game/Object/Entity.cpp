@@ -46,9 +46,7 @@ bool Entity::Update(DX::StepTimer const & timer)
 	// マトリクス/座標の更新
 	Vector3 vel = m_transform.vel.Get() + m_transform.accel.Get();
 	m_transform.vel.Set(vel);
-
-	Vector3 accel = Vector3::Zero;
-	m_transform.accel.Set(accel);
+	m_transform.accel.Set(Vector3::Zero);
 
 	Vector3 pos = m_transform.pos.Get() + m_transform.vel.Get();
 	m_transform.pos.Set(pos);

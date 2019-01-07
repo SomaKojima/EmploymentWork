@@ -157,10 +157,13 @@ void EntityVector::FinalizeList(EntityList* list)
 	while (entity)
 	{
 		obj = entity->GetObj();
-		entity = entity->GetNext();
-
 		obj->FinalizeComponent();
 		obj->Finalize();
+
+		// Entityのデストラクタ内でリストから離れる
 		delete obj;
+
+		// 離れたのでリストが更新され一番先頭を再取得
+		entity = list->GetTop();
 	}
 }

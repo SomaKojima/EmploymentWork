@@ -232,7 +232,14 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 	return false;
 }
 
-
+/// <summary>
+/// 当たり判定の形を判断して当たり判定を行う関数
+/// </summary>
+/// <param name="collision">当たり判定の形１</param>
+/// <param name="collision2">当たり判定の形２</param>
+/// <param name="data">当たり判定の形２を１のオブジェクトに渡す用のバッファ</param>
+/// <param name="data2">当たり判定の形１を２のオブジェクトに渡す用のバッファ</param>
+/// <returns>当たり判定</returns>
 bool Collision::CheckOne(CollisionComponent* collision, CollisionComponent* collision2, CollisionData* data, CollisionData* data2)
 {
 	const Sphere* sphere = collision->GetSphere();
