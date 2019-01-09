@@ -11,6 +11,7 @@ BaseObjectComponent::BaseObjectComponent()
 	:
 	m_normal(Vector3::Down)
 {
+
 }
 
 BaseObjectComponent::~BaseObjectComponent()

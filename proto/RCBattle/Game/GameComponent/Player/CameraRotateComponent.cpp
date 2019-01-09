@@ -81,6 +81,9 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 
 		Quaternion q = Quaternion::CreateFromYawPitchRoll(-m_x, m_y, 0.0f);
 
+		Quaternion dir = Quaternion::Identity;
+		Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
+		float degree = mouseVec.x;
 		switch (m_type)
 		{
 		case CameraRotateComponent::Horizon:
@@ -90,20 +93,13 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 			q = Quaternion::CreateFromYawPitchRoll(0.0f, m_y, 0.0f);
 			if (mouseVec.x > 0)
 			{
-				Quaternion dir = Quaternion::Identity;
-				float degree = mouseVec.x;
-				Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
 				dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
-				m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
 			}
 			else if (mouseVec.x < 0)
 			{
-				Quaternion dir = Quaternion::Identity;
-				float degree = mouseVec.x;
-				Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
 				dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
-				m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
 			}
+			m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
 			break;
 		case CameraRotateComponent::NONE:
 			q = Quaternion::CreateFromYawPitchRoll(0.0f, 0.0f, 0.0f);
@@ -116,10 +112,13 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 		SetCursorPos(centralX, centralY);
 
 		// ----- カメラの座標を求める -----
-		Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 4.0f * cos(m_y), -10.0f), cameraDir);
+		Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 0.0f, -10.0f), cameraDir) + 
+			Vector3::Transform(Vector3(0.0f, 2.0f * cos(m_y), 2.0f * sin(m_y)), m_me->GetTrans().dir.Get());
 		Vector3 eyePos = m_me->GetTrans().world.Get().Translation() + eyeVec;
 
-		m_camera->SetPositionTarget(eyePos, m_me->GetTrans().world.Get().Translation());
+		Vector3 target = m_me->GetTrans().world.Get().Translation() + Vector3::Transform(Vector3(0.0f, 0.0f, 10.0f), cameraDir);
+
+		m_camera->SetPositionTarget(eyePos, target);
 
 		// ----- カメラの情報を更新 -----
 		m_camera->SetDir(cameraDir);

@@ -18,7 +18,7 @@ EnemyCannonComponent::~EnemyCannonComponent()
 void EnemyCannonComponent::Update(DX::StepTimer const & timer)
 {
 	m_count++;
-	if (m_count > 30)
+	if (m_count > 60)
 	{
 		m_count = 0;
 		EntityVector* entityVector = EntityVector::GetInstance();

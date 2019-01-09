@@ -62,10 +62,6 @@ bool Entity::Update(DX::StepTimer const & timer)
 
 void Entity::Finalize()
 {
-	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
-	{
-		(*ite)->Destroy();
-	}
 }
 
 void Entity::Destroy()
@@ -73,6 +69,11 @@ void Entity::Destroy()
 	EntityVector* entityVector = EntityVector::GetInstance();
 	
 	entityVector->AddDestory(this);
+
+	for (auto ite = m_childlist.begin(); ite != m_childlist.end(); ite++)
+	{
+		(*ite)->Destroy();
+	}
 }
 
 Entity* Entity::AddChild(Entity * entity)

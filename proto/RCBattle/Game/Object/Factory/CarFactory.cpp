@@ -19,6 +19,8 @@
 #include "../../GameComponent/Player/CameraRotateComponent.h"
 #include "../../GameComponent/BaseObject/BaseObjectComponent.h"
 #include "../../GameComponent/BaseObject/flowComponent.h"
+#include "../../GameComponent/BaseObject/StatusComponent.h"
+
 
 /// <summary>
 /// 名前空間
@@ -81,6 +83,9 @@ Entity* CarFactory::CreateCar(MyCamera* camera)
 
 	// 浮遊コンポーネントを追加
 	//entity_body->AddComponent(new FlowComponent());
+
+	// ステータスコンポーネントを追加
+	entity_body->AddComponent(new StatusComponent());
 
 	entityVector->Add(entity_body);
 

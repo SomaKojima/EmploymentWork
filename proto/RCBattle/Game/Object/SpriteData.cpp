@@ -19,6 +19,13 @@ SpriteData::~SpriteData()
 	m_titleLogo.Reset();
 	m_titleCar.Reset();
 	m_titleBullet.Reset();
+
+	// プレイ
+	m_mark.Reset();
+	m_lifeOne.Reset();
+	m_lifeTwo.Reset();
+	m_lifeThree.Reset();
+	m_lifeBone.Reset();
 }
 
 void SpriteData::Create(ID3D11Device * device)
@@ -32,4 +39,11 @@ void SpriteData::Create(ID3D11Device * device)
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\title.png", nullptr, m_titleLogo.GetAddressOf());
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\car.png", nullptr, m_titleCar.GetAddressOf());
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\bullet.png", nullptr, m_titleBullet.GetAddressOf());
+
+	// プレイ
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\mark.png", nullptr, m_mark.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\life1.png", nullptr, m_lifeOne.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\life2.png", nullptr, m_lifeTwo.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\life3.png", nullptr, m_lifeThree.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\lifebone.png", nullptr, m_lifeBone.GetAddressOf());
 }

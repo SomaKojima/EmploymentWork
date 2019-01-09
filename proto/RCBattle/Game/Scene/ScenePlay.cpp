@@ -1,15 +1,17 @@
 #include "../../pch.h"
 #include "ScenePlay.h"
+#include "../Data/Data.h"
 #include "../Object/ModelData.h"
 #include "../Object/SpriteData.h"
 #include "../Object/EntityVector.h"
 #include "../Object/Entity.h"
 #include "../Component/TestComponent.h"
 #include "../GameComponent/GameComponentLib.h"
-#include "../Data/Data.h"
 #include "../GameComponent/Player/CameraRotateComponent.h"
-#include "../GameComponent/EnemyComponent.h"
-#include "../GameComponent/BaseObject/EnemyCannonComponent.h"
+#include "../GameComponent/Player/HP_UIComponent.h"
+#include "../GameComponent/Enemy/EnemyComponent.h"
+#include "../GameComponent/Enemy/EnemyCannonComponent.h"
+#include "../GameComponent/BaseObject/StatusComponent.h"
 
 using namespace std;
 using namespace DirectX;
@@ -66,6 +68,9 @@ void ScenePlay::Initialize(Game * game)
 	// オブジェクトの元コンポーネントを追加
 	entity_body->AddComponent(new BaseObjectComponent());
 
+	// ステータスコンポーネントを追加
+	entity_body->AddComponent(new StatusComponent());
+
 	entityVector->Add(entity_body);
 
 
@@ -111,8 +116,22 @@ void ScenePlay::Initialize(Game * game)
 	//// コンテナに追加
 	//entityVector->Add(entity);
 
-	game->GetCamera()->Initialize();
 
+	// マーク
+	entity = new Entity();
+	entity->AddComponent(new UIRenderer(spriteData->GetMark(), RECT{ 0, 0, 50, 50 }));
+	entity->GetTrans().pos.Set(Vector2(400 - 25, 300 - 25));
+	entityVector->Add(entity);
+
+
+	// HP_UI
+	entity = new Entity();
+	entity->AddComponent(new HP_UIComponent(player->GetComponent<StatusComponent>()));
+	entity->GetTrans().pos.Set(Vector3(0.0f, 500.0f, 0.0f));
+	entityVector->Add(entity);
+
+	// カメラの初期化
+	game->GetCamera()->Initialize();
 
 	// マウスの非表示
 	while (ShowCursor(FALSE) >= 0);

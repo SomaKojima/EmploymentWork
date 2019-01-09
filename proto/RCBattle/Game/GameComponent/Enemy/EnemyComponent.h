@@ -3,7 +3,7 @@
 /// <summary>
 /// ヘッダのインクルード
 /// </summary>
-#include "../Component/Component.h"
+#include "../../Component/Component.h"
 
 /// <summary>
 /// 物理のコンポーネントクラス
@@ -20,7 +20,9 @@ public:
 	// 当たり判定の処理
 	void OnCollide(Entity& collide, Collision::CollisionData* data) override;
 
+	// 終了
+	void Finalize() override;
+
 private:
-	int m_count;
 	Entity* m_target;
 };

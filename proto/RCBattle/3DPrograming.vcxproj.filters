@@ -74,6 +74,9 @@
     <Filter Include="Game\GameComponent\Player">
       <UniqueIdentifier>{f1da9f9a-3584-4ae5-bc5c-561d39fca68f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameComponent\Enemy">
+      <UniqueIdentifier>{cc2db3c7-465b-427b-82e6-caa429d06bd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -190,9 +193,6 @@
     <ClInclude Include="Game\Object\Factory\CarFactory.h">
       <Filter>Game\Obj\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameComponent\EnemyComponent.h">
-      <Filter>Game\GameComponent</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Scene\SceneManager.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
@@ -268,8 +268,17 @@
     <ClInclude Include="Game\GameComponent\BaseObject\flowComponent.h">
       <Filter>Game\GameComponent\BaseObject</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameComponent\BaseObject\EnemyCannonComponent.h">
-      <Filter>Game\GameComponent</Filter>
+    <ClInclude Include="Game\GameComponent\Player\HP_UIComponent.h">
+      <Filter>Game\GameComponent\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\BaseObject\StatusComponent.h">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Enemy\EnemyCannonComponent.h">
+      <Filter>Game\GameComponent\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Enemy\EnemyComponent.h">
+      <Filter>Game\GameComponent\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -367,9 +376,6 @@
     <ClCompile Include="Game\Object\Factory\CarFactory.cpp">
       <Filter>Game\Obj\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameComponent\EnemyComponent.cpp">
-      <Filter>Game\GameComponent</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Scene\SceneManager.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
@@ -436,8 +442,17 @@
     <ClCompile Include="Game\GameComponent\BaseObject\flowComponent.cpp">
       <Filter>Game\GameComponent\BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameComponent\BaseObject\EnemyCannonComponent.cpp">
-      <Filter>Game\GameComponent</Filter>
+    <ClCompile Include="Game\GameComponent\Player\HP_UIComponent.cpp">
+      <Filter>Game\GameComponent\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\BaseObject\StatusComponent.cpp">
+      <Filter>Game\GameComponent\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Enemy\EnemyCannonComponent.cpp">
+      <Filter>Game\GameComponent\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Enemy\EnemyComponent.cpp">
+      <Filter>Game\GameComponent\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

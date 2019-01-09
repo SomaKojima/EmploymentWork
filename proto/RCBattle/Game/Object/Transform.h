@@ -82,6 +82,7 @@ private:
 		DirectX::SimpleMath::Vector3 Get() { return m_pos; }
 
 		void Set(DirectX::SimpleMath::Vector3 pos) { m_pos = pos; }
+		void Set(DirectX::SimpleMath::Vector2 pos) { m_pos = DirectX::SimpleMath::Vector3(pos.x, pos.y, m_pos.z); }
 	};
 
 	/// <summary>

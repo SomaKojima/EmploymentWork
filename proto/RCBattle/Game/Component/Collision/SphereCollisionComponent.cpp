@@ -65,7 +65,7 @@ void SphereCollisionComponent::Draw(Game * game)
 	}
 	else
 	{
-		m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
+		//m_obj->Draw(game->GetContext(), *game->GetStates(), world, game->GetView(), game->GetProjection());
 	}
 }
 

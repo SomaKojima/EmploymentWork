@@ -37,7 +37,11 @@ public:
 	RECT GetRECT() { return m_rect; }
 	float GetDepth() { return m_depth; }
 
+	bool GetVisible() { return m_visible; }
+	void SetVisible(bool visible) { m_visible = visible; }
+
 private:
+	bool m_visible;
 	RECT m_rect;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;			// テクスチャハンドル
 	DirectX::XMVECTOR m_color;	// 色
