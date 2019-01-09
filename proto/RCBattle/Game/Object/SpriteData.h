@@ -50,6 +50,8 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetLifeTwo() { return m_lifeTwo; }
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetLifeThree() { return m_lifeThree; }
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetLifeBone() { return m_lifeBone; }
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetWinPlayer() { return m_winPlayer; }
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetWinNPC() { return m_winNPC; }
 
 
 private:
@@ -58,5 +60,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_lifeTwo;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_lifeThree;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_lifeBone;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_winPlayer;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_winNPC;
 };
 

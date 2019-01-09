@@ -1,9 +1,11 @@
 #include "../../../pch.h"
 #include "StatusComponent.h"
 
+#include "../../../Game.h"
+
 StatusComponent::StatusComponent()
 	:
-	m_hp(3)
+	m_hp(300)
 {
 }
 
@@ -21,8 +23,10 @@ void StatusComponent::Update(DX::StepTimer const & timer)
 
 void StatusComponent::OnCollide(Entity & collide, Collision::CollisionData * data)
 {
+
 	if (collide.GetName() == "Bullet")
 	{
+		Game::AddText(L"Hit_Bullet");
 		m_hp--;
 	}
 }

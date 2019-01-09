@@ -84,10 +84,16 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 		Quaternion dir = Quaternion::Identity;
 		Vector3 upDir = Vector3::Transform(Vector3::Up, m_me->GetTrans().dir.Get());
 		float degree = mouseVec.x;
+		Quaternion cameraDir = Quaternion::Identity;
 		switch (m_type)
 		{
+		case Normal:
+			q = Quaternion::CreateFromYawPitchRoll(-m_x, m_y, 0.0f);
+			cameraDir = q;
+			break;
 		case CameraRotateComponent::Horizon:
 			q = Quaternion::CreateFromYawPitchRoll(-m_x, 0.0f, 0.0f);
+			cameraDir = q * m_me->GetTrans().dir.Get();
 			break;
 		case CameraRotateComponent::Vertical:
 			q = Quaternion::CreateFromYawPitchRoll(0.0f, m_y, 0.0f);
@@ -100,13 +106,14 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 				dir = Quaternion::CreateFromAxisAngle(upDir, -XMConvertToRadians(degree));
 			}
 			m_me->GetTrans().dir.Set(m_me->GetTrans().dir.Get() * dir);
+			cameraDir = q * m_me->GetTrans().dir.Get();
 			break;
 		case CameraRotateComponent::NONE:
-			q = Quaternion::CreateFromYawPitchRoll(0.0f, 0.0f, 0.0f);
+			q = Quaternion::CreateFromYawPitchRoll(0.0f, 0.0f, 0.0f); 
+			cameraDir = q * m_me->GetTrans().dir.Get();
 			break;
 		}
 
-		Quaternion cameraDir = q * m_me->GetTrans().dir.Get();
 
 		// ----- マウスの座標をウィンドウの中央に固定する -----
 		SetCursorPos(centralX, centralY);

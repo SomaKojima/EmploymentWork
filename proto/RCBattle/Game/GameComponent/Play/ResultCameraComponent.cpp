@@ -10,7 +10,8 @@ ResultCameraComponent::ResultCameraComponent(MyCamera * camera)
 	:
 	m_camera(camera),
 	m_angle(0.0f),
-	m_time(0)
+	m_time(0),
+	m_count(0)
 {
 }
 
@@ -36,8 +37,12 @@ void ResultCameraComponent::Update(DX::StepTimer const & timer)
 	Mouse::State mouse = Mouse::Get().GetState();
 	if (mouse.leftButton)
 	{
-		SceneManager* sceneManager = SceneManager::GetInstance();
-		sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+		m_count++;
+		if (m_count > 3)
+		{
+			SceneManager* sceneManager = SceneManager::GetInstance();
+			sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+		}
 	}
 
 	// 時間経過でタイトルに戻る

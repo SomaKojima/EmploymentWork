@@ -26,6 +26,8 @@ SpriteData::~SpriteData()
 	m_lifeTwo.Reset();
 	m_lifeThree.Reset();
 	m_lifeBone.Reset();
+	m_winPlayer.Reset();
+	m_winNPC.Reset();
 }
 
 void SpriteData::Create(ID3D11Device * device)
@@ -46,4 +48,6 @@ void SpriteData::Create(ID3D11Device * device)
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\life2.png", nullptr, m_lifeTwo.GetAddressOf());
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\life3.png", nullptr, m_lifeThree.GetAddressOf());
 	CreateWICTextureFromFile(device, L"Resources\\Textures\\lifebone.png", nullptr, m_lifeBone.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\win_player.png", nullptr, m_winPlayer.GetAddressOf());
+	CreateWICTextureFromFile(device, L"Resources\\Textures\\win_npc.png", nullptr, m_winNPC.GetAddressOf());
 }

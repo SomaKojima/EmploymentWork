@@ -83,7 +83,8 @@ void HP_UIComponent::Update(DX::StepTimer const & timer)
 		}
 
 		// UI‚Ì“_–Å
-		if (hp != m_lastHp)
+		if (hp != m_lastHp &&
+			hp <= 2)
 		{
 			// UI‚Ì“_–Å
 			m_flashTime++;

@@ -23,4 +23,5 @@ private:
 	MyCamera* m_camera;
 	float m_angle;
 	int m_time;
+	int m_count;
 };

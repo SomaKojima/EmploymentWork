@@ -14,6 +14,8 @@
 
 #include "../Object/Factory/BulletFactory.h"
 
+#include "../Utility/InputManager.h"
+
 using namespace std;
 using namespace DirectX;
 
@@ -82,7 +84,7 @@ vector<Command*>& InputHandler::GetInputHnadle()
 
 	// マウスの作成
 	Mouse::State mouse = Mouse::Get().GetState();
-	mouseTracker.Update(mouse);
+	mouseTracker = InputManager::GetInstance()->GetMouseTracker();
 
 	// コンテナの初期化
 	m_commandVector.clear();

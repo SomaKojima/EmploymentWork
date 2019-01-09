@@ -10,6 +10,7 @@
 #include "Game/Object/SpriteData.h"
 #include "Game/Object/EntityVector.h"
 #include "Game/Scene/SceneManager.h"
+#include "Game/Utility/InputManager.h"
 
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
@@ -24,24 +25,24 @@ using namespace DirectX::SimpleMath;
 
 using Microsoft::WRL::ComPtr;
 wchar_t* Game::m_debugText[18] = {
-	nullptr,
-	nullptr, 
-	nullptr, 
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr};
+	L"",
+	L"", 
+	L"", 
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L"",
+	L""};
 int Game::m_numText = 0;
 Vector3 Game::m_posText = Vector3::Zero;
 int Game::m_numText2 = 0;
@@ -98,7 +99,7 @@ void Game::Tick()
 void Game::AddText(wchar_t text[])
 {
 	// テキストがいっぱいの時
-	if (m_debugText[17] != nullptr)
+	if (m_debugText[17] != L"")
 	{
 		for (int i = 0; i < 17; i++)
 		{
@@ -111,7 +112,7 @@ void Game::AddText(wchar_t text[])
 	// テキストを入れる
 	for (int i = 0; i < 18; i++)
 	{
-		if (m_debugText[i] == nullptr)
+		if (m_debugText[i] == L"")
 		{
 			m_debugText[i] = text;
 			return;
@@ -124,12 +125,12 @@ void Game::DeleteText()
 	for (int i = 0; i < 17; i++)
 	{
 		m_debugText[i] = m_debugText[i + 1];
-		if (m_debugText[i] == nullptr)
+		if (m_debugText[i] == L"")
 		{
 			return;
 		}
 	}
-	m_debugText[17] = nullptr;
+	m_debugText[17] = L"";
 }
 
 // Updates the world.
@@ -139,6 +140,10 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
     elapsedTime;
+
+	Mouse::State mouse = Mouse::Get().GetState();
+	InputManager* inputManager = InputManager::GetInstance();
+	inputManager->GetMouseTracker().Update(mouse);
 
 	// デバッグカメラの更新
 	m_debugCamera->Update();
@@ -197,23 +202,23 @@ void Game::Render()
 	entityVector->Render(this);*/
 
 	Vector2 pos = Vector2::Zero;
-	//// デバッグテキストの描画
-	//for (int i = 0; i < 18; i++)
-	//{
-	//	if (m_debugText[i] == nullptr)
-	//	{
-	//		break;
-	//	}
-	//	m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red);
-	//	pos.y += 32;
-	//}
-	////	FPSの描画
-	//wchar_t name[30] = L"fps : ";
-	//wchar_t fpsBuf[30] = L"";
-	//int a = m_timer.GetFramesPerSecond();
-	//_itow( a , fpsBuf, 10);
-	//wcscat(name, fpsBuf);
-	//m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red);
+	// デバッグテキストの描画
+	for (int i = 0; i < 18; i++)
+	{
+		if (m_debugText[i] == L"")
+		{
+			break;
+		}
+		m_font->DrawString(m_sprites.get(), m_debugText[i], pos, Colors::Red,0.0f,Vector2::Zero, 1.0f, SpriteEffects_None, 1.0f);
+		pos.y += 32;
+	}
+	//	FPSの描画
+	wchar_t name[30] = L"fps : ";
+	wchar_t fpsBuf[30] = L"";
+	int a = m_timer.GetFramesPerSecond();
+	_itow( a , fpsBuf, 10);
+	wcscat(name, fpsBuf);
+	m_font->DrawString(m_sprites.get(), name, Vector2(300.0f, 10.0f), Colors::Red, 0.0f, Vector2::Zero, 1.0f, SpriteEffects_None, 0.9f);
 
 
 	//wchar_t name2[30] = L"num : ";

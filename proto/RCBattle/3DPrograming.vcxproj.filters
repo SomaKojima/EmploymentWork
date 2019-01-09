@@ -289,6 +289,9 @@
     <ClInclude Include="Game\GameComponent\Play\ResultCameraComponent.h">
       <Filter>Game\GameComponent\Play</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Utility\InputManager.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

@@ -1,5 +1,6 @@
 #include "../../../pch.h"
 #include "ButtonComponent.h"
+#include "../../Utility/InputManager.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -26,7 +27,7 @@ void ButtonComponent::Update(DX::StepTimer const & timer)
 	{
 		auto state = Mouse::Get().GetState();
 
-		m_tracker.Update(state);
+		m_tracker = InputManager::GetInstance()->GetMouseTracker();
 		Vector3 pos = Vector3::Transform(Vector3::Zero, m_me->GetTrans().world.Get());
 		RECT rect = RECT{
 			static_cast<LONG>(pos.x),

@@ -226,6 +226,7 @@
     <ClInclude Include="Game\Scene\ScenePlay.h" />
     <ClInclude Include="Game\Scene\SceneTitle.h" />
     <ClInclude Include="Game\Utility\BidirectionalList.h" />
+    <ClInclude Include="Game\Utility\InputManager.h" />
     <ClInclude Include="Game\Utility\RegisterTo.h" />
     <ClInclude Include="Game\Utility\Utility.h" />
     <ClInclude Include="GridFloor.h" />

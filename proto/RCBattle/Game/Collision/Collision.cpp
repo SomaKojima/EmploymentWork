@@ -200,7 +200,6 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 	Segment segment = Segment{Vector3(triangle.pos[0]), Vector3(vec)};
 	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos))
 	{
-		Game::AddText(L"Hit1");
 		return true;
 	}
 
@@ -208,7 +207,6 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 	segment = Segment{ Vector3(triangle.pos[1]), Vector3(vec) };
 	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos))
 	{
-		Game::AddText(L"Hit2");
 		return true;
 	}
 
@@ -216,7 +214,6 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 	segment = Segment{ Vector3(triangle.pos[2]), Vector3(vec) };
 	if (HitCheck_Segment_Sphere(segment, sphere, hit_pos))
 	{
-		Game::AddText(L"Hit3");
 		return true;
 	}
 
@@ -225,7 +222,6 @@ bool Collision::HitCheck_Sphere_Triangle(const Sphere & sphere, const Triangle &
 	segment = Segment{ Vector3(sphere.center), Vector3(vec) };
 	if (HitCheck_Segment_Triangle(segment, triangle, hit_pos))
 	{
-		Game::AddText(L"Hit4");
 		return true;
 	}
 
