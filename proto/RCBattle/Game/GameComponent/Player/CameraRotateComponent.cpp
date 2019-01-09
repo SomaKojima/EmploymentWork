@@ -13,6 +13,24 @@ CameraRotateComponent::CameraRotateComponent(MyCamera* camera, Type type)
 	m_type(type),
 	m_camera(camera)
 {
+	// ----- ウィンドウの情報が取得できない場合 -----
+	if (!GetActiveWindow())
+	{
+		return;
+	}
+
+	// ----- ウィンドウの長方形(Rectangle)の情報を取得する
+	RECT wRect;
+	GetWindowRect(GetActiveWindow(), &wRect);
+	int width = (wRect.right - wRect.left) / 2;
+	int height = (wRect.bottom - wRect.top) / 2;
+
+	// ----- ウィンドウの中心座標を取得する -----
+	int centralX = wRect.left + width;
+	int centralY = wRect.top + height;
+
+	// ----- マウスの座標をウィンドウの中央に固定する -----
+	SetCursorPos(centralX, centralY);
 }
 
 CameraRotateComponent::~CameraRotateComponent()
@@ -96,7 +114,6 @@ void CameraRotateComponent::Update(DX::StepTimer const & timer)
 
 		// ----- マウスの座標をウィンドウの中央に固定する -----
 		SetCursorPos(centralX, centralY);
-
 
 		// ----- カメラの座標を求める -----
 		Vector3 eyeVec = Vector3::Transform(Vector3(0.0f, 4.0f * cos(m_y), -10.0f), cameraDir);

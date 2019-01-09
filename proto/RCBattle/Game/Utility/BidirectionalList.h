@@ -136,6 +136,7 @@ inline bool BidirectionalList<T, T2>::RegisterTo::Add(T* obj)
 		return false;
 	}
 
+	obj->Remove();
 	if (!m_pTop)
 	{
 		obj->SetRegisterTo(this);

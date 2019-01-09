@@ -27,26 +27,32 @@ using namespace DirectX::SimpleMath;
 
 BulletFactory::BulletFactory()
 {
-	ModelData* modelData = ModelData::GetInstance();
-	m_bulletModel = modelData->GetBullet();
 }
 
 BulletFactory::~BulletFactory()
 {
-	m_bulletModel = nullptr;
 }
 
 /// <summary>
 /// 弾の生成
 /// </summary>
 /// <returns>生成された弾の中で親となるオブジェクトのポインタを返す</returns>
-Entity * BulletFactory::CreateBullet()
+Entity * BulletFactory::CreateBullet(int num)
 {
+	ModelData* modelData = ModelData::GetInstance();
 	Entity* entity = nullptr;
 
 	entity = new Entity();
 	// モデルコンポーネントの追加
-	entity->AddComponent(new ModelComponent(m_bulletModel, ModelComponent::Type::Nomal));
+	switch (num)
+	{
+	case 0:
+		entity->AddComponent(new ModelComponent(modelData->GetBullet(), ModelComponent::Type::Nomal));
+		break;
+	case 1:
+		entity->AddComponent(new ModelComponent(modelData->GetBullet2(), ModelComponent::Type::Nomal));
+		break;
+	}
 	// 球の当たり判定コンポーネントの追加
 	entity->AddComponent(new SphereCollisionComponent(Vector3(0.0f, 0.0f, 0.0f), 0.1f));
 	entity->GetTrans().radius.Set(0.4f);

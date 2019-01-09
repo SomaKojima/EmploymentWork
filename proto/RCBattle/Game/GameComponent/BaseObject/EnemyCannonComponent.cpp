@@ -24,7 +24,7 @@ void EnemyCannonComponent::Update(DX::StepTimer const & timer)
 		EntityVector* entityVector = EntityVector::GetInstance();
 		// ’e‚Ìì¬
 		BulletFactory* bulletFactory = BulletFactory::GetInstance();
-		Entity* entity = bulletFactory->CreateBullet();
+		Entity* entity = bulletFactory->CreateBullet(1);
 
 		entity->GetTrans().dir.Set(m_me->GetTrans().dir.GetWorld());
 		entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.5f));

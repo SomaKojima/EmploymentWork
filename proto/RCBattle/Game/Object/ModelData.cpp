@@ -17,6 +17,8 @@ ModelData::~ModelData()
 	m_carCannonModel.reset();
 	m_roomModel.reset();
 	m_sphere.reset();
+
+	m_bulletModel2.reset();
 }
 
 void ModelData::Create(ID3D11Device* device)
@@ -30,5 +32,7 @@ void ModelData::Create(ID3D11Device* device)
 	m_carCannonModel = Model::CreateFromCMO(device, L"Resources\\Models\\car_cannon.cmo", fx);
 	m_roomModel = Model::CreateFromCMO(device, L"Resources\\Models\\room.cmo", fx);
 	m_sphere = Model::CreateFromCMO(device, L"Resources\\Models\\sphere.cmo", fx);
+
+	m_bulletModel2 = Model::CreateFromCMO(device, L"Resources\\Models\\bullet.cmo", fx);
 }
 

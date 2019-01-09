@@ -18,6 +18,8 @@ public:
 	DirectX::Model* GetRoom() { return m_roomModel.get(); }
 	DirectX::Model* GetSphere() { return m_sphere.get(); }
 
+	DirectX::Model* GetBullet2() { return m_bulletModel2.get(); }
+
 private:
 
 	std::unique_ptr<DirectX::Model> m_bulletModel;
@@ -26,4 +28,5 @@ private:
 	std::unique_ptr<DirectX::Model> m_carCannonModel;
 	std::unique_ptr<DirectX::Model> m_roomModel;
 	std::unique_ptr<DirectX::Model> m_sphere;
+	std::unique_ptr<DirectX::Model> m_bulletModel2;
 };

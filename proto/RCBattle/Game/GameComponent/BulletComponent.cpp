@@ -24,12 +24,13 @@ void BulletComponent::Update(DX::StepTimer const & timer)
 	if(pos.x > 25.0f ||
 		pos.x < -25.0f ||
 		pos.z > 25.0f ||
-		pos.z < -25.0f)
+		pos.z < -25.0f ||
+		pos.y < 0.0f || 
+		pos.y > 50.0f)
 	{
 		m_me->Destroy();
 	}
 }
-
 void BulletComponent::LateUpdate(DX::StepTimer const & timer)
 {
 }

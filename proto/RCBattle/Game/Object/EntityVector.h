@@ -48,5 +48,6 @@ private:
 	// 実体のコンテナ
 	EntityList* m_add;
 	// 実体のコンテナ
+	std::list<Entity*> m_destroybuf;
 	EntityList* m_destroy;
 };

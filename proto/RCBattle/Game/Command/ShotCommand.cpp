@@ -47,7 +47,7 @@ void ShotCommand::Excute(Entity & entity)
 
 		// ’e‚Ìì¬
 		BulletFactory* bulletFactory = BulletFactory::GetInstance();
-		Entity* _entity = bulletFactory->CreateBullet();
+		Entity* _entity = bulletFactory->CreateBullet(0);
 
 		_entity->GetTrans().dir.Set(cannon->GetTrans().dir.GetWorld());
 		_entity->GetTrans().vel.SetLocal(Vector3(0.0f, 0.0f, 0.5f));

@@ -472,6 +472,9 @@
     <MeshContentTask Include="FBX\sphere.FBX">
       <Filter>FBX</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="FBX\bullet.FBX">
+      <Filter>FBX</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\DebugCollision\DebugPlane.inc" />

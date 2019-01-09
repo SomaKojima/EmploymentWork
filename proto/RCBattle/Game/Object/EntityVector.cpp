@@ -37,6 +37,11 @@ void EntityVector::Update(DX::StepTimer const& timer)
 	}
 
 	// デストロイリストのオブジェクトの処理(終了処理)
+	for (auto ite = m_destroybuf.begin(); ite != m_destroybuf.end(); ite++)
+	{
+		m_destroy->Add((*ite)->GetEOF());
+	}
+	m_destroybuf.clear();
 	FinalizeList(m_destroy);
 
 	// コンポーネントの更新処理
@@ -84,6 +89,8 @@ void EntityVector::Finalize()
 	FinalizeList(m_vector);
 	FinalizeList(m_destroy);
 	FinalizeList(m_add);
+
+	m_destroybuf.clear();
 }
 
 void EntityVector::Add(Entity * entity)
@@ -102,8 +109,8 @@ void EntityVector::AddDestory(Entity * entity)
 	{
 		return;
 	}
-	entity->GetEOF()->Remove();
-	m_destroy->Add(entity->GetEOF());
+	m_destroybuf.push_back(entity);
+	//m_destroy->Add(entity->GetEOF());
 }
 
 Entity* EntityVector::GetEntity(char * name)

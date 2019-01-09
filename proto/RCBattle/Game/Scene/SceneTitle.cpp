@@ -76,5 +76,7 @@ void SceneTitle::Initialize(Game * game)
 	//entity = new Entity();
 	//entity->AddComponent(new SelectManager(entity, entity2));
 	//entityVector->Add(entity);
-	ShowCursor(TRUE);
+
+	// マウスの表示
+	while (ShowCursor(TRUE) < 0);
 }

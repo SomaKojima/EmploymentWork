@@ -29,10 +29,8 @@ public:
 	~BulletFactory();
 
 	// ’e‚Ì¶¬
-	Entity* CreateBullet();
+	Entity* CreateBullet(int num);
 
 private:
 	//static BulletFactory* sBulletFactory;
-
-	DirectX::Model* m_bulletModel;	// ’e‚Ìƒ‚ƒfƒ‹
 };

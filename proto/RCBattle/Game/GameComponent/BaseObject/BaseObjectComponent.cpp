@@ -82,9 +82,9 @@ void BaseObjectComponent::LateUpdate(DX::StepTimer const & timer)
 	vel += gravity;
 
 
-	/*if (m_me->GetTrans().GetPos().y <= 0.0f)
+	/*if (m_me->GetTrans().pos.Get().y <= 0.0f)
 	{
-		m_me->GetTrans().SetPos(Vector3(m_me->GetTrans().GetPos().x, 0.0f, m_me->GetTrans().GetPos().z));
+		m_me->GetTrans().pos.Set(Vector3(m_me->GetTrans().pos.Get().x, 0.0f, m_me->GetTrans().pos.Get().z));
 		vel.y = 0.0f;
 	}*/
 

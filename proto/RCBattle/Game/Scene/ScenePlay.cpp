@@ -99,18 +99,21 @@ void ScenePlay::Initialize(Game * game)
 	entityVector->Add(entity);
 
 
-	// 球の作成
-	entity = new Entity();
-	entity->SetName("Wall");
-	entity->SetTag(Tag::Room);
-	entity->GetTrans().radius.Set(15);
-	// モデルコンポーネントの追加
-	entity->AddComponent(new ModelComponent(modelData->GetSphere(), ModelComponent::Type::Nomal));
-	// メッシュの当たり判定の追加
-	entity->AddComponent(new MeshCollisionComponent(L"Resources\\Obj\\sphere.obj"));
-	// コンテナに追加
-	entityVector->Add(entity);
+	//// 球の作成
+	//entity = new Entity();
+	//entity->SetName("Wall");
+	//entity->SetTag(Tag::Room);
+	//entity->GetTrans().radius.Set(15);
+	//// モデルコンポーネントの追加
+	//entity->AddComponent(new ModelComponent(modelData->GetSphere(), ModelComponent::Type::Nomal));
+	//// メッシュの当たり判定の追加
+	//entity->AddComponent(new MeshCollisionComponent(L"Resources\\Obj\\sphere.obj"));
+	//// コンテナに追加
+	//entityVector->Add(entity);
 
 	game->GetCamera()->Initialize();
-	ShowCursor(FALSE);
+
+
+	// マウスの非表示
+	while (ShowCursor(FALSE) >= 0);
 }
