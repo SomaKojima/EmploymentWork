@@ -21,6 +21,8 @@
 #include "../../GameComponent/BaseObject/flowComponent.h"
 #include "../../GameComponent/BaseObject/StatusComponent.h"
 
+#include "../../GameComponent/Play/ResultCameraComponent.h"
+
 
 /// <summary>
 /// 名前空間
@@ -86,6 +88,8 @@ Entity* CarFactory::CreateCar(MyCamera* camera)
 
 	// ステータスコンポーネントを追加
 	entity_body->AddComponent(new StatusComponent());
+
+	//entity_body->AddComponent(new ResultCameraComponent(camera));
 
 	entityVector->Add(entity_body);
 

@@ -207,6 +207,8 @@
     <ClInclude Include="Game\GameComponent\Player\CameraRotateComponent.h" />
     <ClInclude Include="Game\GameComponent\Player\HP_UIComponent.h" />
     <ClInclude Include="Game\GameComponent\Player\PlayerCannonComponent.h" />
+    <ClInclude Include="Game\GameComponent\Play\GameJudgeComponent.h" />
+    <ClInclude Include="Game\GameComponent\Play\ResultCameraComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\AppearTitleComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\LineOfSightComponent.h" />
     <ClInclude Include="Game\GameComponent\Title\ShotComponent.h" />
@@ -275,6 +277,8 @@
     <ClCompile Include="Game\GameComponent\Player\CameraRotateComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Player\HP_UIComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Player\PlayerCannonComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Play\GameJudgeComponent.cpp" />
+    <ClCompile Include="Game\GameComponent\Play\ResultCameraComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\AppearTitleComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\LineOfSightComponent.cpp" />
     <ClCompile Include="Game\GameComponent\Title\ShotComponent.cpp" />

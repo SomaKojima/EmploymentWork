@@ -77,6 +77,9 @@
     <Filter Include="Game\GameComponent\Enemy">
       <UniqueIdentifier>{cc2db3c7-465b-427b-82e6-caa429d06bd0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameComponent\Play">
+      <UniqueIdentifier>{c9d75603-547a-4ace-9333-d1de74d94157}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -280,6 +283,12 @@
     <ClInclude Include="Game\GameComponent\Enemy\EnemyComponent.h">
       <Filter>Game\GameComponent\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GameComponent\Play\GameJudgeComponent.h">
+      <Filter>Game\GameComponent\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameComponent\Play\ResultCameraComponent.h">
+      <Filter>Game\GameComponent\Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -453,6 +462,12 @@
     </ClCompile>
     <ClCompile Include="Game\GameComponent\Enemy\EnemyComponent.cpp">
       <Filter>Game\GameComponent\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Play\GameJudgeComponent.cpp">
+      <Filter>Game\GameComponent\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameComponent\Play\ResultCameraComponent.cpp">
+      <Filter>Game\GameComponent\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@
 #include "../GameComponent/Enemy/EnemyComponent.h"
 #include "../GameComponent/Enemy/EnemyCannonComponent.h"
 #include "../GameComponent/BaseObject/StatusComponent.h"
+#include "../GameComponent/Play/GameJudgeComponent.h"
 
 using namespace std;
 using namespace DirectX;
@@ -129,6 +130,12 @@ void ScenePlay::Initialize(Game * game)
 	entity->AddComponent(new HP_UIComponent(player->GetComponent<StatusComponent>()));
 	entity->GetTrans().pos.Set(Vector3(0.0f, 500.0f, 0.0f));
 	entityVector->Add(entity);
+
+	// ŽŽ‡‚Ì”»’è
+	entity = new Entity();
+	entity->AddComponent(new GameJudgeComponent(game->GetCamera()));
+	entityVector->Add(entity);
+
 
 	// ƒJƒƒ‰‚Ì‰Šú‰»
 	game->GetCamera()->Initialize();

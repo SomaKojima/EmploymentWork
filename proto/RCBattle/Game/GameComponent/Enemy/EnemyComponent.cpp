@@ -1,5 +1,6 @@
 #include "EnemyComponent.h"
 #include "../../Scene/SceneManager.h"
+#include "../../Object/EntityVector.h"
 
 using namespace std;
 using namespace DirectX;
@@ -17,10 +18,12 @@ EnemeyComponent::~EnemeyComponent()
 
 void EnemeyComponent::Update(DX::StepTimer const & timer)
 {
-	if (m_target)
+	EntityVector* entityVector = EntityVector::GetInstance();
+	Entity* target = entityVector->GetEntity("Player");
+	if (target)
 	{
 		Entity* cannon = m_me->GetChild("cannon");
-		Vector3 targetVec = m_me->GetTrans().pos.Get() - m_target->GetTrans().pos.Get();
+		Vector3 targetVec = m_me->GetTrans().pos.Get() - target->GetTrans().pos.Get();
 		Vector3 forward = Vector3::Transform(Vector3::Forward, m_me->GetTrans().dir.GetWorld());
 		Vector3 axis = targetVec.Cross(forward);
 
@@ -51,6 +54,6 @@ void EnemeyComponent::OnCollide(Entity & collide, Collision::CollisionData* data
 
 void EnemeyComponent::Finalize()
 {
-	SceneManager* sceneManager = SceneManager::GetInstance();
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
+	/*SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);*/
 }
