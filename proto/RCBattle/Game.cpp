@@ -371,7 +371,7 @@ void Game::CreateDeviceDependentResources()
 	sceneManager->SetGame(this);
 
 	// シーンの設定と初期化
-	sceneManager->ChangeSceneID(SceneManager::SceneID::Play);
+	sceneManager->ChangeSceneID(SceneManager::SceneID::Title);
 	sceneManager->ChangeScene();
 }
 
