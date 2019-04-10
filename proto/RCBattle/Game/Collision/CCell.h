@@ -8,11 +8,21 @@
 class CCell;
 class Entity;
 
-class OBJECT_FOR_TREE : public BidirectionalList<OBJECT_FOR_TREE, Entity>
+class OBJECT_FOR_TREE
 {
 public:
 	OBJECT_FOR_TREE(Entity* pObject);
 	~OBJECT_FOR_TREE();
+
+public:
+	// リスト先のクラスから離れる(リストから削除)
+	bool Remove();
+
+	// getter
+	OBJECT_FOR_TREE* GetPre() { return m_pPre; }
+	OBJECT_FOR_TREE* GetNext() { return m_pNext; }
+	CCell* GetRegisterTo() { return m_pRegisterTo; }
+	OBJECT_FOR_TREE* GetObj() { return m_pObj; }
 };
 
 class CCell : public BidirectionalList<OBJECT_FOR_TREE, Entity>::RegisterTo
